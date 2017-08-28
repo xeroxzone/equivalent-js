@@ -6,19 +6,19 @@
     @include transition(color .5s ease-in-out);
 
     &.color-event-1 {
-      color: $brand-primary;
+      color: $mdc-theme-primary-light;
     }
     &.color-event-2 {
-      color: $brand-success;
+      color: $mdc-theme-primary;
     }
     &.color-event-3 {
-      color: $brand-warning;
+      color: $mdc-theme-primary-dark;
     }
     &.color-event-4 {
-      color: $brand-danger;
+      color: $mdc-theme-secondary-light;
     }
     &.color-event-5 {
-      color: $brand-info;
+      color: $mdc-theme-secondary-dark;
     }
   }
 }

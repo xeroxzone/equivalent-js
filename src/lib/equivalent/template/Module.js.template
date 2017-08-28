@@ -1,32 +1,32 @@
 "use strict";
 
-/** @module Namespace/template */
-/** @module Namespace/template/Module */
+/** @module Namespace/pathPart */
+/** @module Namespace/pathPart/ModuleName */
 
 /**
  * @class
  * @classdesc module description
  * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} Namespace.template.Module
+ * @typedef {function} Namespace.pathPart.ModuleName
  * @constructs
  */
-DIC.define('Namespace.template.Module', new function () {
+DIC.define('Namespace.pathPart.ModuleName', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf Namespace.template.Module
+     * @memberOf Namespace.pathPart.ModuleName
      * @private
-     * @alias {Namespace.template.Module}
+     * @alias {Namespace.pathPart.ModuleName}
      */
     var _ = this;
 
     /**
      * @description autoload stylesheet for display
-     * @memberOf Namespace.template.Module
+     * @memberOf Namespace.pathPart.ModuleName
      * @type {boolean}
      * @default
      * @example: if true then
      *  add sass css file to ui library
-     *  like ./src/app/Namespace/module.scss
+     *  like ./src/app/Namespace/pathPart/module-name.scss
      */
     _.layout = false;
 
@@ -34,7 +34,7 @@ DIC.define('Namespace.template.Module', new function () {
      * @description construct the module class;
      *  the method get destroyed by manager after module is loaded;
      *  this method is optional
-     * @memberOf Namespace.template.Module
+     * @memberOf Namespace.pathPart.ModuleName
      * @param {Object} module the construction parameters
      */
     _.construct = function (module) {

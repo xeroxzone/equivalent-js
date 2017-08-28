@@ -1,7 +1,7 @@
 @import "bootstrap";
 
 $main-size: 1rem;
-$main-highlight: $brand-warning;
+$main-highlight: $mdc-theme-primary;
 
 .debug {
   margin: 0;
@@ -16,7 +16,13 @@ $main-highlight: $brand-warning;
   overflow: auto;
 
   #qunit {
-    padding: 1rem;
+    padding: 6rem 1rem 1rem;
+
+    h1 {
+      a {
+        text-decoration: none;
+      }
+    }
 
     h2 {
       margin: $main-size 0;
@@ -41,8 +47,6 @@ $main-highlight: $brand-warning;
         overflow: auto;
         margin-bottom: $main-size;
         padding: $main-size * .65;
-
-        @include border-radius($main-size / 2);
 
         &.pass {
           display: list-item;
@@ -84,6 +88,15 @@ $main-highlight: $brand-warning;
       }
     }
 
+    ol#qunit-tests {
+      > li {
+        border: solid .01rem dimgray;
+
+        @include border-radius($main-size / 2);
+        @include box-shadow(.05rem .05rem .05rem lightgray);
+      }
+    }
+
     #qunit-header {
       margin: 0;
     }
@@ -95,10 +108,19 @@ $main-highlight: $brand-warning;
   }
 
   #qunit-testrunner-toolbar {
-    margin: $main-size * .8 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: .5rem .25rem;
+    background-color: $mdc-theme-primary;
+    color: $mdc-theme-background;
+
+    @include box-shadow(.1rem .1rem .1rem lightgray);
 
     form {
       margin: $main-size * .5 0;
+      padding-left: .25rem;
     }
 
     label,
@@ -107,12 +129,70 @@ $main-highlight: $brand-warning;
       width: auto;
     }
 
+    input, textarea, select, button {
+      background-color: $mdc-theme-background;
+      border: 0 none;
+      padding: .25rem .5rem;
+    }
+
+    input[type="checkbox"] {
+      position: relative;
+      top: .15rem;
+      margin: 0 .3rem 0 .5rem;
+
+      $checkbox-offset: -.1rem;
+
+      &:after {
+        pointer-events: none;
+        content: "";
+        position: absolute;
+        top: $checkbox-offset;
+        right: $checkbox-offset;
+        bottom: $checkbox-offset;
+        left: $checkbox-offset;
+        background-color: $mdc-theme-background;
+        border: solid .1rem $mdc-theme-background;
+      }
+
+      &:checked {
+        &:after {
+          background-color: $mdc-theme-secondary;
+        }
+      }
+    }
+
+    button {
+      background-color: $mdc-theme-secondary-light;
+
+      &:focus {
+        background-color: $mdc-theme-secondary;
+      }
+    }
+
     label {
       margin-left: 0;
       font-size: .8rem;
 
       & + label + label {
         margin-left: $main-size * .5;
+      }
+
+      @media (max-width: 425px) {
+        font-size: x-small;
+      }
+
+      @media (max-width: 375px) {
+        font-size: xx-small;
+
+        &[for="qunit-urlconfig-notrycatch"] {
+          display: none;
+        }
+      }
+    }
+
+    #qunit-filter-input {
+      @media (max-width: 320px) {
+        width: 7rem;
       }
     }
 

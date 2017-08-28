@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="mdc-typography">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,7 @@
         <script src="js/lib/jquery.min.js"></script>
         <script src="js/lib/material-components-web.js"></script>
     </head>
-    <body>
+    <body class="mdc-typography">
 
         <aside class="mdc-persistent-drawer">
             <nav class="mdc-persistent-drawer__drawer">
@@ -38,46 +38,26 @@
             </nav>
         </aside>
 
-        <div class="content">
+        <header class="mdc-toolbar mdc-toolbar--fixed">
+            <div class="mdc-toolbar__row">
 
-            <header class="mdc-toolbar mdc-elevation--z4">
-                <div class="mdc-toolbar__row">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                    <a href="#" class="material-icons mdc-toolbar__icon--menu main-menu">menu</a>
+                    <span class="mdc-toolbar__title main-headline">EquivalentJs</span>
+                </section>
 
-                    <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                        <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
-                        <span class="mdc-toolbar__title catalog-title">EquivalentJs</span>
-                    </section>
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                    <div data-application="DemoApp.tool.DateTime"></div>
+                </section>
 
-                    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-                        <div data-application="DemoApp.tool.DateTime"></div>
-                    </section>
+            </div>
+        </header>
 
-                </div>
-            </header>
-
-            <script>
-                var drawerEl = document.querySelector('.mdc-persistent-drawer');
-                var MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer;
-                var drawer = new MDCPersistentDrawer(drawerEl);
-                document.querySelector('.mdc-toolbar a').addEventListener('click', function() {
-                    drawer.open = !drawer.open;
-                });
-                drawerEl.addEventListener('MDCPersistentDrawer:open', function() {
-                    console.log('Received MDCPersistentDrawer:open');
-                });
-                drawerEl.addEventListener('MDCPersistentDrawer:close', function() {
-                    console.log('Received MDCPersistentDrawer:close');
-                });
-            </script>
+        <div class="content mdc-toolbar-fixed-adjust">
 
             <main>
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
-                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-                            <h1 class="mdc-typography--display1">EquivalentJs</h1>
-
-                        </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
 
                             <div class="hidden" data-application="DemoApp.DependPromise">
@@ -106,7 +86,10 @@
                                 }'
                             >
                                 <div>
-                                    <button type="button" class="mdc-button mdc-button--raised mdc-button--primary hidden">
+                                    <button
+                                        type="button"
+                                        class="mdc-button mdc-button--raised mdc-button--primary hidden"
+                                    >
                                         Demo factory create circles
                                     </button>
                                 </div>
@@ -127,11 +110,10 @@
                         <div class="mdc-layout-grid__cell">
 
                             <small>
-                                © by Ralph Zickert
-                                (<a
+                                © <a
                                     target="_blank"
                                     href="https://github.com/xeroxzone/equivalent-js"
-                                >github.com/xeroxzone/equivalent-js</a>)
+                                >xeroxzone/equivalent-js</a>
                             </small>
 
                         </div>
@@ -143,5 +125,25 @@
 
         <script src="js/lib/equivalent.js"></script>
 
+        <script type="text/javascript">
+            var drawerEl = document.querySelector('.mdc-persistent-drawer');
+            var MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer;
+            var drawer = new MDCPersistentDrawer(drawerEl);
+            document.querySelector('.main-menu').addEventListener('click', function() {
+                drawer.open = !drawer.open;
+            });
+            drawerEl.addEventListener('MDCPersistentDrawer:open', function() {
+                document.querySelector('.main-menu').innerHTML = 'close';
+                $('.main-menu').removeClass('out').addClass('over');
+            });
+            drawerEl.addEventListener('MDCPersistentDrawer:close', function() {
+                document.querySelector('.main-menu').innerHTML = 'menu';
+                $('.main-menu').removeClass('over').addClass('out');
+            });
+        </script>
+
+        <script type="text/javascript">
+            mdc.autoInit();
+        </script>
     </body>
 </html>

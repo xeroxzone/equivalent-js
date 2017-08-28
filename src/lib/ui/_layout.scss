@@ -1,6 +1,7 @@
 @import "bootstrap";
+@import "../../../node_modules/@material/animation/functions";
 
-@include scrollbars(.5em, $brand-primary);
+@include scrollbars(.5em, $mdc-theme-primary);
 
 body {
   margin: 0;
@@ -12,7 +13,11 @@ body {
   width: 100%;
 
   a {
-    color: $brand-primary;
+    color: $mdc-theme-primary;
+  }
+
+  .main-headline {
+    cursor: default;
   }
 
   .content {
@@ -21,5 +26,13 @@ body {
     flex-grow: 1;
     height: 100%;
     box-sizing: border-box;
+  }
+
+  .main-menu.over {
+    animation: mdc-animation-enter(rotateClockwise, 350ms);
+  }
+
+  .main-menu.out {
+    animation: mdc-animation-enter(rotateAntiClockwise, 350ms);
   }
 }

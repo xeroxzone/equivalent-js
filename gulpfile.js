@@ -114,86 +114,87 @@ function buildStyles(cfg) {
 
 /* dev */
 gulp.task('dev:scripts', function() {
-    del(['web/js/lib/*.js', 'web/js/lib/**/*.js']);
-    del(['web/js/config/*.json']);
-
-    buildVendors(config.vendors);
-    buildTestUnit(config.testunit);
-    buildConfigs(config.configs);
-    buildScripts(config.scripts);
+    del(['web/js/lib/*.js', 'web/js/lib/**/*.js']).then(function () {
+        del(['web/js/config/*.json']).then(function () {
+            buildVendors(config.vendors);
+            buildTestUnit(config.testunit);
+            buildConfigs(config.configs);
+            buildScripts(config.scripts);
+        });
+    });
 });
 
 gulp.task('dev:apps', function() {
-    del(['web/js/app/*.js', 'web/js/app/**/*.js']);
-
-    buildApps(config.apps);
+    del(['web/js/app/*.js', 'web/js/app/**/*.js']).then(function () {
+        buildApps(config.apps);
+    });
 });
 
 gulp.task('dev:tests', function() {
-    del(['web/js/test/*.js', 'web/js/app/test/*.js']);
-
-    buildTests(config.tests);
+    del(['web/js/test/*.js', 'web/js/app/test/*.js']).then(function () {
+        buildTests(config.tests);
+    });
 });
 
 gulp.task('dev:styles', function() {
-    del(['web/css/*.css', 'web/css/**/*.css']);
-
-    buildStyles(config.styles);
+    del(['web/css/*.css', 'web/css/**/*.css']).then(function () {
+        buildStyles(config.styles);
+    });
 });
 
 gulp.task('dev:docs', function (callback) {
-    del(['web/doc/**']);
-
-    buildDocs(config.docs, callback);
+    del(['web/doc/**']).then(function () {
+        buildDocs(config.docs, callback);
+    });
 });
 
 
 /* dev watch */
 gulp.task('dev:watch:scripts', function() {
     return watch(config.scripts.src, function () {
-        del(['web/doc/**']);
-
-        buildScripts(config.scripts);
+        del(['web/doc/**']).then(function () {
+            buildScripts(config.scripts);
+        });
     });
 });
 
 gulp.task('dev:watch:apps', function() {
     return watch(config.apps.src, function () {
-        del(['web/js/app/*.js', 'web/js/app/**/*.js']);
-
-        buildApps(config.apps);
+        del(['web/js/app/*.js', 'web/js/app/**/*.js']).then(function () {
+            buildApps(config.apps);
+        });
     });
 });
 
 gulp.task('dev:watch:tests', function() {
     return watch(config.tests.src, function () {
-        del(['web/js/test/*.js', 'web/js/app/test/*.js']);
-
-        buildTests(config.tests);
+        del(['web/js/test/*.js', 'web/js/app/test/*.js']).then(function () {
+            buildTests(config.tests);
+        });
     });
 });
 
 gulp.task('dev:watch:styles', function() {
     return watch(config.styles.src, function () {
-        del(['web/css/*.css', 'web/css/**/*.css']);
-
-        buildStyles(config.styles);
+        del(['web/css/*.css', 'web/css/**/*.css']).then(function () {
+            buildStyles(config.styles);
+        });
     });
 });
 
 gulp.task('dev:watch:docs:scripts', function() {
     return watch(config.scripts.src, function (callback) {
-        del(['web/doc/**']);
-
-        buildDocs(config.docs, callback);
+        del(['web/doc/**']).then(function () {
+            buildDocs(config.docs, callback);
+        });
     });
 });
 
 gulp.task('dev:watch:docs:apps', function() {
     return watch(config.apps.src, function (callback) {
-        del(['web/doc/**']);
-
-        buildDocs(config.docs, callback);
+        del(['web/doc/**']).then(function() {
+            buildDocs(config.docs, callback);
+        });
     });
 });
 

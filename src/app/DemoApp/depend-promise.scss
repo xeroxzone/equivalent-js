@@ -6,19 +6,19 @@
     @include transition(color .5s ease-in-out);
 
     &.color-promise-1 {
-      color: $brand-primary;
+      color: $mdc-theme-primary-light;
     }
     &.color-promise-2 {
-      color: $brand-success;
+      color: $mdc-theme-primary;
     }
     &.color-promise-3 {
-      color: $brand-warning;
+      color: $mdc-theme-primary-dark;
     }
     &.color-promise-4 {
-      color: $brand-danger;
+      color: $mdc-theme-secondary-light;
     }
     &.color-promise-5 {
-      color: $brand-info;
+      color: $mdc-theme-secondary-dark;
     }
   }
 }
