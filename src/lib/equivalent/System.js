@@ -331,7 +331,7 @@ EquivalentJs.System = new function () {
                 }).css({
                     position: 'fixed',
                     zIndex: 1001,
-                    top: '.7rem',
+                    top: '.5rem',
                     right: '6rem',
                     display: 'inline',
                     width: '6rem',

@@ -3,6 +3,10 @@
 [data-application="DemoApp.Factory"] {
   margin: 1rem 0;
 
+  > div {
+    margin-bottom: 1rem;
+  }
+
   .circle {
     display: inline-block;
     opacity: .25;

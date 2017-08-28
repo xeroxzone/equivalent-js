@@ -13,10 +13,16 @@
 
         <header class="mdc-toolbar">
             <div class="mdc-toolbar__row">
+
                 <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                     <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
                     <span class="mdc-toolbar__title">EquivalentJs</span>
                 </section>
+
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                    <div data-application="DemoApp.tool.DateTime"></div>
+                </section>
+
             </div>
         </header>
 
@@ -41,42 +47,62 @@
         </script>
 
         <main>
-            <div class="content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
 
-                <div class="hidden" data-application="DemoApp.DependPromise">
-                    Demo with Promise
-                </div>
+                        <div class="hidden" data-application="DemoApp.DependPromise">
+                            Demo with Promise
+                        </div>
 
-                <div class="hidden" data-application="DemoApp.DependEvent">
-                    <div data-application="DemoApp.DependEvent.Markup">
-                        Demo on Event
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                        <div class="hidden" data-application="DemoApp.DependEvent">
+                            <div data-application="DemoApp.DependEvent.Markup">
+                                Demo on Event
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                        <div
+                            data-application="DemoApp.Factory"
+                            data-parameters='{
+                                "amount": 3,
+                                "size": ["5rem", "4rem", "3rem"],
+                                "background": ["red", "green", "yellow"],
+                                "border": ["black", "black", "black"]
+                            }'
+                        >
+                            <div>
+                                <button type="button" class="mdc-button mdc-button--raised mdc-button--primary hidden">
+                                    Demo factory create circles
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
+
                     </div>
                 </div>
-
-                <div
-                    data-application="DemoApp.Factory"
-                    data-parameters='{
-                        "amount": 3,
-                        "size": ["5rem", "4rem", "3rem"],
-                        "background": ["red", "green", "yellow"],
-                        "border": ["black", "black", "black"]
-                    }'
-                >
-                    <button type="button" class="mdc-button mdc-button--raised hidden">
-                        Demo factory create circles
-                    </button>
-                </div>
-
-                <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
-
             </div>
         </main>
 
-        <footer>
-            <div data-application="DemoApp.tool.DateTime"></div>
-        </footer>
-
         <div class="hidden" data-application="DemoApp.A"></div>
+
+        <footer>
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell">
+
+                        <small>© by Ralph Zickert (https://github.com/xeroxzone)</small>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <script src="js/lib/equivalent.js"></script>
 
