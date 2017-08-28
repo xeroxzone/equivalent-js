@@ -326,7 +326,7 @@ EquivalentJs.System = new function () {
 
                 $('body').css({overflow: 'hidden'});
 
-                $('<button/>').prop({
+                $('<button/>').addClass('mdc-button mdc-button--raised').prop({
                     'id': 'doc-runner-control'
                 }).css({
                     position: 'fixed',
@@ -438,7 +438,7 @@ EquivalentJs.System = new function () {
                     );
                 });
 
-            $('<button/>').prop({
+            $('<button/>').addClass('mdc-button mdc-button--raised').prop({
                 'id': 'test-runner-control'
             }).css({
                 position: 'fixed',

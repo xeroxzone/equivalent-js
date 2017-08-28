@@ -1,6 +1,6 @@
 {
   "name": "equivalent-js",
-  "version": "0.1.35",
+  "version": "0.2.0",
   "description": "Class autoload and dependency manager",
   "main": "./src/lib/init/Run.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "url": "git+https://github.com/xeroxzone/equivalent-js.git"
   },
   "dependencies": {
-    "jquery": "~3.2.1"
+    "jquery": "~3.2.1",
+    "material-components-web": "~0.19.0"
   },
   "devDependencies": {
     "gulp-jsdoc3": "~1.0.1",

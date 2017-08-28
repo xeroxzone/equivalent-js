@@ -1,7 +1,8 @@
 {
   "vendors" : {
     "src" : [
-      "node_modules/jquery/dist/jquery.min.js"
+      "node_modules/jquery/dist/jquery.min.js",
+      "node_modules/material-components-web/dist/material-components-web.js"
     ],
     "dest" : "web/js/lib"
   },
@@ -45,7 +46,8 @@
   "styles" : {
     "src" : [
       "src/app/**/*.scss",
-      "src/lib/ui/**"
+      "src/lib/ui/**",
+      "node_modules/material-components-web/dist/material-components-web.css"
     ],
     "dest" : "web/css"
   }
