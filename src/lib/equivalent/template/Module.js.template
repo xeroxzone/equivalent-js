@@ -1,0 +1,43 @@
+"use strict";
+
+/** @module Namespace/template */
+/** @module Namespace/template/Module */
+
+/**
+ * @class
+ * @classdesc module description
+ * @implements {EquivalentJs.Manager.Module.class}
+ * @typedef {function} Namespace.template.Module
+ * @constructs
+ */
+DIC.define('Namespace.template.Module', new function () {
+    /**
+     * @description bind public properties or methods
+     * @memberOf Namespace.template.Module
+     * @private
+     * @alias {Namespace.template.Module}
+     */
+    var _ = this;
+
+    /**
+     * @description autoload stylesheet for display
+     * @memberOf Namespace.template.Module
+     * @type {boolean}
+     * @default
+     * @example: if true then
+     *  add sass css file to ui library
+     *  like ./src/app/Namespace/module.scss
+     */
+    _.layout = false;
+
+    /**
+     * @description construct the module class;
+     *  the method get destroyed by manager after module is loaded;
+     *  this method is optional
+     * @memberOf Namespace.template.Module
+     * @param {Object} module the construction parameters
+     */
+    _.construct = function (module) {
+        // do something
+    };
+});

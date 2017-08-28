@@ -1,0 +1,12 @@
+@import "../../lib/ui/bootstrap";
+
+[data-application="DemoApp.Factory"] {
+  margin: 1rem 0;
+
+  .circle {
+    display: inline-block;
+    opacity: .25;
+    @include border-radius(50%);
+    @include box-shadow(.1rem .1rem .2rem gray);
+  }
+}

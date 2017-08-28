@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>EquivalentJs</title>
+        <link rel="stylesheet" href="css/load.css">
+        <script src="js/lib/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <header>
+            <div class="runners">
+                <button type="button" class="hidden" data-application="DemoApp.tool.Tests">Tests</button>
+                <button type="button" class="hidden" data-application="DemoApp.tool.Docs">Docs</button>
+            </div>
+        </header>
+
+        <section>
+            <div class="content">
+
+                <div class="hidden" data-application="DemoApp.DependPromise">
+                    Demo with Promise
+                </div>
+
+                <div class="hidden" data-application="DemoApp.DependEvent">
+                    <div data-application="DemoApp.DependEvent.Markup">
+                        Demo on Event
+                    </div>
+                </div>
+
+                <div
+                    data-application="DemoApp.Factory"
+                    data-parameters='{
+                        "amount": 3,
+                        "size": ["5rem", "4rem", "3rem"],
+                        "background": ["red", "green", "yellow"],
+                        "border": ["black", "black", "black"]
+                    }'
+                >
+                    <button type="button" class="hidden">Demo factory create circles</button>
+                </div>
+
+                <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
+
+            </div>
+        </section>
+
+        <footer>
+            <div data-application="DemoApp.tool.DateTime"></div>
+        </footer>
+
+        <div class="hidden" data-application="DemoApp.A"></div>
+
+        <script src="js/lib/equivalent.js"></script>
+
+    </body>
+</html>

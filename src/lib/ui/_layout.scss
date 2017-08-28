@@ -1,0 +1,55 @@
+@import "bootstrap";
+
+@include scrollbars(.5em, $brand-warning);
+
+body {
+  display: none;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1rem;
+
+  > header,
+  > section,
+  > footer {
+    padding: .75rem;
+    margin-bottom: .75rem;
+    background-color: ghostwhite;
+
+    @include border-radius(.25rem);
+    @include box-shadow(inset .025rem .025rem .05rem lightgray);
+  }
+
+  button,
+  input[type="button"],
+  input[type="text"],
+  textarea {
+    border: solid .01rem lightgray;
+    background-color: ghostwhite;
+    padding: .25rem .35rem;
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: dimgray;
+    text-shadow: .025rem .025rem .05rem white;
+
+    @include border-radius(.25rem);
+    @include box-shadow(.025rem .025rem .05rem lightgray);
+    @include transition(background-color .25s ease-in-out);
+
+    &:hover,
+    &:focus {
+      background-color: white;
+    }
+
+    &:focus {
+      outline: 0 none;
+    }
+
+    &:active {
+      @include box-shadow(inset .025rem .025rem .05rem lightgray);
+    }
+  }
+
+  button,
+  input[type="button"] {
+    cursor: pointer;
+  }
+}

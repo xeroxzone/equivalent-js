@@ -1,0 +1,68 @@
+"use strict";
+
+/**
+ * @class
+ */
+DIC.define('Namespace.test.template.ModuleTest', new function () {
+    /**
+     * @description an optional DIC manager instance that is isolated
+     *  for this test case
+     * @memberOf Namespace.test.template.ModuleTest
+     * @alias {EquivalentJs.Manager}
+     * @see EquivalentJs.Manager
+     */
+    var manager;
+
+    /**
+     * @description setup things before created test methods executed
+     * @memberOf Namespace.test.template.ModuleTest
+     * @param {EquivalentJs.Manager} managerInstance the DIC manager
+     *  as an isolated instance
+     */
+    this.setup = function (managerInstance) {
+        manager = managerInstance;
+
+        // setup something at vars or other ways
+    };
+
+    /**
+     * @description test {@link Namespace.template.Module.layout} is setted
+     * @memberOf Namespace.test.template.ModuleTest
+     * @param {EquivalentJs.test.Unit.assert} assert the assertion interface
+     * @param {Namespace.template.Module} moduleClass as an isolated instance
+     */
+    this.testHasLayout = function (assert, moduleClass) {
+        assert.ok(moduleClass.layout, 'has layout');
+    };
+
+    /**
+     * @description test {@link Namespace.template.Module} with manager
+     * @memberOf Namespace.test.template.ModuleTest
+     * @param {EquivalentJs.test.Unit.assert} assert the assertion interface
+     * @param {Namespace.template.Module} moduleClass as an isolated instance
+     */
+    this.testModuleClassWithManager = function (assert, moduleClass) {
+        var assertAsync = assert.async();
+
+        manager.add(moduleClass.type)
+            .done(function (module) {
+                assert.ok(moduleClass.type === module.type, 'module class loaded');
+
+                assertAsync();
+            })
+            .fail(function (error) {
+                assert.notOk(true, 'failed to load module class with error: ' + JSON.stringify(error));
+
+                assertAsync();
+            })
+        ;
+    };
+
+    /**
+     * @description teardown things after created test methods executed
+     * @memberOf Namespace.test.template.ModuleTest
+     */
+    this.teardown = function () {
+        // teardown something
+    };
+});

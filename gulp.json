@@ -1,0 +1,52 @@
+{
+  "vendors" : {
+    "src" : [
+      "node_modules/jquery/dist/jquery.min.js"
+    ],
+    "dest" : "web/js/lib"
+  },
+  "docs" : {
+    "src" : [
+      "src/lib/equivalent/**/*.js"
+    ],
+    "dest" : "web/doc"
+  },
+  "testunit" : {
+    "src" : [
+      "node_modules/qunitjs/qunit/qunit.js"
+    ],
+    "dest" : "web/js/lib"
+  },
+  "tests" : {
+    "src" : [
+      "src/test/**/*.js"
+    ],
+    "dest" : "web/js"
+  },
+  "configs" : {
+    "src" : [
+      "src/config/*.json"
+    ],
+    "dest" : "web/js/config"
+  },
+  "apps" : {
+    "src" : [
+      "src/app/**/*.js"
+    ],
+    "dest" : "web/js"
+  },
+  "scripts" : {
+    "src" : [
+      "src/lib/**/*.js",
+      "!src/lib/ui"
+    ],
+    "dest" : "web/js"
+  },
+  "styles" : {
+    "src" : [
+      "src/app/**/*.scss",
+      "src/lib/ui/**"
+    ],
+    "dest" : "web/css"
+  }
+}

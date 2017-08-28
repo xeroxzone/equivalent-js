@@ -1,0 +1,127 @@
+@import "bootstrap";
+
+$main-size: 1rem;
+$main-highlight: $brand-warning;
+
+.debug {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+
+  #qunit {
+    padding: 1rem;
+
+    h2 {
+      margin: $main-size 0;
+    }
+
+    a {
+      color: $main-highlight;
+      cursor: pointer;
+    }
+
+    pre {
+      white-space: pre-line;
+    }
+
+    ol {
+      margin-top: $main-size;
+      padding-left: 0;
+      list-style: inside none;
+
+      li {
+        display: none;
+        overflow: auto;
+        margin-bottom: $main-size;
+        padding: $main-size * .65;
+
+        @include border-radius($main-size / 2);
+
+        &.pass {
+          display: list-item;
+          background-color: lighten(green, 25%);
+        }
+        &.fail {
+          display: list-item;
+          background-color: lighten(darkred, 25%);
+        }
+
+        a {
+          display: block;
+          width: 12rem;
+          margin: .5rem 0;
+          padding: .25rem;
+          border: dashed .05rem orange;
+          background-color: black;
+          color: orange;
+          font: 1rem monospace;
+          text-transform: uppercase;
+          text-decoration: none;
+          @include transition(all .25s ease-in-out);
+
+          &:hover {
+            background-color: orange;
+            color: black;
+            padding-right: 20%;
+            @include transition(all .25s ease-in-out);
+          }
+
+          &:active {
+            background-color: white;
+          }
+        }
+
+        ol {
+          list-style-type: decimal;
+        }
+      }
+    }
+
+    #qunit-header {
+      margin: 0;
+    }
+
+    .qunit-source {
+      font-family: monospace;
+      font-size: .8rem;
+    }
+  }
+
+  #qunit-testrunner-toolbar {
+    margin: $main-size * .8 0;
+
+    form {
+      margin: $main-size * .5 0;
+    }
+
+    label,
+    input, textarea, select, button {
+      display: inline;
+      width: auto;
+    }
+
+    label {
+      margin-left: 0;
+      font-size: .8rem;
+
+      & + label + label {
+        margin-left: $main-size * .5;
+      }
+    }
+
+    #qunit-modulefilter {
+      display: none;
+    }
+  }
+
+  #qunit-userAgent {
+    font-size: 1rem;
+  }
+}

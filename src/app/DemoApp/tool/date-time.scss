@@ -1,0 +1,9 @@
+@import "../../../lib/ui/bootstrap";
+
+[data-application="DemoApp.tool.DateTime"] {
+  font-family: monospace !important;
+
+  .date-time {
+    display: block;
+  }
+}
