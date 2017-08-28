@@ -11,98 +11,131 @@
     </head>
     <body>
 
-        <header class="mdc-toolbar">
-            <div class="mdc-toolbar__row">
+        <aside class="mdc-persistent-drawer">
+            <nav class="mdc-persistent-drawer__drawer">
+                <div class="mdc-persistent-drawer__toolbar-spacer"></div>
+                <div class="mdc-list-group">
+                    <nav class="mdc-list">
+                        <a data-application="DemoApp.tool.Tests" class="mdc-list-item mdc-persistent-drawer" href="#">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">class</i>Tests
+                        </a>
+                        <a data-application="DemoApp.tool.Docs" class="mdc-list-item" href="#">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">description</i>Docs
+                        </a>
+                    </nav>
 
-                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                    <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
-                    <span class="mdc-toolbar__title">EquivalentJs</span>
-                </section>
+                    <hr class="mdc-list-divider">
 
-                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-                    <div data-application="DemoApp.tool.DateTime"></div>
-                </section>
+                    <nav class="mdc-list">
+                        <a class="mdc-list-item" href="https://www.npmjs.com/package/equivalent-js" target="_blank">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">extension</i>NPMJS
+                        </a>
+                        <a class="mdc-list-item" href="https://github.com/xeroxzone/equivalent-js" target="_blank">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">favorite</i>GitHub
+                        </a>
+                    </nav>
+                </div>
+            </nav>
+        </aside>
 
-            </div>
-        </header>
+        <div class="content">
 
-        <div class="mdc-simple-menu" tabindex="-1">
-            <ul class="mdc-simple-menu__items mdc-list runners" role="menu" aria-hidden="true">
-                <li data-application="DemoApp.tool.Tests" class="mdc-list-item" role="menuitem" tabindex="0">
-                    Tests
-                </li>
-                <li data-application="DemoApp.tool.Docs" class="mdc-list-item" role="menuitem" tabindex="0">
-                    Docs
-                </li>
-            </ul>
+            <header class="mdc-toolbar mdc-elevation--z4">
+                <div class="mdc-toolbar__row">
+
+                    <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                        <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
+                        <span class="mdc-toolbar__title catalog-title">EquivalentJs</span>
+                    </section>
+
+                    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                        <div data-application="DemoApp.tool.DateTime"></div>
+                    </section>
+
+                </div>
+            </header>
+
+            <script>
+                var drawerEl = document.querySelector('.mdc-persistent-drawer');
+                var MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer;
+                var drawer = new MDCPersistentDrawer(drawerEl);
+                document.querySelector('.mdc-toolbar a').addEventListener('click', function() {
+                    drawer.open = !drawer.open;
+                });
+                drawerEl.addEventListener('MDCPersistentDrawer:open', function() {
+                    console.log('Received MDCPersistentDrawer:open');
+                });
+                drawerEl.addEventListener('MDCPersistentDrawer:close', function() {
+                    console.log('Received MDCPersistentDrawer:close');
+                });
+            </script>
+
+            <main>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <h1 class="mdc-typography--display1">EquivalentJs</h1>
+
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div class="hidden" data-application="DemoApp.DependPromise">
+                                Demo with Promise
+                            </div>
+
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div class="hidden" data-application="DemoApp.DependEvent">
+                                <div data-application="DemoApp.DependEvent.Markup">
+                                    Demo on Event
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div
+                                data-application="DemoApp.Factory"
+                                data-parameters='{
+                                    "amount": 3,
+                                    "size": ["5rem", "4rem", "3rem"],
+                                    "background": ["red", "green", "yellow"],
+                                    "border": ["black", "black", "black"]
+                                }'
+                            >
+                                <div>
+                                    <button type="button" class="mdc-button mdc-button--raised mdc-button--primary hidden">
+                                        Demo factory create circles
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <div class="hidden" data-application="DemoApp.A"></div>
+
+            <footer>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell">
+
+                            <small>
+                                © by Ralph Zickert (<a href="https://github.com/xeroxzone">github.com/xeroxzone</a>)
+                            </small>
+
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
         </div>
-
-        <script>
-            var $toggle = $('.mdc-toolbar a');
-            var menu = new mdc.menu.MDCSimpleMenu($('.mdc-simple-menu').get(0));
-
-            $toggle.on('click', function() {
-                menu.open = !menu.open;
-            });
-        </script>
-
-        <main>
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-                        <div class="hidden" data-application="DemoApp.DependPromise">
-                            Demo with Promise
-                        </div>
-
-                    </div>
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-                        <div class="hidden" data-application="DemoApp.DependEvent">
-                            <div data-application="DemoApp.DependEvent.Markup">
-                                Demo on Event
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-                        <div
-                            data-application="DemoApp.Factory"
-                            data-parameters='{
-                                "amount": 3,
-                                "size": ["5rem", "4rem", "3rem"],
-                                "background": ["red", "green", "yellow"],
-                                "border": ["black", "black", "black"]
-                            }'
-                        >
-                            <div>
-                                <button type="button" class="mdc-button mdc-button--raised mdc-button--primary hidden">
-                                    Demo factory create circles
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
-
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <div class="hidden" data-application="DemoApp.A"></div>
-
-        <footer>
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell">
-
-                        <small>© by Ralph Zickert (https://github.com/xeroxzone)</small>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
 
         <script src="js/lib/equivalent.js"></script>
 

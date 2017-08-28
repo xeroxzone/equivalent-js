@@ -25,7 +25,7 @@
     "copyright"             : "MIT",
     "navType"               : "vertical",
     "inverseNav"            : true,
-    "theme"                 : "spacelab",
+    "theme"                 : "cosmo",
     "linenums"              : true,
     "collapseSymbols"       : false,
     "outputSourceFiles"     : true
