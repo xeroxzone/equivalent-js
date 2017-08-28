@@ -502,11 +502,11 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
             if (false === /^EquivalentJs\./.test(module.type)) {
                 reNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
-                    '/' + reNamespace;
+                    '/' + reNamespace.toLowerCase();
             }
 
             layoutUri = configuration.moduleLayout + '/' +
-                reNamespace.toLowerCase() + '.css' +
+                reNamespace + '.css' +
                 ((true === cacheBust) ? '?' + String((new Date()).getTime()) : '');
 
             registerRequest({url: layoutUri, method: 'head'})
