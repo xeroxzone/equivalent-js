@@ -11,94 +11,66 @@
     </head>
     <body>
 
-        <div class="mdc-components">
-            <div class="mdc-components__section">
-                <div class="mdc-components__column">
-
-                    <div class="mdc-component mdc-component__toolbar">
-
-                        <div class="mdc-component__section mdc-component__section--size-full">
-                            <div class="mdc-component__section__content">
-                                <div class="mdc-component__section__content__frame">
-
-                                    <header class="mdc-toolbar">
-                                        <div class="mdc-toolbar__row">
-                                            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                                                <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
-                                                <span class="mdc-toolbar__title">EquivalentJs</span>
-                                            </section>
-                                        </div>
-                                    </header>
-
-                                    <div class="mdc-simple-menu" tabindex="-1">
-                                        <ul class="mdc-simple-menu__items mdc-list runners" role="menu" aria-hidden="true">
-                                            <li data-application="DemoApp.tool.Tests" class="mdc-list-item" role="menuitem" tabindex="0">
-                                                Tests
-                                            </li>
-                                            <li data-application="DemoApp.tool.Docs" class="mdc-list-item" role="menuitem" tabindex="0">
-                                                Docs
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <script>
-                                        var $toggle = $('.mdc-toolbar a');
-                                        var menu = new mdc.menu.MDCSimpleMenu($('.mdc-simple-menu').get(0));
-
-                                        $toggle.on('click', function() {
-                                            menu.open = !menu.open;
-                                        });
-                                    </script>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="mdc-component__section mdc-component__section--size-full">
-                        <div class="mdc-component__section__content">
-                            <div class="mdc-component__section__content__frame">
-
-                                <main>
-                                    <div class="content">
-
-                                        <div class="hidden" data-application="DemoApp.DependPromise">
-                                            Demo with Promise
-                                        </div>
-
-                                        <div class="hidden" data-application="DemoApp.DependEvent">
-                                            <div data-application="DemoApp.DependEvent.Markup">
-                                                Demo on Event
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            data-application="DemoApp.Factory"
-                                            data-parameters='{
-                                                "amount": 3,
-                                                "size": ["5rem", "4rem", "3rem"],
-                                                "background": ["red", "green", "yellow"],
-                                                "border": ["black", "black", "black"]
-                                            }'
-                                        >
-                                            <button type="button" class="mdc-button mdc-button--raised hidden">
-                                                Demo factory create circles
-                                            </button>
-                                        </div>
-
-                                        <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
-
-                                    </div>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <header class="mdc-toolbar">
+            <div class="mdc-toolbar__row">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                    <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
+                    <span class="mdc-toolbar__title">EquivalentJs</span>
+                </section>
             </div>
+        </header>
+
+        <div class="mdc-simple-menu" tabindex="-1">
+            <ul class="mdc-simple-menu__items mdc-list runners" role="menu" aria-hidden="true">
+                <li data-application="DemoApp.tool.Tests" class="mdc-list-item" role="menuitem" tabindex="0">
+                    Tests
+                </li>
+                <li data-application="DemoApp.tool.Docs" class="mdc-list-item" role="menuitem" tabindex="0">
+                    Docs
+                </li>
+            </ul>
         </div>
+
+        <script>
+            var $toggle = $('.mdc-toolbar a');
+            var menu = new mdc.menu.MDCSimpleMenu($('.mdc-simple-menu').get(0));
+
+            $toggle.on('click', function() {
+                menu.open = !menu.open;
+            });
+        </script>
+
+        <main>
+            <div class="content">
+
+                <div class="hidden" data-application="DemoApp.DependPromise">
+                    Demo with Promise
+                </div>
+
+                <div class="hidden" data-application="DemoApp.DependEvent">
+                    <div data-application="DemoApp.DependEvent.Markup">
+                        Demo on Event
+                    </div>
+                </div>
+
+                <div
+                    data-application="DemoApp.Factory"
+                    data-parameters='{
+                        "amount": 3,
+                        "size": ["5rem", "4rem", "3rem"],
+                        "background": ["red", "green", "yellow"],
+                        "border": ["black", "black", "black"]
+                    }'
+                >
+                    <button type="button" class="mdc-button mdc-button--raised hidden">
+                        Demo factory create circles
+                    </button>
+                </div>
+
+                <div class="hidden" data-application="DemoApp.DelayedMarkup"></div>
+
+            </div>
+        </main>
 
         <footer>
             <div data-application="DemoApp.tool.DateTime"></div>
