@@ -2,6 +2,10 @@
 
 ## Class autoload and dependency manager
 
+EquivalentJs was emerged from the JS micro framework forked of [meinauto/meinauto-js][meinauto-js]. 
+It has more streamlined interfaces and is extended for multiple namespace trees. 
+Further development will take place here.
+
 *Introduction*
 
 A JavaScript micro framework for modern web browsers to asynchronous autoload 
@@ -72,6 +76,7 @@ or
 [MOS]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/module/MODULE-ORCHESTRATION-SYSTEM.md
 [MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/test/MODULE-TEST-RUNNER.md
 [MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/doc/MODULE-DOC-RUNNER.md
+[meinauto-js]: https://github.com/meinauto/meinauto-js
 [npmjs]: https://www.npmjs.com/
 [gulp]: http://gulpjs.com/
 [qunit]: https://qunitjs.com
