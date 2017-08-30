@@ -1,3 +1,11 @@
+@import "../../../node_modules/@material/animation/functions";
+
+@mixin box-sizing() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
@@ -7,13 +15,8 @@
 @mixin box-shadow($shodow) {
   -webkit-box-shadow: $shodow;
   -moz-box-shadow: $shodow;
+  -o-box-shadow: $shodow;
   box-shadow: $shodow;
-}
-
-@mixin box-sizing() {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 @mixin transition($transition) {
@@ -21,6 +24,30 @@
   -moz-transition: $transition;
   -o-transition: $transition;
   transition: $transition;
+}
+
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin skew($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
 }
 
 @mixin clearfix() {
@@ -51,7 +78,11 @@
   }
 }
 
-@keyframes rotateClockwise {
+@mixin animate($keyframes, $duration: 350ms) {
+  animation: mdc-animation-enter($keyframes, $duration);
+}
+
+@keyframes rotate-clockwise {
   from {
     transform: rotate(0deg);
   }
@@ -61,13 +92,33 @@
   }
 }
 
-@keyframes rotateAntiClockwise {
+@keyframes rotate-anti-clockwise {
   from {
     transform: rotate(360deg);
   }
 
   to {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 

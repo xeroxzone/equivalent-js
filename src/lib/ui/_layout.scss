@@ -1,7 +1,7 @@
 @import "bootstrap";
-@import "../../../node_modules/@material/animation/functions";
+@import "logo";
 
-@include scrollbars(.5em, $mdc-theme-primary);
+@include scrollbars(.5rem, $mdc-theme-primary);
 
 body {
   margin: 0;
@@ -29,10 +29,10 @@ body {
   }
 
   .main-menu.over {
-    animation: mdc-animation-enter(rotateClockwise, 350ms);
+    @include animate(rotate-clockwise);
   }
 
   .main-menu.out {
-    animation: mdc-animation-enter(rotateAntiClockwise, 350ms);
+    @include animate(rotate-anti-clockwise);
   }
 }

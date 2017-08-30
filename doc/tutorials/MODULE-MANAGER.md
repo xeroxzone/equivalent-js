@@ -1,6 +1,4 @@
-# The Module Orchestration System (MOS)
-
-*Module Description*
+# The Module Manager
 
 All modules stored in a Dependency Injection Container – in following called DIC
 
@@ -52,9 +50,9 @@ var MyApp = DIC.get('MyNamespace.MyApp').class;
 if (true === DIC.remove('MyNamespace.MyApp')) {}
 ```
 
-## The Module Autoload Declaration (MAD)
+## The Module Autoload Declaration
 
-For example there is a [module template][module-template](../../../src/lib/equivalent/template/Module.js.template).
+For example there is a [module template][module-template](../../src/lib/equivalent/template/ModuleName.js.template).
 
 First initializing point of the autoloaded module class could be an application 
 markup or a direct object call from another javascripts to access the module by DIC.
@@ -80,7 +78,13 @@ or
 
 For automated testing use the integrated test runner:
 
-* [Module Test Runner][MTR](../test/MODULE-TEST-RUNNER.md)
+* [Test Runner][MTR](TEST-RUNNER.md)
+
+### Automated doc generated view in browser with [JSDoc][jsdoc] and [Gulp][gulp]
+
+For automated documentation generation for all declared modules use the integrated doc runner:
+
+* [Doc Runner][MDR](DOC-RUNNER.md)
 
 ### Define an initializing point for an autoloaded class.
 
@@ -370,6 +374,9 @@ DIC.get('MyNamespace.MyApp.controller.Doing').class;
 }
 ```
 
-[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/test/MODULE-TEST-RUNNER.md
-[module-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/module/template/Module.js.template
+[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/TEST-RUNNER.md
+[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/DOC-RUNNER.md
+[module-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/lib/equivalent/template/ModuleName.js.template
+[gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com
+[jsdoc]: http://usejsdoc.org

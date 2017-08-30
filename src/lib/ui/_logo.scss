@@ -1,0 +1,157 @@
+@import "bootstrap";
+
+@keyframes rotate-logo {
+  from {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes rotate-logo-back {
+  from {
+    transform: rotate(405deg);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+.logo {
+  margin-top: 1rem;
+  
+  @media (min-width: $display-min-mobile-l) {
+    .equivalent-js-logo {
+      margin-left: 4rem;
+    }
+  }
+}
+
+.equivalent-js-logo {
+  $logo-size: 8rem;
+
+  position: relative;
+  margin: 0 auto;
+  width: $logo-size;
+  height: $logo-size;
+  background-color: $mdc-theme-primary;
+  border: solid .2rem $mdc-theme-primary;
+  text-align: center;
+  overflow: hidden;
+
+  @include border-radius($logo-size - 6);
+  @include rotate(45);
+
+  @include animate(rotate-logo, 2s);
+
+  &.animate {
+    @include animate(rotate-logo-back, 2s);
+  }
+
+  i {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    @include translate(-50%, -50%);
+  }
+
+  > i {
+    $circle-size: $logo-size - 2;
+
+    background-color: $mdc-theme-background;
+    width: $circle-size;
+    height: $circle-size;
+
+    @include border-radius($circle-size);
+    @include transform(rotate(-45deg) translate(0, -71%));
+
+    > i {
+      $letter-top-size: $circle-size - 1;
+
+      background-color: $mdc-theme-primary;
+      width: $letter-top-size;
+      height: $letter-top-size;
+
+      @include border-radius($letter-top-size);
+
+      &::after {
+        $letter-top-layer-size: $letter-top-size - 1;
+
+        content: '';
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1;
+        background-color: $mdc-theme-background;
+        width: $letter-top-layer-size;
+        height: $letter-top-layer-size;
+
+        @include border-radius($letter-top-layer-size);
+      }
+
+      > i {
+        $letter-mid-size: $circle-size - 3;
+
+        position: absolute;
+        left: 3.5rem;
+        top: 2.5rem;
+        z-index: 2;
+        background-color: $mdc-theme-primary;
+        width: $letter-mid-size;
+        height: $letter-mid-size;
+
+        @include border-radius($letter-mid-size);
+
+        &::after {
+          $letter-mid-layer-size: $letter-mid-size - 1;
+
+          content: '';
+          position: absolute;
+          top: .95rem;
+          left: .95rem;
+          z-index: 3;
+          background-color: $mdc-theme-background;
+          width: $letter-mid-layer-size;
+          height: $letter-mid-layer-size;
+
+          @include border-radius($letter-mid-layer-size);
+        }
+
+        > i {
+          $letter-dot-size: $circle-size - 3;
+
+          position: absolute;
+          top: 1.5rem;
+          left: -3.5rem;
+          z-index: 4;
+          background-color: $mdc-theme-background;
+          width: $letter-dot-size;
+          height: $letter-dot-size;
+
+          @include border-radius($letter-dot-size);
+
+          &:nth-child(2) {
+            top: 1.5rem;
+            left: 4.5rem;
+          }
+
+          &:nth-child(3) {
+            top: -2.5rem;
+            left: 0.5rem;
+          }
+
+          &:nth-child(4) {
+            top: 5.5rem;
+            left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

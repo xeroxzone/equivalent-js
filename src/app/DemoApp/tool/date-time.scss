@@ -5,6 +5,8 @@
   font-family: monospace !important;
   text-align: right;
 
+  @include animate(fade-in);
+
   .date-time {
     cursor: default;
     display: block;

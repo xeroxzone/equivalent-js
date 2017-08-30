@@ -1,6 +1,4 @@
-# The Module Doc Runner (MDR)
-
-*Doc Runner Description*
+# The Doc Runner
 
 The Doc Runner will try to run documentation generation for all declared modules
 
@@ -18,7 +16,7 @@ to disable the doc runner send
 
 ### Start live documentation coding
 
-run watcher like described in [README.md][readme](../../../README.md)
+run watcher like described in [README.md][readme](../../README.md)
 
     npm run dev-watch
 

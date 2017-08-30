@@ -1,12 +1,10 @@
-# The Module Test Runner (MTR)
-
-*Test Runner Description*
+# The Test Runner
 
 The Test Runner will try to run tests for all modules stored in DIC
 
-## The Module Test Autoload Declaration (MTAD)
+## The Module Test Autoload Declaration
 
-For an example there is a [test template][test-template](../../../src/test/lib/equivalent/template/ModuleTest.js.template)
+For an example there is a [test template][test-template](../../src/test/lib/equivalent/template/ModuleNameTest.js.template)
 
 ### Automated unit testing for modules with [QUnit][qunit]
 
@@ -120,7 +118,7 @@ this.teardown = function () {
 
 ##### Use class autoload and dependency manager as an isolated instance
 
-For an example there is a [test template][test-template](../../../src/test/lib/equivalent/template/ModuleTest.js.template)
+For an example there is a [test template][test-template](../../src/test/lib/equivalent/template/ModuleNameTest.js.template)
 
 ```javascript
 /**
@@ -286,5 +284,5 @@ DIC.define('MyNamespace.test.BetterTestableModuleClassTest', new function () {
 });
 ```
 
-[test-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/test/lib/equivalent/template/ModuleTest.js.template
+[test-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/test/lib/equivalent/template/ModuleNameTest.js.template
 [qunit]: https://qunitjs.com

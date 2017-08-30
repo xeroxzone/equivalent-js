@@ -8,7 +8,9 @@
   },
   "docs" : {
     "src" : [
-      "src/lib/equivalent/**/*.js"
+      "src/lib/equivalent/**/*.js",
+      "doc/**/*.md",
+      "*.md"
     ],
     "dest" : "web/doc"
   },

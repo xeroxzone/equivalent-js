@@ -68,12 +68,14 @@ $main-highlight: $mdc-theme-primary;
           font: 1rem monospace;
           text-transform: uppercase;
           text-decoration: none;
+
           @include transition(all .25s ease-in-out);
 
           &:hover {
             background-color: orange;
             color: black;
             padding-right: 20%;
+
             @include transition(all .25s ease-in-out);
           }
 
@@ -142,7 +144,7 @@ $main-highlight: $mdc-theme-primary;
 
       $checkbox-offset: -.1rem;
 
-      &:after {
+      &::after {
         pointer-events: none;
         content: "";
         position: absolute;
@@ -155,7 +157,7 @@ $main-highlight: $mdc-theme-primary;
       }
 
       &:checked {
-        &:after {
+        &::after {
           background-color: $mdc-theme-secondary;
         }
       }
@@ -177,11 +179,11 @@ $main-highlight: $mdc-theme-primary;
         margin-left: $main-size * .5;
       }
 
-      @media (max-width: 425px) {
+      @media (max-width: $display-mobile-l) {
         font-size: x-small;
       }
 
-      @media (max-width: 375px) {
+      @media (max-width: $display-mobile-m) {
         font-size: xx-small;
 
         &[for="qunit-urlconfig-notrycatch"] {
@@ -191,7 +193,7 @@ $main-highlight: $mdc-theme-primary;
     }
 
     #qunit-filter-input {
-      @media (max-width: 320px) {
+      @media (max-width: $display-mobile-s) {
         width: 7rem;
       }
     }

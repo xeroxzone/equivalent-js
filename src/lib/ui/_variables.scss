@@ -1,4 +1,4 @@
-// equivalent main colors
+// equivalent-js main colors
 $mdc-theme-primary: #2780E3;
 $mdc-theme-secondary: #ffab40;
 $mdc-theme-background: #fff;
@@ -7,3 +7,21 @@ $mdc-theme-primary-light: #35abd8;
 $mdc-theme-primary-dark: #34409a;
 $mdc-theme-secondary-light: #ffd180;
 $mdc-theme-secondary-dark: #ff6d00;
+
+// display sizes max
+$display-mobile-s: 320px;
+$display-mobile-m: 375px;
+$display-mobile-l: 425px;
+$display-tablet: 786px;
+$display-desktop: 1024px;
+$display-desktop-l: 1440px;
+$display-desktop-4k: 2560px;
+
+// display sizes min
+$display-min-mobile-s: $display-mobile-s + 1;
+$display-min-mobile-m: $display-mobile-m + 1;
+$display-min-mobile-l: $display-mobile-l + 1;
+$display-min-tablet: $display-tablet + 1;
+$display-min-desktop: $display-desktop + 1;
+$display-min-desktop-l: $display-desktop-l + 1;
+$display-min-desktop-4k: $display-desktop-4k + 1;

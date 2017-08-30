@@ -315,7 +315,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @param {boolean} withSystemTests indicate to include core modules into test runner
      * @returns {void}
      * @throws {Error} if module class could not be cloned for test isolation
-     * @tutorial MODULE-TEST-RUNNER
+     * @tutorial TEST-RUNNER
      */
     var test = function (module, withSystemTests) {
         if (true === testing) {return;} // if tests are testing the manager themself
@@ -792,7 +792,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @memberOf EquivalentJs.Manager
      * @param {(string|Array.<string>)} type as module class name
      * @param {function} callback runs after module class is ready
-     * @tutorial MODULE-ORCHESTRATION-SYSTEM
+     * @tutorial MODULE-MANAGER
      * @see EquivalentJs.Manager#ready:callback
      * @example DIC.ready('A.namespacePart.ClassName', function (module) {});
      * @example DIC.ready([
@@ -870,7 +870,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      *      'A.namespacePart.ClassNameB',
      *      'A.namespacePart.ClassNameC'
      *  ]);
-     * @tutorial MODULE-ORCHESTRATION-SYSTEM
+     * @tutorial MODULE-MANAGER
      */
     _.remove = function (type) {
         var onRemoveError = function (type) {
@@ -917,7 +917,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * ])
      *  .done(function (module) {})
      *  .fail(function () {});
-     * @tutorial MODULE-ORCHESTRATION-SYSTEM
+     * @tutorial MODULE-MANAGER
      */
     _.add = function (type, parameters) {
         var $resolver,
@@ -963,7 +963,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @param {string} type as module class name
      * @returns {?EquivalentJs.Manager.Module}
      * @example DIC.get('A.namespacePart.ClassName');
-     * @tutorial MODULE-ORCHESTRATION-SYSTEM
+     * @tutorial MODULE-MANAGER
      */
     _.get = function (type) {
         return getModule(type);
@@ -975,7 +975,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @param {string} type as module class name
      * @returns {boolean}
      * @example DIC.has('A.namespacePart.ClassName');
-     * @tutorial MODULE-ORCHESTRATION-SYSTEM
+     * @tutorial MODULE-MANAGER
      */
     _.has = function (type) {
         return null !== getModule(type);

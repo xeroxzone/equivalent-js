@@ -6,8 +6,6 @@ Further development will take place here.
 
 ## Class autoload and dependency manager
 
-*Introduction*
-
 A JavaScript micro framework for modern web browsers to asynchronous autoload 
 module classes and their dependencies handled by a manager for a dependency injection container.
 
@@ -34,9 +32,9 @@ in time at coding, with help of file watchers from [Gulp][gulp].
 
 Content
 
-* [Module Orchestration System][MOS](doc/tutorials/module/MODULE-ORCHESTRATION-SYSTEM.md)
-* [Module Test Runner][MTR](doc/tutorials/test/MODULE-TEST-RUNNER.md)
-* [Module Doc Runner][MDR](doc/tutorials/doc/MODULE-DOC-RUNNER.md)
+* [Module Manager][MM](doc/tutorials/MODULE-MANAGER.md)
+* [Test Runner][MTR](doc/tutorials/TEST-RUNNER.md)
+* [Doc Runner][MDR](doc/tutorials/DOC-RUNNER.md)
 
 ## Requirements
 
@@ -73,13 +71,13 @@ or
 
 ...live long and prosper
 
-[MOS]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/module/MODULE-ORCHESTRATION-SYSTEM.md
-[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/test/MODULE-TEST-RUNNER.md
-[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/doc/MODULE-DOC-RUNNER.md
+[MM]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/MODULE-MANAGER.md
+[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/TEST-RUNNER.md
+[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/DOC-RUNNER.md
 [meinauto-js]: https://github.com/meinauto/meinauto-js
-[npmjs]: https://www.npmjs.com/
-[gulp]: http://gulpjs.com/
+[npmjs]: https://www.npmjs.com
+[gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com
-[jsdoc]: http://usejsdoc.org/
+[jsdoc]: http://usejsdoc.org
 [jsdoc-type]: http://usejsdoc.org/tags-type.html
-[sass]: http://sass-lang.com/
+[sass]: http://sass-lang.com
