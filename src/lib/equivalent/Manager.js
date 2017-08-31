@@ -445,6 +445,13 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                     error.status + ' ' + error.statusText +
                     ' - Could not load test for module "' + namespace + '"!'
                 );
+
+                var $missingTestsLog = $('.missing-tests-log > ul');
+                if (0 < $missingTestsLog.length) {
+                    $missingTestsLog.append(
+                        $('<li/>').html('Could not load test for module "' + namespace + '"!')
+                    );
+                }
             });
     };
 

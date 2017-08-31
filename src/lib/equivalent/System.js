@@ -439,6 +439,8 @@ EquivalentJs.System = new function () {
                     );
                 });
 
+            $('<div><ul></ul></div>').addClass('missing-tests-log').appendTo('.debug');
+
             $('<button/>').addClass('mdc-button mdc-button--raised').prop({
                 'id': 'test-runner-control'
             }).css({
