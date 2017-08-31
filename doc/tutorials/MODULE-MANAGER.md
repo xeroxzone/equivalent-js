@@ -214,7 +214,7 @@ _.construct = function () {
  *  the file name pattern is lowercase dash seperated module class name parts
  *  like MyNamespace/MyApp.js => MyNamespace/my-app.scss;
  *  the stylesheet DOM link element get removed if 
- *  the module will be removed from manager;
+ *  the module will be removed from DIC;
  *  this property is optional
  * @type {boolean}
  * @see EquivalentJs.Manager.Module.class.__layout__ the css reference
