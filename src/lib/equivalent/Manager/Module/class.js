@@ -46,7 +46,7 @@ EquivalentJs.define('EquivalentJs.Manager.Module.class', new function () {
      * the file name pattern is lowercase dash seperated module class name parts
      * like MyNamespace/MyApp.js => MyNamespace/my-app.scss;
      * the stylesheet DOM link element get removed if
-     * the module will be removed from manager;
+     * the module will be removed from DIC;
      * this property is optional
      * @memberOf EquivalentJs.Manager.Module.class
      * @type {boolean}
