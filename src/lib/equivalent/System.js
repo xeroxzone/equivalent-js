@@ -53,7 +53,7 @@ EquivalentJs.System = new function () {
      * @type {string}
      * @default
      */
-    var shortcut = 'MAJS';
+    var shortcut = 'DIC';
 
     /**
      * @description path to module class root directory
