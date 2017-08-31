@@ -80,7 +80,7 @@ markup or a direct object call from another javascripts to access the module by 
 
 ```html
 <head>
-    <script src="../src/lib/equivalent.js"></script>
+    <script src="js/lib/equivalent.js"></script>
 </head>
 ```
 
@@ -89,7 +89,7 @@ or
 ```html
 <body>
     <!-- some markup... -->
-    <script src="../src/lib/equivalent.js"></script>
+    <script src="js/lib/equivalent.js"></script>
 </body>
 ```
 
