@@ -30,6 +30,8 @@ A module test runner based on [QUnit][qunit] and isolated test methods are avail
 Also a documentation runner that based on [JSDoc][jsdoc]; view the doc tag interpretation 
 in time at coding, with help of file watchers from [Gulp][gulp].
 
+This framework use [jQuery][jquery] to realize tasks in traversing, manipulation, events and ajax. 
+
 Content
 
 * [Module Manager][MM](doc/tutorials/MODULE-MANAGER.md)
@@ -47,25 +49,15 @@ Install dependencies with [npmjs][npmjs] at project root folder
 Generate scripts and stylesheets ([Sass][sass]) 
 and documentation ([JSDoc][jsdoc] & [JSDoc Type][jsdoc-type])
 
-    npm run dev-run
+    npm run dev:run
 
 or
 
-    npm run dev-watch
+    npm run dev:watch
 
 ## Run demo application in browser
 
-e.g.
-
-    http://localhost/equivalent-js/web/index.html
-    
-or
-
-    http://localhost/equivalent-js/web/index.html?tests
-
-or
-
-    http://localhost/equivalent-js/web/index.html?docs
+    npm run dev:http
 
 ## Appendix
 
@@ -77,6 +69,7 @@ or
 [meinauto-js]: https://github.com/meinauto/meinauto-js
 [npmjs]: https://www.npmjs.com
 [gulp]: http://gulpjs.com
+[jquery]: https://jquery.com
 [qunit]: https://qunitjs.com
 [jsdoc]: http://usejsdoc.org
 [jsdoc-type]: http://usejsdoc.org/tags-type.html

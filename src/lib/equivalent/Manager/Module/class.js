@@ -42,12 +42,15 @@ EquivalentJs.define('EquivalentJs.Manager.Module.class', new function () {
 
     /**
      * @description bind a stylesheet on module;
-     *  if true then add sass css file to ui library;
-     *  this property is optional
+     * if true then add sass css file to the corresponding module class folder;
+     * the file name pattern is lowercase dash seperated module class name parts
+     * like MyNamespace/MyApp.js => MyNamespace/my-app.scss;
+     * the stylesheet DOM link element get removed if
+     * the module will be removed from manager;
+     * this property is optional
      * @memberOf EquivalentJs.Manager.Module.class
      * @type {boolean}
      * @typedef {boolean} EquivalentJs.Manager.Module.class.layout
-     * @see '/src/lib/ui/template/module.scss.template'
      * @see EquivalentJs.Manager.Module.class.__layout__ the css reference
      */
     _.layout = false;

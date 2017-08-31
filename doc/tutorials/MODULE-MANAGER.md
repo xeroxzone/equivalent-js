@@ -50,6 +50,25 @@ var MyApp = DIC.get('MyNamespace.MyApp').class;
 if (true === DIC.remove('MyNamespace.MyApp')) {}
 ```
 
+- show DIC object or EquivalentJs public interface object in browser console
+
+```javascript
+console.log(DIC, EquivalentJs);
+```
+
+## Configuration
+
+The [Gulp][gulp] piped input / output pathes for javascripts, stylesheets and documentation to the public web folder 
+can be changed by the gulp.json configuration file:
+
+[./gulp.json](../../gulp.json)
+
+To change from which web location the module manager read the files modify the parameters.json configuration file:
+
+[./src/config/parameters.json](../../src/config/parameters.json)
+
+run watcher like described in [README.md][readme](../../README.md)
+
 ## The Module Autoload Declaration
 
 For example there is a [module template][module-template](../../src/lib/equivalent/template/ModuleName.js.template).
@@ -182,6 +201,25 @@ Describe the class autoload construction:
 _.construct = function () {
     // do something
 };
+```
+
+### Define autoloaded stylesheet
+
+    ./src/app/MyNamespace/my-app.scss
+
+```javascript
+/**
+ * @description bind a stylesheet on module;
+ *  if true then add sass css file to the corresponding module class folder;
+ *  the file name pattern is lowercase dash seperated module class name parts
+ *  like MyNamespace/MyApp.js => MyNamespace/my-app.scss;
+ *  the stylesheet DOM link element get removed if 
+ *  the module will be removed from manager;
+ *  this property is optional
+ * @type {boolean}
+ * @see EquivalentJs.Manager.Module.class.__layout__ the css reference
+ */
+_.layout = true;
 ```
 
 ### Define class events

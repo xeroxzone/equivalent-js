@@ -133,9 +133,10 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                 var $defer = this;
                 $defer.resolve(getModule(type).class);
             });
-        } else if (-1 === prepared.indexOf(type)) {
+        } else if ('' !== type && -1 === prepared.indexOf(type)) {
             prepared.push(type);
-        } else if (-1 < prepared.indexOf(type) &&
+        } else if ('' !== type &&
+            -1 < prepared.indexOf(type) &&
             null === getModule(type)
         ) {
             return $.Deferred(function () {
@@ -608,14 +609,16 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @description create a module object around the module class
      * @memberOf EquivalentJs.Manager
      * @private
-     * @param {function} module the module class
+     * @param {object} module the module class
      * @param {string} module.type as module class name
      * @returns {EquivalentJs.Manager.Module}
      * @throws {Error} if module could not be created
      */
     var createModule = function (module) {
-        if (typeof module === 'function' && typeof module.type !== 'string') {
+        if (typeof module !== 'object') {
             throw new Error('Could not create module!');
+        } else if (typeof module.type !== 'string') {
+            throw new Error('The module type property must be of type <string>!');
         }
 
         /**

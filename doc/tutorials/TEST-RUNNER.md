@@ -11,12 +11,12 @@ For an example there is a [test template][test-template](../../src/test/lib/equi
     load system with get parameter "tests" like
     
     e.g.
-    http://localhost/equivalent-js/web/?tests
+    http://localhost:8083/?tests
     
 to disable the test suit send
 
     e.g.
-    http://localhost/equivalent-js/web/?tests-stop
+    http://localhost:8083/?tests-stop
 
 #### Add unit test per module
 
@@ -146,7 +146,8 @@ For better test case accessibility the manager and markup from implementation ca
 This means that in test cases the isolated module class instance own manager property 
 are overridden by an isolated test case manager instance and the markup can be overridden per test method.
 
-The manager and markup properties are described at the module class interface "EquivalentJs.Manager.Module.class" 
+The manager and markup properties are described at the 
+module class interface [{EquivalentJs.Manager.Module.class}](../../src/lib/equivalent/Manager/Module/class.js) 
 can be found in the generated documentation.
 
     example:

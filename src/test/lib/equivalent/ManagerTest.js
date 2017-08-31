@@ -7,7 +7,7 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
     /**
      * @type {string}
      */
-    var moduleAutoloadPath = '/equivalent-js/web/js/lib/equivalent';
+    var moduleAutoloadPath = '/js/lib/equivalent';
 
     /**
      * @description test has pre setted type string

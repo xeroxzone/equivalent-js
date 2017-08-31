@@ -7,18 +7,18 @@ The Doc Runner will try to run documentation generation for all declared modules
     load system with get parameter "docs" like
     
     e.g.
-    http://localhost/equivalent-js/web/?docs
+    http://localhost:8083/?docs
     
 to disable the doc runner send
 
     e.g.
-    http://localhost/equivalent-js/web/?docs-stop
+    http://localhost:8083/?docs-stop
 
 ### Start live documentation coding
 
 run watcher like described in [README.md][readme](../../README.md)
 
-    npm run dev-watch
+    npm run dev:watch
 
 if doc runner is loaded, the browser refreshes the documentation
 from all documentated code changes as long as the mouse cursor 
