@@ -126,7 +126,7 @@ EquivalentJS.System = new function () {
     };
 
     /**
-     * @description configure system pathes
+     * @description configure system paths
      * @memberOf EquivalentJS.System
      * @private
      * @param {function} registerCallback the callback to register

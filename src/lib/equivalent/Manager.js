@@ -510,7 +510,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
             if (false === /^EquivalentJS\./.test(module.type)) {
                 reNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
-                    '/' + reNamespace.toLowerCase();
+                    '/' + reNamespace;
             }
 
             layoutUri = configuration.moduleLayout + '/' +

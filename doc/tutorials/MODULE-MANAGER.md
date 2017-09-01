@@ -58,7 +58,7 @@ console.log(DIC, EquivalentJs);
 
 ## Configuration
 
-The [Gulp][gulp] piped input / output pathes for javascripts, stylesheets and documentation to the public web folder 
+The [Gulp][gulp] piped input / output paths for javascripts, stylesheets and documentation to the public web folder 
 can be changed by the gulp.json configuration file:
 
 [./gulp.json](../../gulp.json)
