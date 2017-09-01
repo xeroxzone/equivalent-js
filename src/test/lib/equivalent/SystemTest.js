@@ -3,12 +3,12 @@
 /**
  * @class test system module
  */
-DIC.define('EquivalentJs.test.SystemTest', new function () {
+DIC.define('EquivalentJS.test.SystemTest', new function () {
     /**
      * @description test has pre setted type string
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testHasPreSettedType = function (assert, moduleClass) {
         assert.ok(
@@ -17,16 +17,16 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
         );
 
         assert.ok(
-            'EquivalentJs.System' === moduleClass.type,
-            'is EquivalentJs.System'
+            'EquivalentJS.System' === moduleClass.type,
+            'is EquivalentJS.System'
         );
     };
 
     /**
      * @description test get namespace module string
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testGetNamespace = function (assert, moduleClass) {
         assert.ok(
@@ -37,9 +37,9 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
 
     /**
      * @description test system module loaded manager
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testHasLoadedConfig = function (assert, moduleClass) {
         var assertAsync = assert.async();
@@ -55,9 +55,9 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
 
     /**
      * @description test to define a new module class with wrong parameter or class object type
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testDefineModuleClassWithWrongParameterType = function (assert, moduleClass) {
         var assertAsync = assert.async();
@@ -65,7 +65,7 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
         moduleClass.construct(true, function () {
             assert.throws(
                 function() {
-                    EquivalentJs.define(1);
+                    EquivalentJS.define(1);
                 },
                 new Error('The module class type must be of type <string>.'),
                 'exception was thrown on wrong typed module creation'
@@ -73,7 +73,7 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
 
             assert.throws(
                 function() {
-                    EquivalentJs.define(1, 1);
+                    EquivalentJS.define(1, 1);
                 },
                 new Error('The module class type must be of type <string>.'),
                 'exception was thrown on wrong typed module creation ' +
@@ -87,9 +87,9 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
     /**
      * @description test to define a new module class with correct parameter and wrong class object type
      *  but no class object is given
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testDefineModuleClassWithCorrectParameterTypeButNoClassObject = function (assert, moduleClass) {
         var assertAsync = assert.async();
@@ -97,7 +97,7 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
         moduleClass.construct(true, function () {
             assert.throws(
                 function() {
-                    EquivalentJs.define('EquivalentJs.mock.ModuleClassNamespace');
+                    EquivalentJS.define('EquivalentJS.mock.ModuleClassNamespace');
                 },
                 new Error('The module class must be of type <Object>.'),
                 'exception was thrown on correct typed module creation ' +
@@ -106,7 +106,7 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
 
             assert.throws(
                 function() {
-                    EquivalentJs.define('EquivalentJs.mock.ModuleClassNamespace', 1);
+                    EquivalentJS.define('EquivalentJS.mock.ModuleClassNamespace', 1);
                 },
                 new Error('The module class must be of type <Object>.'),
                 'exception was thrown on correct typed module creation with ' +
@@ -120,17 +120,17 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
     /**
      * @description test to define a new module class with correct parameter and correct class object type
      *  but no class object is given
-     * @memberOf EquivalentJs.test.SystemTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.System} moduleClass
+     * @memberOf EquivalentJS.test.SystemTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.System} moduleClass
      */
     this.testDefineModuleClassWithCorrectParameterTypeAndClassObject = function (assert, moduleClass) {
         var assertAsync = assert.async();
 
         moduleClass.construct(true, function () {
-            EquivalentJs.define('EquivalentJs.mock.ModuleClassNamespace', new function () {});
+            EquivalentJS.define('EquivalentJS.mock.ModuleClassNamespace', new function () {});
 
-            var MockModuleClassNamespace = EquivalentJs.mock.ModuleClassNamespace;
+            var MockModuleClassNamespace = EquivalentJS.mock.ModuleClassNamespace;
 
             assert.ok(
                 typeof MockModuleClassNamespace === 'object',
@@ -143,15 +143,15 @@ DIC.define('EquivalentJs.test.SystemTest', new function () {
 
     /**
      * @description teardown the created test method objects
-     * @memberOf EquivalentJs.test.SystemTest
+     * @memberOf EquivalentJS.test.SystemTest
      */
     this.teardown = function () {
-        removeModuleDOM('EquivalentJs.mock.ModuleClassNamespace');
+        removeModuleDOM('EquivalentJS.mock.ModuleClassNamespace');
     };
 
     /**
      * @description remove a test mock created namespace
-     * @memberOf EquivalentJs.test.SystemTest
+     * @memberOf EquivalentJS.test.SystemTest
      * @param {string} type
      * @return {boolean}
      */

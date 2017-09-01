@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc an application demo as a factory
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.Factory
  * @constructs
  */
@@ -191,7 +191,7 @@ DIC.define('DemoApp.Factory', new function () {
                 .setBorderColor(border)
             ;
         } catch (error) {
-            EquivalentJs.console.error(error);
+            EquivalentJS.console.error(error);
         }
 
         return circle;

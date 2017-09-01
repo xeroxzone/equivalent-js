@@ -3,7 +3,7 @@
 /**
  * @class test manager module
  */
-DIC.define('EquivalentJs.test.ManagerTest', new function () {
+DIC.define('EquivalentJS.test.ManagerTest', new function () {
     /**
      * @type {string}
      */
@@ -11,9 +11,9 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
     /**
      * @description test has pre setted type string
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testHasPreSettedType = function (assert, moduleClass) {
         assert.ok(
@@ -22,16 +22,16 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
         );
 
         assert.ok(
-            'EquivalentJs.Manager' === moduleClass.type,
-            'is EquivalentJs.Manager'
+            'EquivalentJS.Manager' === moduleClass.type,
+            'is EquivalentJS.Manager'
         );
     };
 
     /**
      * @description test has and get not existing module fail
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testNotExistingModuleFail = function (assert, moduleClass) {
         var manager = moduleClass;
@@ -39,21 +39,21 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
         manager.construct(moduleAutoloadPath, true);
 
         assert.ok(
-            false === manager.has('EquivalentJs.NotExistingModule'),
+            false === manager.has('EquivalentJS.NotExistingModule'),
             'has not existing module fails'
         );
 
         assert.ok(
-            null === manager.get('EquivalentJs.NotExistingModule'),
+            null === manager.get('EquivalentJS.NotExistingModule'),
             'get not existing module fails'
         );
     };
 
     /**
      * @description test remove not existing module fail
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testRemoveNotExistingModuleFail = function (assert, moduleClass) {
         var manager = moduleClass;
@@ -61,16 +61,16 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
         manager.construct(moduleAutoloadPath, true);
 
         assert.ok(
-            false === manager.remove('EquivalentJs.NotExistingModule'),
+            false === manager.remove('EquivalentJS.NotExistingModule'),
             'remove not existing module fails'
         );
     };
 
     /**
      * @description test has and get existing module success
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testExistingModuleSuccess = function (assert, moduleClass) {
         var assertAsync = assert.async(),
@@ -78,7 +78,7 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
         manager.construct(moduleAutoloadPath, true);
 
-        manager.add('EquivalentJs.mock.ExistingModule').done(function (module) {
+        manager.add('EquivalentJS.mock.ExistingModule').done(function (module) {
             assert.ok(
                 true === manager.has(module.type),
                 'add and has existing module'
@@ -116,9 +116,9 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
     /**
      * @description test ready existing module success
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testReadyExistingModuleSuccess = function (assert, moduleClass) {
         var assertAsync = assert.async(),
@@ -126,7 +126,7 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
         manager.construct(moduleAutoloadPath, true);
 
-        manager.ready('EquivalentJs.mock.ExistingModule', function (module) {
+        manager.ready('EquivalentJS.mock.ExistingModule', function (module) {
             assert.ok(
                 true === manager.has(module.type),
                 'ready existing module'
@@ -135,14 +135,14 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
             assertAsync();
         });
 
-        manager.add('EquivalentJs.mock.ExistingModule');
+        manager.add('EquivalentJS.mock.ExistingModule');
     };
 
     /**
      * @description test remove existing module success
-     * @memberOf EquivalentJs.test.ManagerTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager} moduleClass
+     * @memberOf EquivalentJS.test.ManagerTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager} moduleClass
      */
     this.testRemoveExistingModuleSuccess = function (assert, moduleClass) {
         var assertAsync = assert.async(),
@@ -150,7 +150,7 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
         manager.construct(moduleAutoloadPath, true);
 
-        manager.add('EquivalentJs.mock.ExistingModule').done(function (module) {
+        manager.add('EquivalentJS.mock.ExistingModule').done(function (module) {
             assert.ok(
                 true === manager.remove(module.type),
                 'add and remove existing module'
@@ -162,15 +162,15 @@ DIC.define('EquivalentJs.test.ManagerTest', new function () {
 
     /**
      * @description teardown the created test method objects
-     * @memberOf EquivalentJs.test.ManagerTest
+     * @memberOf EquivalentJS.test.ManagerTest
      */
     this.teardown = function () {
-        removeModuleDOM('EquivalentJs.mock.ExistingModule');
+        removeModuleDOM('EquivalentJS.mock.ExistingModule');
     };
 
     /**
      * @description remove a test mock created namespace
-     * @memberOf EquivalentJs.test.ManagerTest
+     * @memberOf EquivalentJS.test.ManagerTest
      * @param {string} type
      * @return {boolean}
      */

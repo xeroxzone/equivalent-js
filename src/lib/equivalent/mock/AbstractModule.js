@@ -3,22 +3,22 @@
 /**
  * @class
  * @classdesc a test mock to represent an abstract module class
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.mock.AbstractModule
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.mock.AbstractModule
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.mock.AbstractModule', new function () {
+EquivalentJS.define('EquivalentJS.mock.AbstractModule', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.mock.AbstractModule
+     * @memberOf EquivalentJS.mock.AbstractModule
      * @private
-     * @alias {EquivalentJs.mock.AbstractModule}
+     * @alias {EquivalentJS.mock.AbstractModule}
      */
     var _ = this;
 
     /**
      * @description test a property
-     * @memberOf EquivalentJs.mock.AbstractModule
+     * @memberOf EquivalentJS.mock.AbstractModule
      * @type {number}
      * @default
      */
@@ -26,7 +26,7 @@ EquivalentJs.define('EquivalentJs.mock.AbstractModule', new function () {
 
     /**
      * @description test b property
-     * @memberOf EquivalentJs.mock.AbstractModule
+     * @memberOf EquivalentJS.mock.AbstractModule
      * @type {number}
      * @default
      */

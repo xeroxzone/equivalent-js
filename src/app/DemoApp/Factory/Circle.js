@@ -6,7 +6,7 @@
 /**
  * @class
  * @classdesc a model to be created by factory
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.Factory.Circle
  * @constructs
  */

@@ -3,13 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>EquivalentJs</title>
+        <title>EquivalentJS</title>
         <link rel="stylesheet" href="css/material-components-web.css">
         <link rel="stylesheet" href="css/load.css">
         <script src="js/lib/jquery.min.js"></script>
         <script src="js/lib/material-components-web.js"></script>
     </head>
-    <body class="mdc-typography">
+    <body class="mdc-typography" data-application="DemoApp.Viewport">
 
         <aside class="mdc-persistent-drawer">
             <nav class="mdc-persistent-drawer__drawer">
@@ -43,7 +43,7 @@
 
                 <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                     <a href="#" class="material-icons mdc-toolbar__icon--menu main-menu">menu</a>
-                    <span class="mdc-toolbar__title main-headline">EquivalentJs</span>
+                    <span class="mdc-toolbar__title main-headline">EquivalentJS</span>
                 </section>
 
                 <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
@@ -143,23 +143,6 @@
         </div>
 
         <script src="js/lib/equivalent.js"></script>
-
-        <script type="text/javascript">
-            var drawerEl = document.querySelector('.mdc-persistent-drawer');
-            var MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer;
-            var drawer = new MDCPersistentDrawer(drawerEl);
-            document.querySelector('.main-menu').addEventListener('click', function() {
-                drawer.open = !drawer.open;
-            });
-            drawerEl.addEventListener('MDCPersistentDrawer:open', function() {
-                document.querySelector('.main-menu').innerHTML = 'close';
-                $('.main-menu').removeClass('out').addClass('over');
-            });
-            drawerEl.addEventListener('MDCPersistentDrawer:close', function() {
-                document.querySelector('.main-menu').innerHTML = 'menu';
-                $('.main-menu').removeClass('over').addClass('out');
-            });
-        </script>
 
         <script type="text/javascript">
             mdc.autoInit();

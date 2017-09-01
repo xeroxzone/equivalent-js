@@ -8,15 +8,15 @@ DIC.define('Namespace.test.pathPart.ModuleNameTest', new function () {
      * @description an optional DIC manager instance that is isolated
      *  for this test case
      * @memberOf Namespace.test.pathPart.ModuleNameTest
-     * @alias {EquivalentJs.Manager}
-     * @see EquivalentJs.Manager
+     * @alias {EquivalentJS.Manager}
+     * @see EquivalentJS.Manager
      */
     var manager;
 
     /**
      * @description setup things before created test methods executed
      * @memberOf Namespace.test.pathPart.ModuleNameTest
-     * @param {EquivalentJs.Manager} managerInstance the DIC manager
+     * @param {EquivalentJS.Manager} managerInstance the DIC manager
      *  as an isolated instance
      */
     this.setup = function (managerInstance) {
@@ -28,7 +28,7 @@ DIC.define('Namespace.test.pathPart.ModuleNameTest', new function () {
     /**
      * @description test {@link Namespace.pathPart.ModuleName.layout} is setted
      * @memberOf Namespace.test.pathPart.ModuleNameTest
-     * @param {EquivalentJs.test.Unit.assert} assert the assertion interface
+     * @param {EquivalentJS.test.Unit.assert} assert the assertion interface
      * @param {Namespace.pathPart.ModuleName} moduleClass as an isolated instance
      */
     this.testHasLayout = function (assert, moduleClass) {
@@ -38,7 +38,7 @@ DIC.define('Namespace.test.pathPart.ModuleNameTest', new function () {
     /**
      * @description test {@link Namespace.pathPart.ModuleName} with manager
      * @memberOf Namespace.test.pathPart.ModuleNameTest
-     * @param {EquivalentJs.test.Unit.assert} assert the assertion interface
+     * @param {EquivalentJS.test.Unit.assert} assert the assertion interface
      * @param {Namespace.pathPart.ModuleName} moduleClass as an isolated instance
      */
     this.testModuleClassWithManager = function (assert, moduleClass) {

@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc demo app logo tool
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.tool.Logo
  * @constructs
  */

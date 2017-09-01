@@ -3,26 +3,26 @@
 /**
  * @class test manager app module
  */
-DIC.define('EquivalentJs.test.Manager.AppTest', new function () {
+DIC.define('EquivalentJS.test.Manager.AppTest', new function () {
     /**
      * @description test has assigned module class type by manager
-     * @memberOf EquivalentJs.test.Manager.AppTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.App} moduleClass
+     * @memberOf EquivalentJS.test.Manager.AppTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.App} moduleClass
      */
     this.testHasAssignedTypeByManager = function (assert, moduleClass) {
         assert.ok(
-            'EquivalentJs.Manager.App' === moduleClass.type,
-            'is EquivalentJs.Manager.App'
+            'EquivalentJS.Manager.App' === moduleClass.type,
+            'is EquivalentJS.Manager.App'
         );
     };
 
     /**
-     * @description test if the {@link EquivalentJs.Manager.App#app:initialize}
+     * @description test if the {@link EquivalentJS.Manager.App#app:initialize}
      *  event has been fired
-     * @memberOf EquivalentJs.test.Manager.AppTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.App} moduleClass
+     * @memberOf EquivalentJS.test.Manager.AppTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.App} moduleClass
      */
     this.testAreAppsInitialized = function (assert, moduleClass) {
         moduleClass.construct();

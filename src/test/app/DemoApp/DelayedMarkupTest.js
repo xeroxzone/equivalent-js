@@ -7,7 +7,7 @@ DIC.define('DemoApp.test.DelayedMarkupTest', new function () {
     /**
      * @description test delayed demo markup
      * @memberOf DemoApp.test.DelayedMarkupTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.DelayedMarkup} moduleClass
      */
     this.testDelayedDemoMarkup = function (assert, moduleClass) {

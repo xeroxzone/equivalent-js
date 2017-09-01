@@ -3,22 +3,22 @@
 /**
  * @class
  * @classdesc a test mock to represent an existing module class
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.mock.ExistingModule
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.mock.ExistingModule
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
+EquivalentJS.define('EquivalentJS.mock.ExistingModule', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @private
-     * @alias {EquivalentJs.mock.ExistingModule}
+     * @alias {EquivalentJS.mock.ExistingModule}
      */
     var _ = this;
 
     /**
      * @description test property foo
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @private
      * @type {Object}
      */
@@ -26,7 +26,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description test set property foo.first
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @param {string} bar
      * @returns {this}
      */
@@ -38,7 +38,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description test set property foo.second
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @param {string} bar
      * @returns {this}
      */
@@ -50,7 +50,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description test set property foo.third
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @param {string} bar
      * @returns {this}
      */
@@ -62,7 +62,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description test set property foo.fourth
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @param {string} bar
      * @returns {this}
      */
@@ -74,7 +74,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description test set property foo.fifth
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @param {string} bar
      * @returns {this}
      */
@@ -86,7 +86,7 @@ EquivalentJs.define('EquivalentJs.mock.ExistingModule', new function () {
 
     /**
      * @description get foo object
-     * @memberOf EquivalentJs.mock.ExistingModule
+     * @memberOf EquivalentJS.mock.ExistingModule
      * @returns {Object}
      */
     _.getFoo = function () {

@@ -1,28 +1,28 @@
 "use strict";
 
-/** @module EquivalentJs/Manager */
-/** @module EquivalentJs/Manager/App */
+/** @module EquivalentJS/Manager */
+/** @module EquivalentJS/Manager/App */
 
 /**
  * @class
  * @classdesc The core app loader to load apps into DIC by
- *  the module {@link EquivalentJs.Manager}
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.Manager.App
+ *  the module {@link EquivalentJS.Manager}
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.Manager.App
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.Manager.App', new function () {
+EquivalentJS.define('EquivalentJS.Manager.App', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.Manager.App
+     * @memberOf EquivalentJS.Manager.App
      * @private
-     * @alias {EquivalentJs.Manager.App}
+     * @alias {EquivalentJS.Manager.App}
      */
     var _ = this;
 
     /**
      * @description holds jQuery collection of app selectors
-     * @memberOf EquivalentJs.Manager.App
+     * @memberOf EquivalentJS.Manager.App
      * @type {?jQuery}
      */
     var $apps = null;
@@ -30,7 +30,7 @@ EquivalentJs.define('EquivalentJs.Manager.App', new function () {
     /**
      * @description stored app views; the DOM representations
      *  of the app module classes
-     * @memberOf EquivalentJs.Manager.App
+     * @memberOf EquivalentJS.Manager.App
      * @type {Array.<HTMLElement>}
      */
     _.collection = [];
@@ -40,9 +40,9 @@ EquivalentJs.define('EquivalentJs.Manager.App', new function () {
      *  this event is the point where core modules and
      *  their dependencies are done and from now on only
      *  app modules will add dependencies to DIC
-     *  {@link EquivalentJs.Manager.modules}
-     * @memberOf EquivalentJs.Manager.App
-     * @event EquivalentJs.Manager.App#app:initialize
+     *  {@link EquivalentJS.Manager.modules}
+     * @memberOf EquivalentJS.Manager.App
+     * @event EquivalentJS.Manager.App#app:initialize
      */
     _.construct = function () {
         $(_).on('app:initialize', function () {
@@ -55,7 +55,7 @@ EquivalentJs.define('EquivalentJs.Manager.App', new function () {
     /**
      * @description initialize app modules and reference module
      *  class to DOM application
-     * @memberOf EquivalentJs.Manager.App
+     * @memberOf EquivalentJS.Manager.App
      * @private
      */
     var initialize = function () {
@@ -67,17 +67,17 @@ EquivalentJs.define('EquivalentJs.Manager.App', new function () {
 
             _.collection.push(this);
 
-            EquivalentJs.Manager.add(appModule, {
+            EquivalentJS.Manager.add(appModule, {
                 app: this,
                 data: parameters
             }).done(function () {
                 /**
                  * @description each [data-application] attribute selector got appended
                  *  a property <HTMLElement>.__class__ to access
-                 *  the module class {@link EquivalentJs.Manager.Module.class}
+                 *  the module class {@link EquivalentJS.Manager.Module.class}
                  *  by reference from DOM
                  */
-                $app.prop('__class__', EquivalentJs.Manager.get(appModule).class);
+                $app.prop('__class__', EquivalentJS.Manager.get(appModule).class);
             });
         });
     };

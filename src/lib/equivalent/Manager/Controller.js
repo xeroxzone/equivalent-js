@@ -1,30 +1,30 @@
 "use strict";
 
-/** @module EquivalentJs/Manager */
-/** @module EquivalentJs/Manager/Controller */
+/** @module EquivalentJS/Manager */
+/** @module EquivalentJS/Manager/Controller */
 
 /**
  * @class
- * @classdesc The core controller to handle the viewport {@link EquivalentJs.Renderer}
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.Manager.Controller
+ * @classdesc The core controller to handle the viewport {@link EquivalentJS.Renderer}
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.Manager.Controller
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.Manager.Controller', new function () {
+EquivalentJS.define('EquivalentJS.Manager.Controller', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.Manager.Controller
+     * @memberOf EquivalentJS.Manager.Controller
      * @private
-     * @alias {EquivalentJs.Manager.Controller}
+     * @alias {EquivalentJS.Manager.Controller}
      */
     var _ = this;
 
     /**
      * @description initialize renderer
-     * @memberOf EquivalentJs.Manager.Controller
-     * @requires module:EquivalentJs/Renderer
+     * @memberOf EquivalentJS.Manager.Controller
+     * @requires module:EquivalentJS/Renderer
      */
     _.construct = function () {
-        EquivalentJs.Manager.add('EquivalentJs.Renderer');
+        EquivalentJS.Manager.add('EquivalentJS.Renderer');
     };
 });

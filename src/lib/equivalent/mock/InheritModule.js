@@ -3,29 +3,29 @@
 /**
  * @class
  * @classdesc a test mock to represent an inherited module class
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.mock.InheritModule
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.mock.InheritModule
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.mock.InheritModule', new function () {
+EquivalentJS.define('EquivalentJS.mock.InheritModule', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.mock.InheritModule
+     * @memberOf EquivalentJS.mock.InheritModule
      * @private
-     * @alias {EquivalentJs.mock.InheritModule}
+     * @alias {EquivalentJS.mock.InheritModule}
      */
     var _ = this;
 
     /**
      * @description test extend abstract module
-     * @memberOf EquivalentJs.mock.InheritModule
+     * @memberOf EquivalentJS.mock.InheritModule
      * @type {string}
      */
-    _.extend = 'EquivalentJs.mock.AbstractModule';
+    _.extend = 'EquivalentJS.mock.AbstractModule';
 
     /**
      * @description test b property
-     * @memberOf EquivalentJs.mock.InheritModule
+     * @memberOf EquivalentJS.mock.InheritModule
      * @type {number}
      * @default
      */

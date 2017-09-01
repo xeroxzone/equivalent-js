@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc an application demo with a promise dependency
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.DependPromise
  * @constructs
  */
@@ -48,7 +48,7 @@ DIC.define('DemoApp.DependPromise', new function () {
                 renderDemo();
             })
             .fail(function () {
-                EquivalentJs.console.error(
+                EquivalentJS.console.error(
                     'Could not load dependency "DemoApp.DependPromise.Markup"'
                 );
             });

@@ -8,7 +8,7 @@ DIC.define('DemoApp.test.DependEvent.MarkupTest', new function () {
      * @description test {@link DemoApp.DependEvent.Markup}
      *  has wrapped the text in headline
      * @memberOf DemoApp.test.DependEvent.MarkupTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      */
     this.testHasWrappedTextInHeadline = function (assert) {
         var $demo = $('[data-application="DemoApp.DependEvent"]');

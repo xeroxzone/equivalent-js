@@ -6,7 +6,7 @@
 /**
  * @class
  * @classdesc an application demo event dependency
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.DependEvent.Markup
  * @constructs
  */

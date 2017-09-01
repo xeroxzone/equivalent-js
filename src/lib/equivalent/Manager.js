@@ -1,26 +1,26 @@
 "use strict";
 
-/** @module EquivalentJs/Manager */
+/** @module EquivalentJS/Manager */
 
 /**
  * @class
  * @classdesc The module manager for dependencies and class autoloads
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.Manager
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.Manager
  * @constructs
  */
-EquivalentJs.define('EquivalentJs.Manager', new function () {
+EquivalentJS.define('EquivalentJS.Manager', new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
-     * @alias {EquivalentJs.Manager}
+     * @alias {EquivalentJS.Manager}
      */
     var _ = this;
 
     /**
      * @description path to module class root directory will be set on construct
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @type {string}
      */
@@ -28,7 +28,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description setted true to test the manager by unit tests
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @type {boolean}
      * @default
@@ -37,7 +37,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description stored type names to prepare modules for DIC
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @type {Array.<string>}
      */
@@ -45,7 +45,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description collection of queued requests
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @type {jQuery}
      */
@@ -53,29 +53,29 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description set module type before autoload can do this
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @type {string}
      * @default
      */
-    _.type = 'EquivalentJs.Manager';
+    _.type = 'EquivalentJS.Manager';
 
     /**
      * @description stored modules in DIC
-     * @memberOf EquivalentJs.Manager
-     * @type {EquivalentJs.Manager.Module[]}
+     * @memberOf EquivalentJS.Manager
+     * @type {EquivalentJS.Manager.Module[]}
      */
     _.modules = [];
 
     /**
      * @description initialize manager for DIC and autoload
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {string} uri the module uri path
      * @param {boolean=} testRun if true then manager can be
      *  manually handled by tests
-     * @requires module:EquivalentJs
-     * @requires module:EquivalentJs/Manager/Extend
-     * @requires module:EquivalentJs/Manager/Controller
-     * @requires module:EquivalentJs/Manager/App
+     * @requires module:EquivalentJS
+     * @requires module:EquivalentJS/Manager/Extend
+     * @requires module:EquivalentJS/Manager/Controller
+     * @requires module:EquivalentJS/Manager/App
      */
     _.construct = function (uri, testRun) {
         moduleUri = uri || '';
@@ -83,31 +83,31 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
         if (false === testing) {
             _.add([
-                EquivalentJs.System.type,
+                EquivalentJS.System.type,
                 _.type,
-                'EquivalentJs.Manager.Extend',
-                'EquivalentJs.Manager.Controller',
-                'EquivalentJs.Manager.App'
+                'EquivalentJS.Manager.Extend',
+                'EquivalentJS.Manager.Controller',
+                'EquivalentJS.Manager.App'
             ]);
         }
     };
 
     /**
      * @description register a module into DIC
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {Object} module an object with module class construction parameters
      * @param {string} module.type as module class name
      * @param {Object=} module.parameters an object of construction parameters
      * @returns {(void|Deferred)}
      * @throws {Error} if any module class construct exceptions are thrown
-     * @todo refactor too long method {@link EquivalentJs.Manager~register}
+     * @todo refactor too long method {@link EquivalentJS.Manager~register}
      */
     var register = function (module) {
         /**
          * @type {{systemTests: boolean, appPath: string}}
          */
-        var configuration = EquivalentJs.System.getConfiguration();
+        var configuration = EquivalentJS.System.getConfiguration();
 
         /**
          * @description indicates that the system core module itself will be tested
@@ -147,20 +147,20 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
             });
         }
 
-        if (EquivalentJs.System.type === type) {
+        if (EquivalentJS.System.type === type) {
             /**
              * @description get module class manager
-             * @memberOf EquivalentJs.System
-             * @see EquivalentJs.Manager.Module.class.__manager__
-             * @return {EquivalentJs.Manager}
+             * @memberOf EquivalentJS.System
+             * @see EquivalentJS.Manager.Module.class.__manager__
+             * @return {EquivalentJS.Manager}
              */
-            EquivalentJs.System.__manager__ = _;
-            _.modules.push(createModule(EquivalentJs.System));
-            delete EquivalentJs.System.construct;
+            EquivalentJS.System.__manager__ = _;
+            _.modules.push(createModule(EquivalentJS.System));
+            delete EquivalentJS.System.construct;
             if (true === withSystemTests &&
                 true === Boolean(sessionStorage.getItem('runTests'))
             ) {
-                test({type: EquivalentJs.System.type}, true);
+                test({type: EquivalentJS.System.type}, true);
             }
             return;
         } else if (_.type === type) {
@@ -176,11 +176,11 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
         var isAppLoad = false;
 
-        if (false === /^EquivalentJs\./.test(type)) {
+        if (false === /^EquivalentJS\./.test(type)) {
             isAppLoad = true;
         }
 
-        var namespace = EquivalentJs.System.getNamespace(type);
+        var namespace = EquivalentJS.System.getNamespace(type);
 
         var classUri = moduleUri;
         if (true === isAppLoad) {
@@ -198,20 +198,20 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
         return registerRequest(request).then(function () {
             /**
-             * @type {EquivalentJs.Manager.Module.class}
+             * @type {EquivalentJS.Manager.Module.class}
              */
             var importedClass = getModuleDOM(type);
 
-            if (true === testing && EquivalentJs.Manager.has(type)) {
+            if (true === testing && EquivalentJS.Manager.has(type)) {
                 // create a module class as mock for manager in test cases
-                var mockClass = EquivalentJs.Manager.get(type).class;
+                var mockClass = EquivalentJS.Manager.get(type).class;
                 importedClass = new mockClass.constructor();
             }
 
             importedClass.type = type;
 
             /**
-             * @see EquivalentJs.Manager.Module.class.__manager__
+             * @see EquivalentJS.Manager.Module.class.__manager__
              */
             importedClass.__manager__ = _;
 
@@ -240,7 +240,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                 true === isAppLoad
             ) {
                 /**
-                 * @see EquivalentJs.Manager.Module.class.__markup__
+                 * @see EquivalentJS.Manager.Module.class.__markup__
                  */
                 importedClass.__markup__ = module.parameters.app;
             }
@@ -267,14 +267,14 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                 try {
                     importedClass.construct.parentClass(module);
                 } catch (error) {
-                    EquivalentJs.console.error(error);
+                    EquivalentJS.console.error(error);
                 }
             }
 
             try {
                 importedClass.construct(module);
             } catch (error) {
-                EquivalentJs.console.error(error);
+                EquivalentJS.console.error(error);
             }
 
             delete importedClass.construct;
@@ -282,7 +282,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
             return importedClass;
         })
         .then(function (importedClass) {
-            if (true === (EquivalentJs.System.testing || false)) {
+            if (true === (EquivalentJS.System.testing || false)) {
                 test(module, withSystemTests);
             }
 
@@ -291,14 +291,14 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         .then(function (importedClass) {
             /**
              * @description fires to event if module is ready
-             * @fires EquivalentJs.Manager#ready:callback
+             * @fires EquivalentJS.Manager#ready:callback
              */
             $(_).trigger('ready:callback', importedClass);
 
             return importedClass;
         })
         .fail(function (error) {
-            EquivalentJs.console.error(
+            EquivalentJS.console.error(
                 (error.status || '0') + ' ' + (error.statusText || 'Error') +
                 ' - Could not load' +
                 ((isAppLoad) ? ' app' : '') + ' module "' +
@@ -310,7 +310,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
     /**
      * @description if test runner is activated try to find a test unit
      *  for every module class autoload
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {Object} module an object with module class construction parameters
      * @param {boolean} withSystemTests indicate to include core modules into test runner
@@ -322,7 +322,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         if (true === testing) {return;} // if tests are testing the manager themself
 
         var isAppLoad = false;
-        if (false === /^EquivalentJs\./.test(module.type)) {
+        if (false === /^EquivalentJS\./.test(module.type)) {
             isAppLoad = true;
         }
 
@@ -330,7 +330,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
             parameters = module.parameters
         ;
 
-        var namespace = EquivalentJs.System.getNamespace(type),
+        var namespace = EquivalentJS.System.getNamespace(type),
             testCase = type.replace(/^(\w+)\./, '$1.test.') + 'Test';
 
         if (true === isAppLoad) {
@@ -349,8 +349,8 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
         /**
          * @description clone module class as copy from constructor per isolated test method
-         * @param {EquivalentJs.Manager.Module.class} moduleClass
-         * @returns {EquivalentJs.Manager.Module.class}
+         * @param {EquivalentJS.Manager.Module.class} moduleClass
+         * @returns {EquivalentJS.Manager.Module.class}
          * @throws {Error} module class failed to clone for test
          */
         var clone = function(moduleClass) {
@@ -372,7 +372,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         };
 
         /**
-         * @returns {EquivalentJs.Manager}
+         * @returns {EquivalentJS.Manager}
          */
         var getManagerMock = function () {
             var manager = _,
@@ -409,11 +409,11 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                         $.each(moduleClassTest, function (testMethod) {
                             var test = moduleClassTest[testMethod];
                             if (typeof test === 'function' && /^test.*/.test(String(testMethod))) {
-                                EquivalentJs.test.Unit.test(testCase + '. ' + testMethod, function (assert) {
+                                EquivalentJS.test.Unit.test(testCase + '. ' + testMethod, function (assert) {
                                     try {
                                         return test(assert, clone(moduleClass));
                                     } catch (error) {
-                                        EquivalentJs.console.error(error);
+                                        EquivalentJS.console.error(error);
                                     }
                                 });
                                 hasTestMethods++;
@@ -421,7 +421,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                         });
 
                         if (0 === hasTestMethods) {
-                            EquivalentJs.console.warn('Test "' + testCase + '" has no test methods!');
+                            EquivalentJS.console.warn('Test "' + testCase + '" has no test methods!');
                         }
                     }
                 });
@@ -441,7 +441,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                 $testSetup.resolve();
             })
             .fail(function (error) {
-                EquivalentJs.console.error(
+                EquivalentJS.console.error(
                     error.status + ' ' + error.statusText +
                     ' - Could not load test for module "' + namespace + '"!'
                 );
@@ -457,22 +457,22 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description inherit a module from another
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
-     * @see EquivalentJs.Extend
-     * @param {EquivalentJs.Manager.Module.class} inheritClass the inherit class
-     * @param {EquivalentJs.Manager.Module.class} moduleClass the parent class
-     * @returns {?EquivalentJs.Manager.Module.class}
+     * @see EquivalentJS.Extend
+     * @param {EquivalentJS.Manager.Module.class} inheritClass the inherit class
+     * @param {EquivalentJS.Manager.Module.class} moduleClass the parent class
+     * @returns {?EquivalentJS.Manager.Module.class}
      */
     var extend = function (inheritClass, moduleClass) {
-        return EquivalentJs.Manager.Extend.inherit(inheritClass, moduleClass);
+        return EquivalentJS.Manager.Extend.inherit(inheritClass, moduleClass);
     };
 
     /**
      * @description if module class use a layout then try to autoload the stylesheet
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
-     * @param {EquivalentJs.Manager.Module.class} module the module class
+     * @param {EquivalentJS.Manager.Module.class} module the module class
      * @param {boolean} module.layout if module has layout
      * @param {string} module.type as module class name
      * @param {boolean} cacheBust bust the cache to get module stylesheet fresh
@@ -489,12 +489,12 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
             /**
              * @type {{moduleLayout: string}}
              */
-            var configuration = EquivalentJs.System.getConfiguration();
+            var configuration = EquivalentJS.System.getConfiguration();
 
             /**
              * @type {string}
              */
-            var namespace = EquivalentJs.System.getNamespace(module.type);
+            var namespace = EquivalentJS.System.getNamespace(module.type);
 
             /**
              * @type {string}
@@ -508,7 +508,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
                 reNamespace = (namespace.substr(0, namespace.lastIndexOf('/') + 1)) +
                 layoutClassName;
 
-            if (false === /^EquivalentJs\./.test(module.type)) {
+            if (false === /^EquivalentJS\./.test(module.type)) {
                 reNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
                     '/' + reNamespace.toLowerCase();
             }
@@ -519,7 +519,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
             registerRequest({url: layoutUri, method: 'head'})
                 .fail(function (error) {
-                    EquivalentJs.console.error(
+                    EquivalentJS.console.error(
                         error.status + ' ' + error.statusText +
                         ' - Could not load layout for module "' + namespace + '"!'
                     );
@@ -531,7 +531,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description create an asynchronous request
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} moduleUrl the path to the module class js file
      * @returns {Object} a jquery request object
@@ -560,7 +560,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description register an asynchronous request
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {Object} request a jQuery ajax request object definition
      * @return {Deferred}
@@ -614,11 +614,11 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description create a module object around the module class
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {object} module the module class
      * @param {string} module.type as module class name
-     * @returns {EquivalentJs.Manager.Module}
+     * @returns {EquivalentJS.Manager.Module}
      * @throws {Error} if module could not be created
      */
     var createModule = function (module) {
@@ -631,9 +631,9 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         /**
          * @description an object which contains the module class object
          *  and the module type string
-         * @typedef {Object} EquivalentJs.Manager.Module
-         * @type {{type: string, class: EquivalentJs.Manager.Module.class}}
-         * @see EquivalentJs.Manager.Module.class
+         * @typedef {Object} EquivalentJS.Manager.Module
+         * @type {{type: string, class: EquivalentJS.Manager.Module.class}}
+         * @see EquivalentJS.Manager.Module.class
          */
         return {
             "type": module.type,
@@ -643,10 +643,10 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description get module from DOM reference
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} type as module class name
-     * @returns {?EquivalentJs.Manager.Module.class}
+     * @returns {?EquivalentJS.Manager.Module.class}
      * @throws {Error} if module class is not of type {Object}
      */
     var getModuleDOM = function(type) {
@@ -676,10 +676,10 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description get module from DIC
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} type as module class name
-     * @returns {?EquivalentJs.Manager.Module}
+     * @returns {?EquivalentJS.Manager.Module}
      */
     var getModule = function (type) {
         var module = null;
@@ -696,10 +696,10 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description get module by extend from DIC
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} type as module class name
-     * @returns {?EquivalentJs.Manager.Module}
+     * @returns {?EquivalentJS.Manager.Module}
      */
     var getModuleByExtend = function (type) {
         var inheritModule = null;
@@ -721,7 +721,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
     /**
      * @description remove module from DOM reference;
      *  also if the parent namespace is empty it will be also deleted
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} type as module class name
      * @returns {boolean}
@@ -756,7 +756,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description remove module from DIC
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @private
      * @param {string} type as module class name
      * @returns {boolean}
@@ -799,11 +799,11 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      * @description ready module;
      *  the callback will be triggered if the named type
      *  of the module class is ready
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {(string|Array.<string>)} type as module class name
      * @param {function} callback runs after module class is ready
      * @tutorial MODULE-MANAGER
-     * @see EquivalentJs.Manager#ready:callback
+     * @see EquivalentJS.Manager#ready:callback
      * @example DIC.ready('A.namespacePart.ClassName', function (module) {});
      * @example DIC.ready([
      *      'A.namespacePart.ClassNameA',
@@ -814,7 +814,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
     _.ready = function (type, callback) {
         /**
          * @description set callback on ready event
-         * @memberOf EquivalentJs.Manager.ready
+         * @memberOf EquivalentJS.Manager.ready
          * @private
          * @param {string} type as module class name
          * @param {function} callback runs after module class is ready
@@ -822,14 +822,14 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         var onCallback = function (type, callback) {
             /**
              * @description listen to event when module is ready
-             * @event EquivalentJs.Manager#ready:callback
+             * @event EquivalentJS.Manager#ready:callback
              */
             $(_).on('ready:callback', function (event, module) {
                 if (type === module.type) {
                     /**
                      * @description the callback runs after module class is ready
-                     * @callback EquivalentJs.Manager.ready
-                     * @param {EquivalentJs.Manager.Module.class} module the module class
+                     * @callback EquivalentJS.Manager.ready
+                     * @param {EquivalentJS.Manager.Module.class} module the module class
                      */
                     callback(module);
                 }
@@ -837,7 +837,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
         };
 
         var onReadyError = function () {
-            EquivalentJs.console.error(
+            EquivalentJS.console.error(
                 'Parameter "type" must be a <string> or <Array> and "callback" a <function>!'
             );
         };
@@ -871,7 +871,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description remove module
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {(string|Array.<string>)} type as module class name
      * @returns {boolean}
      * @example DIC.remove('A.namespacePart.ClassName');
@@ -884,7 +884,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
      */
     _.remove = function (type) {
         var onRemoveError = function (type) {
-            EquivalentJs.console.error('Could not remove module "' + type + '".');
+            EquivalentJS.console.error('Could not remove module "' + type + '".');
         };
 
         if (Array.isArray(type)) {
@@ -905,7 +905,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description add module
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {(string|Array.<string>|Array.Array.<string, Object>)} type as module class name
      * @param {Object=} parameters an object of construction parameters
      * @returns {Deferred}
@@ -932,7 +932,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
     _.add = function (type, parameters) {
         var $resolver,
             onAddError = function (type) {
-                EquivalentJs.console.error('Could not add module "' + type + ';' +
+                EquivalentJS.console.error('Could not add module "' + type + ';' +
                     ' parameter "type" must be a <string> or <Array>!' +
                     ' and "parameters" if given; then as an <Object>'
                 );
@@ -969,9 +969,9 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description get module
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {string} type as module class name
-     * @returns {?EquivalentJs.Manager.Module}
+     * @returns {?EquivalentJS.Manager.Module}
      * @example DIC.get('A.namespacePart.ClassName');
      * @tutorial MODULE-MANAGER
      */
@@ -981,7 +981,7 @@ EquivalentJs.define('EquivalentJs.Manager', new function () {
 
     /**
      * @description has module
-     * @memberOf EquivalentJs.Manager
+     * @memberOf EquivalentJS.Manager
      * @param {string} type as module class name
      * @returns {boolean}
      * @example DIC.has('A.namespacePart.ClassName');

@@ -3,25 +3,25 @@
 /**
  * @class test renderer module
  */
-DIC.define('EquivalentJs.test.RendererTest', new function () {
+DIC.define('EquivalentJS.test.RendererTest', new function () {
     /**
      * @description test has assigned module class type by manager
-     * @memberOf EquivalentJs.test.RendererTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Renderer} moduleClass
+     * @memberOf EquivalentJS.test.RendererTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Renderer} moduleClass
      */
     this.testHasAssignedTypeByManager = function (assert, moduleClass) {
         assert.ok(
-            'EquivalentJs.Renderer' === moduleClass.type,
-            'is EquivalentJs.Renderer'
+            'EquivalentJS.Renderer' === moduleClass.type,
+            'is EquivalentJS.Renderer'
         );
     };
 
     /**
-     * @description test is {@link EquivalentJs.Renderer.display} available
-     * @memberOf EquivalentJs.test.RendererTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Renderer} moduleClass
+     * @description test is {@link EquivalentJS.Renderer.display} available
+     * @memberOf EquivalentJS.test.RendererTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Renderer} moduleClass
      */
     this.testIsDisplayAvailable = function (assert, moduleClass) {
         moduleClass.construct();

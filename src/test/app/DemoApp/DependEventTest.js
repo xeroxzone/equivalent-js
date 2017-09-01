@@ -7,14 +7,14 @@ DIC.define('DemoApp.test.DependEventTest', new function () {
     /**
      * @description the manager mock
      * @memberOf DemoApp.test.DependEventTest
-     * @alias {EquivalentJs.Manager}
+     * @alias {EquivalentJS.Manager}
      */
     var manager;
 
     /**
      * @description setup the manager
      * @memberOf DemoApp.test.DependEventTest
-     * @param {EquivalentJs.Manager} managerInstance
+     * @param {EquivalentJS.Manager} managerInstance
      */
     this.setup = function (managerInstance) {
         manager = managerInstance;
@@ -23,7 +23,7 @@ DIC.define('DemoApp.test.DependEventTest', new function () {
     /**
      * @description test {@link DemoApp.DependEvent} has a text
      * @memberOf DemoApp.test.DependEventTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      */
     this.testHasText = function (assert) {
         var $demo = $('[data-application="DemoApp.DependEvent"]');
@@ -34,7 +34,7 @@ DIC.define('DemoApp.test.DependEventTest', new function () {
     /**
      * @description test markup wrapper class dependency is ready
      * @memberOf DemoApp.test.DependEventTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.DependEvent} moduleClass
      */
     this.testMarkupWrapperIsReady = function (assert, moduleClass) {

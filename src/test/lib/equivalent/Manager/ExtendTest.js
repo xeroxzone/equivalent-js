@@ -3,18 +3,18 @@
 /**
  * @class test manager extend module
  */
-DIC.define('EquivalentJs.test.Manager.ExtendTest', new function () {
+DIC.define('EquivalentJS.test.Manager.ExtendTest', new function () {
     /**
      * @description the manager mock
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @type {EquivalentJs.Manager}
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @type {EquivalentJS.Manager}
      */
     var manager;
 
     /**
      * @description setup the manager
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @param {EquivalentJs.Manager} managerInstance
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @param {EquivalentJS.Manager} managerInstance
      */
     this.setup = function (managerInstance) {
         manager = managerInstance;
@@ -22,22 +22,22 @@ DIC.define('EquivalentJs.test.Manager.ExtendTest', new function () {
 
     /**
      * @description test has assigned module class type by manager
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.Extend} moduleClass
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.Extend} moduleClass
      */
     this.testHasAssignedTypeByManager = function (assert, moduleClass) {
         assert.ok(
-            'EquivalentJs.Manager.Extend' === moduleClass.type,
-            'is EquivalentJs.Manager.Extend'
+            'EquivalentJS.Manager.Extend' === moduleClass.type,
+            'is EquivalentJS.Manager.Extend'
         );
     };
 
     /**
      * @description test use inherit method with wrong parameters
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.Extend} moduleClass
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.Extend} moduleClass
      */
     this.testExtendWithWrongParameters = function (assert, moduleClass) {
         var errorMessage = 'Could not extend module! Expected two <Object>\'s as module class to extend.';
@@ -77,9 +77,9 @@ DIC.define('EquivalentJs.test.Manager.ExtendTest', new function () {
 
     /**
      * @description test use inherit method with correct parameters
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.Extend} moduleClass
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.Extend} moduleClass
      */
     this.testExtendWithCorrectParameters = function (assert, moduleClass) {
         var parentClass = new function () {
@@ -103,24 +103,24 @@ DIC.define('EquivalentJs.test.Manager.ExtendTest', new function () {
 
     /**
      * @description test extend a module by another with manager
-     * @memberOf EquivalentJs.test.Manager.ExtendTest
-     * @param {EquivalentJs.test.Unit.assert} assert
-     * @param {EquivalentJs.Manager.Extend} moduleClass
+     * @memberOf EquivalentJS.test.Manager.ExtendTest
+     * @param {EquivalentJS.test.Unit.assert} assert
+     * @param {EquivalentJS.Manager.Extend} moduleClass
      */
     this.testExtendModuleByAnotherWithManager = function (assert, moduleClass) {
         var assertAsync = assert.async();
 
         manager.add(moduleClass.type).done(function () {
-            manager.add('EquivalentJs.mock.InheritModule').done(function (module) {
-                assert.ok('EquivalentJs.mock.InheritModule' === module.type, 'test inherit module type');
+            manager.add('EquivalentJS.mock.InheritModule').done(function (module) {
+                assert.ok('EquivalentJS.mock.InheritModule' === module.type, 'test inherit module type');
 
-                assert.ok('EquivalentJs.mock.AbstractModule' === module.extend, 'test inherit module extend type');
+                assert.ok('EquivalentJS.mock.AbstractModule' === module.extend, 'test inherit module extend type');
 
                 assert.ok(1 === module.aProperty, 'test abstract property is in inherited class');
 
                 assertAsync();
 
-                manager.remove('EquivalentJs.mock.InheritModule');
+                manager.remove('EquivalentJS.mock.InheritModule');
             });
         });
     };

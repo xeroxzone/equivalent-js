@@ -7,14 +7,14 @@ DIC.define('DemoApp.test.ETest', new function () {
     /**
      * @description the manager mock
      * @memberOf DemoApp.test.ETest
-     * @alias {EquivalentJs.Manager}
+     * @alias {EquivalentJS.Manager}
      */
     var manager;
 
     /**
      * @description setup the manager
      * @memberOf DemoApp.test.ETest
-     * @param {EquivalentJs.Manager} managerInstance
+     * @param {EquivalentJS.Manager} managerInstance
      */
     this.setup = function (managerInstance) {
         manager = managerInstance;
@@ -23,7 +23,7 @@ DIC.define('DemoApp.test.ETest', new function () {
     /**
      * @description test has assigned module class type by manager
      * @memberOf DemoApp.test.ETest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.E} moduleClass
      */
     this.testHasAssignedTypeByManager = function (assert, moduleClass) {
@@ -36,7 +36,7 @@ DIC.define('DemoApp.test.ETest', new function () {
     /**
      * @description test has not constructed dependencies
      * @memberOf DemoApp.test.ETest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.E} moduleClass
      */
     this.testHasNotConstructedDependencies = function (assert, moduleClass) {
@@ -59,7 +59,7 @@ DIC.define('DemoApp.test.ETest', new function () {
     /**
      * @description test has constructed dependencies
      * @memberOf DemoApp.test.ETest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.E} moduleClass
      */
     this.testHasConstructedDependencies = function (assert, moduleClass) {

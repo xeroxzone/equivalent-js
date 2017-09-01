@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc demo app doc runner control tool
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.tool.Docs
  * @constructs
  */

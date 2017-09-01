@@ -21,7 +21,7 @@
     "plugins/shout"
   ],
   "templates": {
-    "systemName"            : "EquivalentJs",
+    "systemName"            : "EquivalentJS",
     "copyright"             : "MIT",
     "navType"               : "vertical",
     "inverseNav"            : true,

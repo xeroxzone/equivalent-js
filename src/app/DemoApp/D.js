@@ -3,7 +3,7 @@
 /**
  * @class
  * @classdesc demo app d
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.D
  * @constructs
  */

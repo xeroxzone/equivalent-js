@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc demo app date time tool
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.tool.DateTime
  * @constructs
  */

@@ -5,7 +5,7 @@
 /**
  * @class
  * @classdesc demo app test runner control tool
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.tool.Tests
  * @constructs
  */

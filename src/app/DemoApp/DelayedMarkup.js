@@ -1,9 +1,11 @@
 "use strict";
 
+/** @module DemoApp/DelayedMarkup */
+
 /**
  * @class
  * @classdesc delayed demo markup
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} DemoApp.DelayedMarkup
  * @constructs
  */

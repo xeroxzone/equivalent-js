@@ -4,34 +4,34 @@
 
 /**
  * @namespace
- * @typedef {Object} EquivalentJs
+ * @typedef {Object} EquivalentJS
  */
-var EquivalentJs = {};
+var EquivalentJS = {};
 
-/** @module EquivalentJs */
+/** @module EquivalentJS */
 
 /**
  * @class
  * @classdesc Initial loaded class as running system
- *  to register the module {@link EquivalentJs.Manager};
+ *  to register the module {@link EquivalentJS.Manager};
  *  the test runner and the doc runner
- * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} EquivalentJs.System
+ * @implements {EquivalentJS.Manager.Module.class}
+ * @typedef {function} EquivalentJS.System
  * @constructs
  */
-EquivalentJs.System = new function () {
+EquivalentJS.System = new function () {
     /**
      * @description bind public properties or methods
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
-     * @alias {EquivalentJs.System}
+     * @alias {EquivalentJS.System}
      */
     var _ = this;
 
     /**
      * @description the system configuration
-     *  {@link EquivalentJs.System~configuration}
-     * @memberOf EquivalentJs.System
+     *  {@link EquivalentJS.System~configuration}
+     * @memberOf EquivalentJS.System
      * @private
      * @type {Object}
      */
@@ -39,7 +39,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description the system environment
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      * @default
@@ -48,7 +48,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description the shortcut interface name
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      * @default
@@ -57,7 +57,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description path to module class root directory
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      */
@@ -65,7 +65,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description path to documentation framework directory
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      */
@@ -73,7 +73,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description path to test framework directory
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      */
@@ -81,7 +81,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description path to test framework theme
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @type {string}
      */
@@ -89,15 +89,15 @@ EquivalentJs.System = new function () {
 
     /**
      * @description set module type before autoload can do this
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @type {string}
      * @default
      */
-    _.type = 'EquivalentJs.System';
+    _.type = 'EquivalentJS.System';
 
     /**
      * @description is the testing framework is activated
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @type {boolean}
      * @default
      */
@@ -105,7 +105,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description initialize manager, test and documentation framework
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @param {boolean=} testRun if true then system can be manually handled by tests
      * @param {function=} testCallback if testRun is true then give a callback function
      *  to get the finish of system configuration load
@@ -114,7 +114,7 @@ EquivalentJs.System = new function () {
         testRun = testRun || false;
         configure(function () {
             if (false === testRun) {
-                register({type: 'EquivalentJs.Manager'});
+                register({type: 'EquivalentJS.Manager'});
                 if ('dev' === environment) {
                     registerTestFramework();
                     registerDocFramework();
@@ -127,7 +127,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description configure system pathes
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @param {function} registerCallback the callback to register
      *  module manager, test and doc framework
@@ -139,12 +139,12 @@ EquivalentJs.System = new function () {
          */
         var configPath = 'js/config/parameters.json';
 
-        if (typeof window.EquivalentJsConfigurationPath !== 'undefined') {
+        if (typeof window.EquivalentJSConfigurationPath !== 'undefined') {
             /**
              * @description give a global path to configuration json file
-             * @typedef {string} EquivalentJsConfigurationPath
+             * @typedef {string} EquivalentJSConfigurationPath
              */
-            configPath = window.EquivalentJsConfigurationPath;
+            configPath = window.EquivalentJSConfigurationPath;
         }
 
         $.get(configPath)
@@ -172,30 +172,30 @@ EquivalentJs.System = new function () {
                 testFrameworkThemeUri = configuration.testFrameworkTheme;
 
                 if ('dev' !== environment) {
-                    var disabledConsole = EquivalentJs.console = {};
+                    var disabledConsole = EquivalentJS.console = {};
                     $(['clear', 'dir', 'trace', 'log',
                         'info', 'warn', 'error'
                     ]).each(function () {
                         disabledConsole[this] = function () {};
                     });
                 } else {
-                    EquivalentJs.console = window.console || {};
+                    EquivalentJS.console = window.console || {};
                 }
 
                 if (typeof registerCallback === 'function') {
                     /**
                      * @description define new module class
-                     *  {@link EquivalentJs.System~define}
-                     * @memberOf EquivalentJs
-                     * @typedef {function} EquivalentJs.define
+                     *  {@link EquivalentJS.System~define}
+                     * @memberOf EquivalentJS
+                     * @typedef {function} EquivalentJS.define
                      */
-                    EquivalentJs.define = define;
+                    EquivalentJS.define = define;
 
                     registerCallback();
                 }
             })
             .fail(function (error) {
-                EquivalentJs.console.error(
+                EquivalentJS.console.error(
                     error.status + ' ' + error.statusText +
                     ' - Could not load configuration!'
                 );
@@ -204,7 +204,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description register module manager
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @param {Object} module the module object with module class
      * @param {string} module.type as module class name
@@ -219,17 +219,17 @@ EquivalentJs.System = new function () {
 
         $.get(moduleUrl)
             .done(function () {
-                $(EquivalentJs.Manager).on('ready:manager', function () {
+                $(EquivalentJS.Manager).on('ready:manager', function () {
                     try {
-                        EquivalentJs.Manager.construct(moduleUri);
+                        EquivalentJS.Manager.construct(moduleUri);
                         registerShortcut();
                     } catch (error) {
-                        EquivalentJs.console.error(error);
+                        EquivalentJS.console.error(error);
                     }
                 }).trigger('ready:manager', module).off('ready:manager');
             })
             .fail(function (error) {
-                EquivalentJs.console.error(
+                EquivalentJS.console.error(
                     error.status + ' ' + error.statusText +
                     ' - Could not load module "' + namespace + '"!'
                 );
@@ -238,7 +238,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description register shortcut interface
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @throws {Error} if shortcut interface name is
      *  of wrong type or namespace is already taken
@@ -246,9 +246,9 @@ EquivalentJs.System = new function () {
     var registerShortcut = function () {
         if (typeof shortcut === 'string' &&
             0 < shortcut.length &&
-            EquivalentJs.hasOwnProperty('Manager')
+            EquivalentJS.hasOwnProperty('Manager')
         ) {
-            var manager = EquivalentJs.Manager;
+            var manager = EquivalentJS.Manager;
 
             /**
              * @typedef {Object} DIC the default shortcut interface name
@@ -264,7 +264,7 @@ EquivalentJs.System = new function () {
              * }}
              */
             var shortcutInterface = {
-                console: EquivalentJs.console,
+                console: EquivalentJS.console,
                 getNamespace: _.getNamespace,
                 define: define,
                 add: manager.add,
@@ -290,7 +290,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description register documentation framework
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @example "?docs" add url get parameter to start doc runner
      * @example "?docs-stop" add url get parameter to stop doc runner
@@ -312,7 +312,7 @@ EquivalentJs.System = new function () {
 
             $.ajax(docFrameworkUri, {method: 'head'})
                 .fail(function (error) {
-                    EquivalentJs.console.error(
+                    EquivalentJS.console.error(
                         error.status + ' ' + error.statusText +
                         ' - Could not load layout for test framework!'
                     );
@@ -380,7 +380,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description register test framework
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @example "?tests" add url get parameter to start test runner
      * @example "?tests-stop" add url get parameter to stop test runner
@@ -399,7 +399,7 @@ EquivalentJs.System = new function () {
 
             $.ajax(testFrameworkThemeUri, {method: 'head'})
                 .fail(function (error) {
-                    EquivalentJs.console.error(
+                    EquivalentJS.console.error(
                         error.status + ' ' + error.statusText +
                         ' - Could not load layout for test framework!'
                     );
@@ -421,19 +421,19 @@ EquivalentJs.System = new function () {
                 .done(function () {
                     /**
                      * @description test framework integration
-                     * @memberOf EquivalentJs
+                     * @memberOf EquivalentJS
                      * @type {{Unit: QUnit}}
-                     * @typedef {QUnit} EquivalentJs.test.Unit
-                     * @typedef {Assert} EquivalentJs.test.Unit.assert
+                     * @typedef {QUnit} EquivalentJS.test.Unit
+                     * @typedef {Assert} EquivalentJS.test.Unit.assert
                      */
-                    EquivalentJs.test = {
+                    EquivalentJS.test = {
                         Unit: window.QUnit || {}
                     };
 
                     _.testing = true;
                 })
                 .fail(function (error) {
-                    EquivalentJs.console.error(
+                    EquivalentJS.console.error(
                         error.status + ' ' + error.statusText +
                         ' - Could not load library for test framework!'
                     );
@@ -485,10 +485,10 @@ EquivalentJs.System = new function () {
 
     /**
      * @description prepare module class namespace in DOM
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @param {string} type as module class name
-     * @param {EquivalentJs.Manager.Module.class} moduleClass to be defined into DOM
+     * @param {EquivalentJS.Manager.Module.class} moduleClass to be defined into DOM
      */
     var createModuleDOM = function (type, moduleClass) {
         var classScope = window,
@@ -513,10 +513,10 @@ EquivalentJs.System = new function () {
 
     /**
      * @description define a new module by type and module class
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @private
      * @param {string} type as module class name
-     * @param {EquivalentJs.Manager.Module.class} moduleClass as class object
+     * @param {EquivalentJS.Manager.Module.class} moduleClass as class object
      * @throws {Error} module class definition wrong
      */
     var define = function (type, moduleClass) {
@@ -533,10 +533,10 @@ EquivalentJs.System = new function () {
 
     /**
      * @description get namespace pattern as module path from dot notated path
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @param {string} type as module class name
      * @returns {string}
-     * @example EquivalentJs.System.getNamespace('EquivalentJs.namespace.part.ClassName');
+     * @example EquivalentJS.System.getNamespace('EquivalentJS.namespace.part.ClassName');
      *  // returns: nameSpace/part/ClassName
      */
     _.getNamespace = function (type) {
@@ -547,7 +547,7 @@ EquivalentJs.System = new function () {
 
     /**
      * @description returns the system configuration
-     * @memberOf EquivalentJs.System
+     * @memberOf EquivalentJS.System
      * @return {Object}
      */
     _.getConfiguration = function () {
@@ -555,4 +555,4 @@ EquivalentJs.System = new function () {
     };
 };
 
-EquivalentJs.System.construct();
+EquivalentJS.System.construct();

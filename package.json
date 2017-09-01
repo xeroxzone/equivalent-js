@@ -112,7 +112,7 @@
     "wsh": false,
     "yui": false,
     "globals": {
-      "EquivalentJs": true,
+      "EquivalentJS": true,
       "DIC": true
     }
   }

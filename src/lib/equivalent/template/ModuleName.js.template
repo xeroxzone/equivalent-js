@@ -6,7 +6,7 @@
 /**
  * @class
  * @classdesc module description
- * @implements {EquivalentJs.Manager.Module.class}
+ * @implements {EquivalentJS.Manager.Module.class}
  * @typedef {function} Namespace.pathPart.ModuleName
  * @constructs
  */

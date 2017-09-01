@@ -7,14 +7,14 @@ DIC.define('DemoApp.test.Factory.CircleTest', new function () {
     /**
      * @description the manager mock
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @alias {EquivalentJs.Manager}
+     * @alias {EquivalentJS.Manager}
      */
     var manager;
 
     /**
      * @description setup the manager
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @param {EquivalentJs.Manager} managerInstance
+     * @param {EquivalentJS.Manager} managerInstance
      */
     this.setup = function (managerInstance) {
         manager = managerInstance;
@@ -23,7 +23,7 @@ DIC.define('DemoApp.test.Factory.CircleTest', new function () {
     /**
      * @description test has assigned module class type by manager
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.Factory.Circle} moduleClass
      */
     this.testHasAssignedTypeByManager = function (assert, moduleClass) {
@@ -36,7 +36,7 @@ DIC.define('DemoApp.test.Factory.CircleTest', new function () {
     /**
      * @description test set or get model without create
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.Factory.Circle} moduleClass
      */
     this.testSetOrGetModelWithoutCreate = function (assert, moduleClass) {
@@ -60,7 +60,7 @@ DIC.define('DemoApp.test.Factory.CircleTest', new function () {
     /**
      * @description test create model without factory class
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.Factory.Circle} moduleClass
      */
     this.testCreateModelWithoutFactoryClass = function (assert, moduleClass) {
@@ -76,7 +76,7 @@ DIC.define('DemoApp.test.Factory.CircleTest', new function () {
     /**
      * @description test create model with factory class
      * @memberOf DemoApp.test.Factory.CircleTest
-     * @param {EquivalentJs.test.Unit.assert} assert
+     * @param {EquivalentJS.test.Unit.assert} assert
      * @param {DemoApp.Factory.Circle} moduleClass
      */
     this.testCreateModelWithFactoryClass = function (assert, moduleClass) {
