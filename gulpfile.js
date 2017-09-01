@@ -14,6 +14,10 @@ var del = require('del');
 var config = require('./gulp.json');
 var docConfig = require('./jsdoc.json');
 
+var APP_CLASS_PATH = './src';
+var APP_STYLE_PATH = '';
+var LIB_CLASS_PATH = './src';
+
 /**
  * @param {Object} cfg
  * @param {(null|Object|function)=} builder
@@ -70,7 +74,7 @@ function buildTestUnit(cfg) {
  * @returns {Gulp}
  */
 function buildTests(cfg) {
-    return build(cfg, null, './src');
+    return build(cfg, null, APP_CLASS_PATH);
 }
 
 /**
@@ -86,7 +90,7 @@ function buildConfigs(cfg) {
  * @returns {Gulp}
  */
 function buildApps(cfg) {
-    return build(cfg, uglify(), './src');
+    return build(cfg, uglify(), APP_CLASS_PATH);
 }
 
 /**
@@ -94,7 +98,7 @@ function buildApps(cfg) {
  * @returns {Gulp}
  */
 function buildScripts(cfg) {
-    return build(cfg, uglify(), './src');
+    return build(cfg, uglify(), LIB_CLASS_PATH);
 }
 
 /**
@@ -102,7 +106,7 @@ function buildScripts(cfg) {
  * @returns {Gulp}
  */
 function buildStyles(cfg) {
-    return gulp.src(cfg.src)
+    return gulp.src(cfg.src, {base: APP_STYLE_PATH})
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}))
@@ -131,7 +135,7 @@ gulp.task('dev:apps', function() {
 });
 
 gulp.task('dev:tests', function() {
-    del(['web/js/test/*.js', 'web/js/app/test/*.js']).then(function () {
+    del(['web/js/test/*.js', 'web/js/test/**/*.js']).then(function () {
         buildTests(config.tests);
     });
 });
@@ -168,7 +172,7 @@ gulp.task('dev:watch:apps', function() {
 
 gulp.task('dev:watch:tests', function() {
     return watch(config.tests.src, function () {
-        del(['web/js/test/*.js', 'web/js/app/test/*.js']).then(function () {
+        del(['web/js/test/*.js', 'web/js/test/**/*.js']).then(function () {
             buildTests(config.tests);
         });
     });
