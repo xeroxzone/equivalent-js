@@ -23,6 +23,7 @@ DIC.define('EquivalentJS.test.Manager.AppTest', new function () {
      * @memberOf EquivalentJS.test.Manager.AppTest
      * @param {EquivalentJS.test.Unit.assert} assert
      * @param {EquivalentJS.Manager.App} moduleClass
+     * @todo fix sometimes occouring bug in test cases through re-initialize app event
      */
     this.testAreAppsInitialized = function (assert, moduleClass) {
         moduleClass.construct();
