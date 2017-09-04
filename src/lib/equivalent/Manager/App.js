@@ -65,20 +65,22 @@ EquivalentJS.define('EquivalentJS.Manager.App', new function () {
                 appModule = $app.data('application')
             ;
 
-            _.collection.push(this);
+            if (false === EquivalentJS.Manager.has(appModule)) {
+                _.collection.push(this);
 
-            EquivalentJS.Manager.add(appModule, {
-                app: this,
-                data: parameters
-            }).done(function () {
-                /**
-                 * @description each [data-application] attribute selector got appended
-                 *  a property <HTMLElement>.__class__ to access
-                 *  the module class {@link EquivalentJS.Manager.Module.class}
-                 *  by reference from DOM
-                 */
-                $app.prop('__class__', EquivalentJS.Manager.get(appModule).class);
-            });
+                EquivalentJS.Manager.add(appModule, {
+                    app: this,
+                    data: parameters
+                }).done(function () {
+                    /**
+                     * @description each [data-application] attribute selector got appended
+                     *  a property <HTMLElement>.__class__ to access
+                     *  the module class {@link EquivalentJS.Manager.Module.class}
+                     *  by reference from DOM
+                     */
+                    $app.prop('__class__', EquivalentJS.Manager.get(appModule).class);
+                });
+            }
         });
     };
 });
