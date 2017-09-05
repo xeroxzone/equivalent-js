@@ -61,17 +61,17 @@ console.log(DIC, EquivalentJs);
 The [Gulp][gulp] piped input / output paths for javascripts, stylesheets and documentation to the public web folder 
 can be changed by the gulp.json configuration file:
 
-[./gulp.json](../../gulp.json)
+[./gulp.json](../gulp.json)
 
 To change from which web location the module manager read the files modify the parameters.json configuration file:
 
-[./src/config/parameters.json](../../src/config/parameters.json)
+[./src/config/parameters.json](../src/config/parameters.json)
 
-run watcher like described in [README.md][readme](../../README.md)
+run watcher like described in [README.md][readme](../README.md)
 
 ## The Module Autoload Declaration
 
-For example there is a [module template][module-template](../../src/lib/equivalent/template/ModuleName.js.template).
+For example there is a [module template][module-template](../src/lib/equivalent/template/ModuleName.js.template).
 
 First initializing point of the autoloaded module class could be an application 
 markup or a direct object call from another javascripts to access the module by DIC.
@@ -97,13 +97,13 @@ or
 
 For automated testing use the integrated test runner:
 
-* [Test Runner][MTR](TEST-RUNNER.md)
+* [Test Runner][MTR](TEST_RUNNER.md)
 
 ### Automated doc generated view in browser with [JSDoc][jsdoc] and [Gulp][gulp]
 
 For automated documentation generation for all declared modules use the integrated doc runner:
 
-* [Doc Runner][MDR](DOC-RUNNER.md)
+* [Doc Runner][MDR](DOC_RUNNER.md)
 
 ### Define an initializing point for an autoloaded class.
 
@@ -412,8 +412,8 @@ DIC.get('MyNamespace.MyApp.controller.Doing').class;
 }
 ```
 
-[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/TEST-RUNNER.md
-[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/DOC-RUNNER.md
+[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
+[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
 [module-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/lib/equivalent/template/ModuleName.js.template
 [gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com

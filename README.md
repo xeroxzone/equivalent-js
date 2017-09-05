@@ -34,9 +34,9 @@ This framework use [jQuery][jquery] to realize tasks in traversing, manipulation
 
 Content
 
-* [Module Manager][MM](doc/tutorials/MODULE-MANAGER.md)
-* [Test Runner][MTR](doc/tutorials/TEST-RUNNER.md)
-* [Doc Runner][MDR](doc/tutorials/DOC-RUNNER.md)
+* [Module Manager][MM](docs/MODULE_MANAGER.md)
+* [Test Runner][MTR](docs/TEST_RUNNER.md)
+* [Doc Runner][MDR](docs/DOC_RUNNER.md)
 
 ## Requirements
 
@@ -61,11 +61,13 @@ or
 
 ## Appendix
 
+[Code of Conduct](CODE_OF_CONDUCT.md)
+
 ...live long and prosper
 
-[MM]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/MODULE-MANAGER.md
-[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/TEST-RUNNER.md
-[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/doc/tutorials/DOC-RUNNER.md
+[MM]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/MODULE_MANAGER.md
+[MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
+[MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
 [meinauto-js]: https://github.com/meinauto/meinauto-js
 [npmjs]: https://www.npmjs.com
 [gulp]: http://gulpjs.com

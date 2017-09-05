@@ -316,7 +316,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {boolean} withSystemTests indicate to include core modules into test runner
      * @returns {void}
      * @throws {Error} if module class could not be cloned for test isolation
-     * @tutorial TEST-RUNNER
+     * @tutorial TEST_RUNNER
      */
     var test = function (module, withSystemTests) {
         if (true === testing) {return;} // if tests are testing the manager themself
@@ -802,7 +802,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @memberOf EquivalentJS.Manager
      * @param {(string|Array.<string>)} type as module class name
      * @param {function} callback runs after module class is ready
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      * @see EquivalentJS.Manager#ready:callback
      * @example DIC.ready('A.namespacePart.ClassName', function (module) {});
      * @example DIC.ready([
@@ -880,7 +880,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      *      'A.namespacePart.ClassNameB',
      *      'A.namespacePart.ClassNameC'
      *  ]);
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      */
     _.remove = function (type) {
         var onRemoveError = function (type) {
@@ -927,7 +927,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * ])
      *  .done(function (module) {})
      *  .fail(function () {});
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      */
     _.add = function (type, parameters) {
         var $resolver,
@@ -973,7 +973,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {string} type as module class name
      * @returns {?EquivalentJS.Manager.Module}
      * @example DIC.get('A.namespacePart.ClassName');
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      */
     _.get = function (type) {
         return getModule(type);
@@ -985,7 +985,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {string} type as module class name
      * @returns {boolean}
      * @example DIC.has('A.namespacePart.ClassName');
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      */
     _.has = function (type) {
         return null !== getModule(type);

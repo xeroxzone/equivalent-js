@@ -10,6 +10,7 @@
     "src" : [
       "src/lib/equivalent/**/*.js",
       "doc/**/*.md",
+      "doc/*.md",
       "*.md"
     ],
     "dest" : "web/doc"

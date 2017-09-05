@@ -7,7 +7,7 @@
  * @classdesc Module class interface representation
  * @typedef {Object} EquivalentJS.Manager.Module.class
  * @constructs
- * @tutorial MODULE-MANAGER
+ * @tutorial MODULE_MANAGER
  * @see if the module class is initialized by DOM application
  *  the reference is appended to
  *  class property EquivalentJS.Manager.Module.class.__markup__
@@ -27,7 +27,7 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      * @memberOf EquivalentJS.Manager.Module.class
      * @type {string}
      * @typedef {string} EquivalentJS.Manager.Module.class.type
-     * @tutorial MODULE-MANAGER
+     * @tutorial MODULE_MANAGER
      */
     _.type = 'EquivalentJS.Manager.Module.class';
 
