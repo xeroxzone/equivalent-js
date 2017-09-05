@@ -6,7 +6,7 @@
  * @class
  * @classdesc The renderer handles the display viewport for app views
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.Renderer
+ * @typedef {Object} EquivalentJS.Renderer
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.Renderer', new function () {

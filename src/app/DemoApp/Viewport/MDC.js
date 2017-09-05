@@ -7,7 +7,7 @@
  * @class
  * @classdesc the viewport mdc wrapper
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.Viewport.MDC
+ * @typedef {Object} DemoApp.Viewport.MDC
  * @constructs
  */
 DIC.define('DemoApp.Viewport.MDC', new function () {

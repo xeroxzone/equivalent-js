@@ -6,7 +6,7 @@
  * @class
  * @classdesc demo app logo tool
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.tool.Logo
+ * @typedef {Object} DemoApp.tool.Logo
  * @constructs
  */
 DIC.define('DemoApp.tool.Logo', new function () {

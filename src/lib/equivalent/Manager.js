@@ -6,7 +6,7 @@
  * @class
  * @classdesc The module manager for dependencies and class autoloads
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.Manager
+ * @typedef {Object} EquivalentJS.Manager
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.Manager', new function () {

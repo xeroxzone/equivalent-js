@@ -6,7 +6,7 @@
  * @class
  * @classdesc demo app test runner control tool
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.tool.Tests
+ * @typedef {Object} DemoApp.tool.Tests
  * @constructs
  */
 DIC.define('DemoApp.tool.Tests', new function () {

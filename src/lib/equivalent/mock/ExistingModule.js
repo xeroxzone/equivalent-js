@@ -4,7 +4,7 @@
  * @class
  * @classdesc a test mock to represent an existing module class
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.mock.ExistingModule
+ * @typedef {Object} EquivalentJS.mock.ExistingModule
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.mock.ExistingModule', new function () {

@@ -4,7 +4,7 @@
  * @class
  * @classdesc a test mock to represent an inherited module class
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.mock.InheritModule
+ * @typedef {Object} EquivalentJS.mock.InheritModule
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.mock.InheritModule', new function () {

@@ -137,7 +137,7 @@ or with construction parameters
  * @class
  * @classdesc my class description here
  * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} MyNamespace.MyApp
+ * @typedef {Object} MyNamespace.MyApp
  * @constructs
  */
 DIC.define('MyNamespace.MyApp', new function () {
@@ -313,7 +313,7 @@ var doSomething = function(parameters) {
 /**
  * @class
  * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} MyNamespace.MyApp.abstract.Controller
+ * @typedef {Object} MyNamespace.MyApp.abstract.Controller
  * @constructs
  */
 DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
@@ -360,7 +360,7 @@ DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
  * @class
  * @implements {EquivalentJs.Manager.Module.class}
  * @augments {MyNamespace.MyApp.abstract.Controller}
- * @typedef {function} MyNamespace.MyApp.controller.Doing
+ * @typedef {Object} MyNamespace.MyApp.controller.Doing
  * @constructs
  */
 DIC.define('MyNamespace.MyApp.controller.Doing', new function () {

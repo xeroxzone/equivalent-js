@@ -6,7 +6,7 @@
  * @class
  * @classdesc demo app viewport handlers
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.Viewport
+ * @typedef {Object} DemoApp.Viewport
  * @constructs
  */
 DIC.define('DemoApp.Viewport', new function () {

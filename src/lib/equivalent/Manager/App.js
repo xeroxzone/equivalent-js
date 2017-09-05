@@ -8,7 +8,7 @@
  * @classdesc The core app loader to load apps into DIC by
  *  the module {@link EquivalentJS.Manager}
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.Manager.App
+ * @typedef {Object} EquivalentJS.Manager.App
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.Manager.App', new function () {

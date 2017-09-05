@@ -7,7 +7,7 @@
  * @class
  * @classdesc The core controller to handle the viewport {@link EquivalentJS.Renderer}
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.Manager.Controller
+ * @typedef {Object} EquivalentJS.Manager.Controller
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.Manager.Controller', new function () {

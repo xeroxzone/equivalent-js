@@ -6,7 +6,7 @@
  * @class
  * @classdesc demo app date time tool
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.tool.DateTime
+ * @typedef {Object} DemoApp.tool.DateTime
  * @constructs
  */
 DIC.define('DemoApp.tool.DateTime', new function () {

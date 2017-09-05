@@ -159,7 +159,7 @@ can be found in the generated documentation.
 /**
  * @class
  * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} MyNamespace.BetterTestableModuleClass
+ * @typedef {Object} MyNamespace.BetterTestableModuleClass
  * @constructs
  */
 DIC.define('MyNamespace.BetterTestableModuleClass', new function () {

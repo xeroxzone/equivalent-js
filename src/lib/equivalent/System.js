@@ -16,7 +16,7 @@ var EquivalentJS = {};
  *  to register the module {@link EquivalentJS.Manager};
  *  the test runner and the doc runner
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.System
+ * @typedef {Object} EquivalentJS.System
  * @constructs
  */
 EquivalentJS.System = new function () {

@@ -5,7 +5,7 @@
 /**
  * @interface
  * @classdesc Module class interface representation
- * @typedef {function} EquivalentJS.Manager.Module.class
+ * @typedef {Object} EquivalentJS.Manager.Module.class
  * @constructs
  * @tutorial MODULE-MANAGER
  * @see if the module class is initialized by DOM application
@@ -60,7 +60,7 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      *  the method get destroyed by manager after module is loaded;
      *  this method is optional
      * @memberOf EquivalentJS.Manager.Module.class
-     * @typedef {function} EquivalentJS.Manager.Module.class.construct
+     * @typedef {Object} EquivalentJS.Manager.Module.class.construct
      */
     _.construct = function () {};
 
