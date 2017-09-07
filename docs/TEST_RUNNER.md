@@ -78,6 +78,19 @@ this.testModuleApplicationDOM = function (assert) {
 };
 ```
 
+#### Method naming
+
+A test method start with lowercase letters "test" like *testImplementedMethodName*
+
+```regexp
+^test.*
+```
+
+Also the test method names "setup" and "teardown" are predefined like described 
+at next paragraph.
+
+Any other method name is free to use for any cases.
+
 #### Setup and teardown test cases
 
 ```javascript
