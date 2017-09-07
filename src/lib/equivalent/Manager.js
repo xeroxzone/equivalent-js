@@ -941,7 +941,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (Array.isArray(type)) {
             $(type).each(function () {
                 if (Array.isArray(this)) {
-                    if (typeof this[0] === 'string' && typeof this[1] === 'object') {
+                    if (typeof this[0] === 'string') {
                         $resolver = register({type: this[0], parameters: this[1]});
                     } else {
                         onAddError(this[0]);
