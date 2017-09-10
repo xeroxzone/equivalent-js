@@ -175,7 +175,6 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var isAppLoad = false;
-
         if (false === /^EquivalentJS\./.test(type)) {
             isAppLoad = true;
         }
@@ -190,22 +189,19 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         var moduleUrl = classUri + '/' +
             namespace + '.js?' +
-            String((new Date()).getTime());
+            String((new Date()).getTime()),
+            layoutUri = null
+        ;
 
-        var layoutUri = null;
-
-        var request = createRequest(moduleUrl);
-
-        return registerRequest(request).then(function () {
+        return registerRequest(createRequest(moduleUrl)).then(function () {
             /**
              * @type {EquivalentJS.Manager.Module.class}
              */
             var importedClass = getModuleDOM(type);
 
-            if (true === testing && EquivalentJS.Manager.has(type)) {
+            if (true === testing) {
                 // create a module class as mock for manager in test cases
-                var mockClass = EquivalentJS.Manager.get(type).class;
-                importedClass = new mockClass.constructor();
+                importedClass = new importedClass.constructor();
             }
 
             importedClass.type = type;

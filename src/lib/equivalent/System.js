@@ -500,12 +500,6 @@ EquivalentJS.System = new function () {
                 if (classPath.length -1 === i) {
                     classScope[classPath[i]] = moduleClass;
                 }
-            } else if (typeof classScope[classPath[i]] === 'object' &&
-                Object.keys(classScope[classPath[i]]).length > 0
-            ) {
-                if (classPath.length -1 === i) {
-                    $.extend(true, classScope[classPath[i]], moduleClass);
-                }
             }
             classScope = classScope[classPath[i]];
         });

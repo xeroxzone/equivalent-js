@@ -25,15 +25,7 @@ EquivalentJS.define('EquivalentJS.Manager.App', new function () {
      * @memberOf EquivalentJS.Manager.App
      * @type {?jQuery}
      */
-    var $apps = null;
-
-    /**
-     * @description stored app views; the DOM representations
-     *  of the app module classes
-     * @memberOf EquivalentJS.Manager.App
-     * @type {Array.<HTMLElement>}
-     */
-    _.collection = [];
+    _.$apps = null;
 
     /**
      * @description initialize all described apps on view;
@@ -42,12 +34,11 @@ EquivalentJS.define('EquivalentJS.Manager.App', new function () {
      *  app modules will add dependencies to DIC
      *  {@link EquivalentJS.Manager.modules}
      * @memberOf EquivalentJS.Manager.App
-     * @event EquivalentJS.Manager.App#app:initialize
      */
     _.construct = function () {
-        $(_).on('app:initialize', function () {
-            $apps = $('[data-application]');
+        _.$apps = $('[data-application]');
 
+        $(_).on('app:initialize', function () {
             initialize();
         });
     };
@@ -57,18 +48,17 @@ EquivalentJS.define('EquivalentJS.Manager.App', new function () {
      *  class to DOM application
      * @memberOf EquivalentJS.Manager.App
      * @private
+     * @event EquivalentJS.Manager.App#app:initialize
      */
     var initialize = function () {
-        $apps.each(function () {
+        _.$apps.each(function () {
             var $app = $(this),
                 parameters = $app.data('parameters'),
                 appModule = $app.data('application')
             ;
 
-            if (false === EquivalentJS.Manager.has(appModule)) {
-                _.collection.push(this);
-
-                EquivalentJS.Manager.add(appModule, {
+            if (false === _.__manager__.has(appModule)) {
+                _.__manager__.add(appModule, {
                     app: this,
                     data: parameters
                 }).done(function () {
@@ -78,7 +68,7 @@ EquivalentJS.define('EquivalentJS.Manager.App', new function () {
                      *  the module class {@link EquivalentJS.Manager.Module.class}
                      *  by reference from DOM
                      */
-                    $app.prop('__class__', EquivalentJS.Manager.get(appModule).class);
+                    $app.prop('__class__', _.__manager__.get(appModule).class);
                 });
             }
         });
