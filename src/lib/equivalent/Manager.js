@@ -105,7 +105,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      */
     var register = function (module) {
         /**
-         * @type {{systemTests: boolean, appPath: string}}
+         * @type {{environment: string, systemTests: boolean, appPath: string}}
          */
         var configuration = EquivalentJS.System.getConfiguration();
 
@@ -187,13 +187,24 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             namespace = type.replace(/^(\w+)\..*/, '$1') + '/' + namespace;
         }
 
+        var cacheBust = false;
+        if ('dev' === configuration.environment) {
+            cacheBust = true;
+        }
+
         var moduleUrl = classUri + '/' +
-            namespace + '.js?' +
-            String((new Date()).getTime()),
+            namespace + '.js' +
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ''),
             layoutUri = null
         ;
 
-        return registerRequest(createRequest(moduleUrl)).then(function () {
+        var request = createRequest(moduleUrl);
+
+        if (false === cacheBust) {
+            delete request.beforeSend;
+        }
+
+        return registerRequest(request).then(function () {
             /**
              * @type {EquivalentJS.Manager.Module.class}
              */
@@ -483,7 +494,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             true === module.layout
         ) {
             /**
-             * @type {{moduleLayout: string}}
+             * @type {{environment: string, moduleLayout: string}}
              */
             var configuration = EquivalentJS.System.getConfiguration();
 
@@ -509,9 +520,13 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     '/' + reNamespace;
             }
 
+            if ('dev' !== configuration.environment) {
+                cacheBust = false;
+            }
+
             layoutUri = configuration.moduleLayout + '/' +
                 reNamespace + '.css' +
-                ((true === cacheBust) ? '?' + String((new Date()).getTime()) : '');
+                ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : '');
 
             registerRequest({url: layoutUri, method: 'head'})
                 .fail(function (error) {
