@@ -7,7 +7,7 @@ DIC.define('EquivalentJS.test.Manager.ExtendTest', new function () {
     /**
      * @description the manager mock
      * @memberOf EquivalentJS.test.Manager.ExtendTest
-     * @type {EquivalentJS.Manager}
+     * @alias {EquivalentJS.Manager}
      */
     var manager;
 

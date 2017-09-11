@@ -4,7 +4,7 @@ The Test Runner will try to run tests for all modules stored in DIC
 
 ## The Module Test Autoload Declaration
 
-For an example there is a [test template][test-template](../../src/test/lib/equivalent/template/ModuleNameTest.js.template)
+For an example there is a [test template][test-template](../src/test/lib/equivalent/template/ModuleNameTest.js.template)
 
 ### Automated unit testing for modules with [QUnit][qunit]
 
@@ -78,6 +78,19 @@ this.testModuleApplicationDOM = function (assert) {
 };
 ```
 
+#### Method naming
+
+A test method start with lowercase letters "test" like *testImplementedMethodName*
+
+```regexp
+^test.*
+```
+
+Also the test method names "setup" and "teardown" are predefined like described 
+at next paragraph.
+
+Any other method name is free to use for any cases.
+
 #### Setup and teardown test cases
 
 ```javascript
@@ -118,7 +131,7 @@ this.teardown = function () {
 
 ##### Use class autoload and dependency manager as an isolated instance
 
-For an example there is a [test template][test-template](../../src/test/lib/equivalent/template/ModuleNameTest.js.template)
+For an example there is a [test template][test-template](../src/test/lib/equivalent/template/ModuleNameTest.js.template)
 
 ```javascript
 /**
@@ -147,7 +160,7 @@ This means that in test cases the isolated module class instance own manager pro
 are overridden by an isolated test case manager instance and the markup can be overridden per test method.
 
 The manager and markup properties are described at the 
-module class interface [{EquivalentJs.Manager.Module.class}](../../src/lib/equivalent/Manager/Module/class.js) 
+module class interface [{EquivalentJs.Manager.Module.class}](../src/lib/equivalent/Manager/Module/class.js) 
 can be found in the generated documentation.
 
     example:
@@ -159,7 +172,7 @@ can be found in the generated documentation.
 /**
  * @class
  * @implements {EquivalentJs.Manager.Module.class}
- * @typedef {function} MyNamespace.BetterTestableModuleClass
+ * @typedef {Object} MyNamespace.BetterTestableModuleClass
  * @constructs
  */
 DIC.define('MyNamespace.BetterTestableModuleClass', new function () {

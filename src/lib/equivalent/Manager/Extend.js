@@ -7,7 +7,7 @@
  * @class
  * @classdesc Extend a module by module {@link EquivalentJS.Manager~register} a module
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.Manager.Extend
+ * @typedef {Object} EquivalentJS.Manager.Extend
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.Manager.Extend', new function () {

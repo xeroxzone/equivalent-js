@@ -7,7 +7,7 @@
  * @class
  * @classdesc a model to be created by factory
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.Factory.Circle
+ * @typedef {Object} DemoApp.Factory.Circle
  * @constructs
  */
 DIC.define('DemoApp.Factory.Circle', new function () {

@@ -6,7 +6,7 @@
  * @class
  * @classdesc an application demo with a promise dependency
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.DependPromise
+ * @typedef {Object} DemoApp.DependPromise
  * @constructs
  */
 DIC.define('DemoApp.DependPromise', new function () {

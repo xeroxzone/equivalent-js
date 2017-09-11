@@ -33,7 +33,7 @@
   "opts": {
     "encoding": "utf8",
     "template": "./node_modules/ink-docstrap/template",
-    "tutorials": "./doc/tutorials",
+    "tutorials": "./docs",
     "destination": "./web/doc",
     "readme": "./README.md",
     "private": true,

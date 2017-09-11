@@ -6,7 +6,7 @@
  * @class
  * @classdesc delayed demo markup
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.DelayedMarkup
+ * @typedef {Object} DemoApp.DelayedMarkup
  * @constructs
  */
 DIC.define('DemoApp.DelayedMarkup', new function () {

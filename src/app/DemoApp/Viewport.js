@@ -6,7 +6,7 @@
  * @class
  * @classdesc demo app viewport handlers
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.Viewport
+ * @typedef {Object} DemoApp.Viewport
  * @constructs
  */
 DIC.define('DemoApp.Viewport', new function () {
@@ -19,12 +19,12 @@ DIC.define('DemoApp.Viewport', new function () {
     var _ = this;
 
     /**
-     * @description the material design components web interface
+     * @description the mdc web interface wrapper
      * @memberOf DemoApp.Viewport
-     * @private
-     * @type {?{drawer: Object}}
+     * @alias {?DemoApp.Viewport.MDC}
+     * @see DemoApp.Viewport.MDC
      */
-    var mdc = null;
+    var MDC = null;
 
     /**
      * @description the main menu element
@@ -39,14 +39,15 @@ DIC.define('DemoApp.Viewport', new function () {
      * @memberOf DemoApp.Viewport
      */
     _.construct = function () {
-        if (window.hasOwnProperty('mdc')) {
-            mdc = window.mdc;
-            $mainMenu = $('.main-menu');
+        $mainMenu = $('.main-menu');
+
+        _.__manager__.add('DemoApp.Viewport.MDC').done(function (module) {
+            MDC = module;
 
             handlePersistentDrawerOnMainMenu();
-        } else {
+        }).fail(function () {
             EquivalentJS.console.error('Could not find design renderer!');
-        }
+        });
     };
 
     /**
@@ -55,16 +56,15 @@ DIC.define('DemoApp.Viewport', new function () {
      * @private
      */
     var handlePersistentDrawerOnMainMenu = function () {
-        var $drawerEl = $('.mdc-persistent-drawer'),
-            MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer,
-            drawer = new MDCPersistentDrawer($drawerEl.get(0))
+        var $drawerElement = $('.mdc-persistent-drawer'),
+            drawer = MDC.createDrawer($drawerElement.get(0))
         ;
 
         $mainMenu.on('click', function () {
             drawer.open = !drawer.open;
         });
 
-        $drawerEl.on('MDCPersistentDrawer:open', function() {
+        $drawerElement.on('MDCPersistentDrawer:open', function() {
             $mainMenu
                 .removeClass('out')
                 .addClass('over')
@@ -72,7 +72,7 @@ DIC.define('DemoApp.Viewport', new function () {
             ;
         });
 
-        $drawerEl.on('MDCPersistentDrawer:close', function() {
+        $drawerElement.on('MDCPersistentDrawer:close', function() {
             $mainMenu
                 .removeClass('over')
                 .addClass('out')

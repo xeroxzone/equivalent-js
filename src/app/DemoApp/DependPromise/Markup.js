@@ -7,7 +7,7 @@
  * @class
  * @classdesc an application demo promise dependency
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.DependPromise.Markup
+ * @typedef {Object} DemoApp.DependPromise.Markup
  * @constructs
  */
 DIC.define('DemoApp.DependPromise.Markup', new function () {

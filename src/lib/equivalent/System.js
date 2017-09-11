@@ -16,7 +16,7 @@ var EquivalentJS = {};
  *  to register the module {@link EquivalentJS.Manager};
  *  the test runner and the doc runner
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.System
+ * @typedef {Object} EquivalentJS.System
  * @constructs
  */
 EquivalentJS.System = new function () {
@@ -499,12 +499,6 @@ EquivalentJS.System = new function () {
                 classScope[classPath[i]] = {};
                 if (classPath.length -1 === i) {
                     classScope[classPath[i]] = moduleClass;
-                }
-            } else if (typeof classScope[classPath[i]] === 'object' &&
-                Object.keys(classScope[classPath[i]]).length > 0
-            ) {
-                if (classPath.length -1 === i) {
-                    $.extend(true, classScope[classPath[i]], moduleClass);
                 }
             }
             classScope = classScope[classPath[i]];

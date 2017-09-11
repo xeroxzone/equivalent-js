@@ -7,7 +7,7 @@
  * @class
  * @classdesc module description
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} Namespace.pathPart.ModuleName
+ * @typedef {Object} Namespace.pathPart.ModuleName
  * @constructs
  */
 DIC.define('Namespace.pathPart.ModuleName', new function () {

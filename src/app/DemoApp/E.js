@@ -4,7 +4,7 @@
  * @class
  * @classdesc demo app e
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.E
+ * @typedef {Object} DemoApp.E
  * @constructs
  */
 DIC.define('DemoApp.E', new function () {

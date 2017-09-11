@@ -4,7 +4,7 @@
  * @class
  * @classdesc a test mock to represent an abstract module class
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} EquivalentJS.mock.AbstractModule
+ * @typedef {Object} EquivalentJS.mock.AbstractModule
  * @constructs
  */
 EquivalentJS.define('EquivalentJS.mock.AbstractModule', new function () {

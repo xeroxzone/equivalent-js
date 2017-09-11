@@ -6,7 +6,7 @@
   "scripts": {
     "dev:run": "./node_modules/.bin/gulp dev",
     "dev:watch": "./node_modules/.bin/gulp dev:watch",
-    "dev:http": "./node_modules/.bin/http-server ./web -a 127.0.0.1 -p 8083 -o"
+    "dev:http": "./node_modules/.bin/http-server ./web -a 127.0.0.1 -p 8083"
   },
   "repository": {
     "type": "git",

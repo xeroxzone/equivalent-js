@@ -6,7 +6,7 @@
  * @class
  * @classdesc an application demo with an event dependency
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.DependEvent
+ * @typedef {Object} DemoApp.DependEvent
  * @constructs
  */
 DIC.define('DemoApp.DependEvent', new function () {

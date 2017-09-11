@@ -6,7 +6,7 @@
  * @class
  * @classdesc an application demo as a factory
  * @implements {EquivalentJS.Manager.Module.class}
- * @typedef {function} DemoApp.Factory
+ * @typedef {Object} DemoApp.Factory
  * @constructs
  */
 DIC.define('DemoApp.Factory', new function () {
