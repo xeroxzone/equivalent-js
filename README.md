@@ -1,9 +1,5 @@
 # EquivalentJS
 
-EquivalentJS was emerged from the JS micro framework forked of [meinauto/meinauto-js][meinauto-js]. 
-It has more streamlined interfaces and is extended for multiple namespace trees. 
-Further development will take place here.
-
 ## Class autoload and dependency manager
 
 A JavaScript micro framework for modern web browsers to asynchronous autoload 
