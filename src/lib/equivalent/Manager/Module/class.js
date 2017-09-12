@@ -14,6 +14,12 @@
  */
 EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
     /**
+     * @description indicates a layout stylesheet DOM loaded
+     *  if {@link EquivalentJS.Manager.Module.class.layout} is set true
+     * @event EquivalentJS.Manager.Module.class#layout:ready
+     */
+
+    /**
      * @description bind public properties or methods from inner scope
      * @memberOf EquivalentJS.Manager.Module.class
      * @private

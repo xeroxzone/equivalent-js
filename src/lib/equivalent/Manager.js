@@ -256,6 +256,13 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 var $link = $('<link/>').attr({
                     'rel': 'stylesheet',
                     'href': layoutUri
+                }).on('load', function () {
+                    /**
+                     * @description fires to event if layout stylesheet DOM loaded
+                     * @memberOf EquivalentJS.Manager.Module.class
+                     * @fires EquivalentJS.Manager.Module.class#layout:done
+                     */
+                    $(importedClass).trigger('layout:done');
                 });
 
                 importedClass.__layout__ = $link.get(0);
