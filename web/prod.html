@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>EquivalentJS</title>
+        <link rel="stylesheet" href="css/material-components-web.css">
+        <link rel="stylesheet" href="css/load.css">
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/lib/material-components-web.js"></script>
+    </head>
+    <body class="mdc-typography" data-application="DemoApp.Viewport">
+
+        <aside class="mdc-persistent-drawer">
+            <nav class="mdc-persistent-drawer__drawer">
+                <div class="mdc-persistent-drawer__toolbar-spacer"></div>
+                <div class="mdc-list-group">
+                    <nav class="mdc-list">
+                        <a class="mdc-list-item" href="/">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">more</i>Docs &amp; Tests
+                        </a>
+                    </nav>
+
+                    <hr class="mdc-list-divider">
+
+                    <nav class="mdc-list">
+                        <a class="mdc-list-item" href="https://www.npmjs.com/package/equivalent-js" target="_blank">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">extension</i>NPMJS
+                        </a>
+                        <a class="mdc-list-item" href="https://github.com/xeroxzone/equivalent-js" target="_blank">
+                            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">favorite</i>GitHub
+                        </a>
+                    </nav>
+                </div>
+            </nav>
+        </aside>
+
+        <header class="mdc-toolbar mdc-toolbar--fixed">
+            <div class="mdc-toolbar__row">
+
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                    <a href="#" class="material-icons mdc-toolbar__icon--menu main-menu">menu</a>
+                    <span class="mdc-toolbar__title main-headline">EquivalentJS</span>
+                </section>
+
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                    <div data-application="DemoApp.tool.DateTime"></div>
+                </section>
+
+            </div>
+        </header>
+
+        <div class="content mdc-toolbar-fixed-adjust">
+
+            <main>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div class="logo" data-application="DemoApp.tool.Logo">
+                                <div class="equivalent-js-logo">
+                                    <i>
+                                        <i>
+                                            <i>
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                            </i>
+                                        </i>
+                                    </i>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div class="hidden" data-application="DemoApp.DependPromise">
+                                Demo with Promise
+                            </div>
+
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                            <div class="hidden" data-application="DemoApp.DependEvent">
+                                <div data-application="DemoApp.DependEvent.Markup">
+                                    Demo on Event
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell">
+
+                            <small>
+                                © <a
+                                    target="_blank"
+                                    href="https://github.com/xeroxzone/equivalent-js"
+                                >xeroxzone/equivalent-js</a>
+                            </small>
+
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script src="js/lib/equivalent.min.js"></script>
+
+        <script type="text/javascript">
+            mdc.autoInit();
+        </script>
+    </body>
+</html>

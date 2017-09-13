@@ -6,6 +6,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
@@ -41,6 +42,27 @@ function build(cfg, builder, base) {
     wrap.pipe(gulp.dest(cfg.dest));
 
     return wrap;
+}
+
+/**
+ * @param {Object} cfg
+ * @param {(null|Object|function)=} builder
+ * @param {string=} base
+ * @returns {Gulp}
+ */
+function buildConcat(cfg, builder, base) {
+    builder = builder || null;
+    base = base || '';
+
+    return gulp.src(cfg.src)
+            .pipe(plumber())
+                .pipe(sourcemaps.init())
+                    .pipe(concat(cfg.name))
+                    .pipe(builder)
+                .pipe(sourcemaps.write())
+            .pipe(plumber.stop())
+        .pipe(gulp.dest(cfg.dest))
+    ;
 }
 
 /**
@@ -99,6 +121,14 @@ function buildApps(cfg) {
  */
 function buildScripts(cfg) {
     return build(cfg, uglify(), LIB_CLASS_PATH);
+}
+
+/**
+ * @param {Object} cfg
+ * @returns {Gulp}
+ */
+function buildConcatScripts(cfg) {
+    return buildConcat(cfg, uglify(), LIB_CLASS_PATH);
 }
 
 /**
@@ -202,7 +232,21 @@ gulp.task('dev:watch:docs:apps', function() {
     });
 });
 
-/* init commands "dev" and "dev:watch" */
+
+/* prod */
+gulp.task('prod:scripts', function() {
+    del(['web/js/lib/equivalent.min.js', 'web/js/app/**/*.js']).then(function () {
+        del(['web/js/config/*.json']).then(function () {
+            buildVendors(config.vendors);
+            buildConfigs(config.configs);
+            buildConcatScripts(config.minify);
+            buildApps(config.apps);
+            buildStyles(config.styles);
+        });
+    });
+});
+
+/* init commands "dev", "dev:watch", "prod:minify" */
 gulp.task('dev', [
     'dev:scripts',
     'dev:apps',
@@ -219,4 +263,8 @@ gulp.task('dev:watch', [
     'dev:watch:styles',
     'dev:watch:docs:scripts',
     'dev:watch:docs:apps'
+]);
+
+gulp.task('prod:minify', [
+    'prod:scripts'
 ]);

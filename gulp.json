@@ -53,5 +53,17 @@
       "node_modules/material-components-web/dist/material-components-web.css"
     ],
     "dest" : "web/css"
+  },
+  "minify": {
+    "name": "equivalent.min.js",
+    "src": [
+      "src/lib/equivalent/System.js",
+      "src/lib/equivalent/Manager.js",
+      "src/lib/equivalent/Manager/Extend.js",
+      "src/lib/equivalent/Manager/Controller.js",
+      "src/lib/equivalent/Manager/App.js",
+      "src/lib/equivalent/Renderer.js"
+    ],
+    "dest": "web/js/lib"
   }
 }

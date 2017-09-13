@@ -11,6 +11,47 @@ var EquivalentJS = {};
 /** @module EquivalentJS */
 
 /**
+ * @description define a new module by type and module class
+ * @memberOf EquivalentJS
+ * @param {string} type as module class name
+ * @param {EquivalentJS.Manager.Module.class} moduleClass as class object
+ * @throws {Error} module class definition wrong
+ */
+EquivalentJS.define = function (type, moduleClass) {
+    if (typeof type !== 'string') {
+        throw new Error('The module class type must be of type <string>.');
+    }
+
+    if (typeof moduleClass === 'object') {
+        /**
+         * @description prepare module class namespace in DOM
+         * @memberOf EquivalentJS.define
+         * @private
+         * @param {string} type as module class name
+         * @param {EquivalentJS.Manager.Module.class} moduleClass to be defined into DOM
+         */
+        var createModuleDOM = function (type, moduleClass) {
+            var classScope = window,
+                classPath = type.split('.');
+
+            $(classPath).each(function (i) {
+                if (typeof classScope[classPath[i]] === 'undefined') {
+                    classScope[classPath[i]] = {};
+                    if (classPath.length -1 === i) {
+                        classScope[classPath[i]] = moduleClass;
+                    }
+                }
+                classScope = classScope[classPath[i]];
+            });
+        };
+
+        createModuleDOM(type, moduleClass);
+    } else {
+        throw new Error('The module class must be of type <Object>.');
+    }
+};
+
+/**
  * @class
  * @classdesc Initial loaded class as running system
  *  to register the module {@link EquivalentJS.Manager};
@@ -183,14 +224,6 @@ EquivalentJS.System = new function () {
                 }
 
                 if (typeof registerCallback === 'function') {
-                    /**
-                     * @description define new module class
-                     *  {@link EquivalentJS.System~define}
-                     * @memberOf EquivalentJS
-                     * @typedef {function} EquivalentJS.define
-                     */
-                    EquivalentJS.define = define;
-
                     registerCallback();
                 }
             })
@@ -216,6 +249,19 @@ EquivalentJS.System = new function () {
 
         var moduleUrl = moduleUri + '/' +
             namespace + '.js?' + String((new Date()).getTime());
+
+        // if equivalent.min.js library is as concatenated minified files loaded
+        //  search for existing DOM object
+        if (EquivalentJS.hasOwnProperty('Manager')) {
+            try {
+                EquivalentJS.Manager.construct(moduleUri);
+                registerShortcut();
+            } catch (error) {
+                EquivalentJS.console.error(error);
+            }
+
+            return;
+        }
 
         $.get(moduleUrl)
             .done(function () {
@@ -266,7 +312,7 @@ EquivalentJS.System = new function () {
             var shortcutInterface = {
                 console: EquivalentJS.console,
                 getNamespace: _.getNamespace,
-                define: define,
+                define: EquivalentJS.define,
                 add: manager.add,
                 ready: manager.ready,
                 has: manager.has,
@@ -480,48 +526,6 @@ EquivalentJS.System = new function () {
             });
 
             sessionStorage.setItem('runTests', true);
-        }
-    };
-
-    /**
-     * @description prepare module class namespace in DOM
-     * @memberOf EquivalentJS.System
-     * @private
-     * @param {string} type as module class name
-     * @param {EquivalentJS.Manager.Module.class} moduleClass to be defined into DOM
-     */
-    var createModuleDOM = function (type, moduleClass) {
-        var classScope = window,
-            classPath = type.split('.');
-
-        $(classPath).each(function (i) {
-            if (typeof classScope[classPath[i]] === 'undefined') {
-                classScope[classPath[i]] = {};
-                if (classPath.length -1 === i) {
-                    classScope[classPath[i]] = moduleClass;
-                }
-            }
-            classScope = classScope[classPath[i]];
-        });
-    };
-
-    /**
-     * @description define a new module by type and module class
-     * @memberOf EquivalentJS.System
-     * @private
-     * @param {string} type as module class name
-     * @param {EquivalentJS.Manager.Module.class} moduleClass as class object
-     * @throws {Error} module class definition wrong
-     */
-    var define = function (type, moduleClass) {
-        if (typeof type !== 'string') {
-            throw new Error('The module class type must be of type <string>.');
-        }
-
-        if (typeof moduleClass === 'object') {
-            createModuleDOM(type, moduleClass);
-        } else {
-            throw new Error('The module class must be of type <Object>.');
         }
     };
 

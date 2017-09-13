@@ -55,6 +55,10 @@ or
 
     npm run dev:http
 
+## Build all EquivalentJS modules as concatenated minified library file
+
+    npm run prod:minify
+
 ## Appendix
 
 [Code of Conduct](CODE_OF_CONDUCT.md)

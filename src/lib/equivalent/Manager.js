@@ -177,6 +177,36 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var isAppLoad = false;
         if (false === /^EquivalentJS\./.test(type)) {
             isAppLoad = true;
+        } else if ('dev' !== configuration.environment) {
+            var moduleDom = getModuleDOM(type);
+            return $.Deferred(function () {
+                var $defer = this;
+
+                moduleDom.type = type;
+
+                /**
+                 * @see EquivalentJS.Manager.Module.class.__manager__
+                 */
+                moduleDom.__manager__ = _;
+
+                _.modules.push(createModule(moduleDom));
+
+                try {
+                    moduleDom.construct(module);
+                } catch (error) {
+                    EquivalentJS.console.error(error);
+                }
+
+                delete moduleDom.construct;
+
+                /**
+                 * @description fires to event if module is ready
+                 * @fires EquivalentJS.Manager#ready:callback
+                 */
+                $(_).trigger('ready:callback', moduleDom);
+
+                $defer.resolve(moduleDom);
+            });
         }
 
         var namespace = EquivalentJS.System.getNamespace(type);
