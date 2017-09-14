@@ -6,7 +6,8 @@
   "scripts": {
     "dev:run": "./node_modules/.bin/gulp dev",
     "dev:watch": "./node_modules/.bin/gulp dev:watch",
-    "dev:http": "./node_modules/.bin/http-server ./web -a 127.0.0.1 -p 8083"
+    "dev:http": "./node_modules/.bin/http-server ./web -a 127.0.0.1 -p 8083",
+    "prod:minify": "./node_modules/.bin/gulp prod:minify"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
+    "gulp-concat": "^2.6.1",
     "gulp-watch": "^4.3.11",
     "gulp-plumber": "^1.1.0",
     "gulp-cli": "^1.4.0",

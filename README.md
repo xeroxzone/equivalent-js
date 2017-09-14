@@ -54,7 +54,15 @@ or
 ## Run demo application in browser
 
     npm run dev:http
+    
+    http://127.0.0.1:8083/index.html
 
+## Build all EquivalentJS modules as concatenated minified library file
+
+    npm run prod:minify
+    
+    http://127.0.0.1:8083/prod.html
+    
 ## Appendix
 
 [Code of Conduct](CODE_OF_CONDUCT.md)
@@ -64,7 +72,6 @@ or
 [MM]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/MODULE_MANAGER.md
 [MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
 [MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
-[meinauto-js]: https://github.com/meinauto/meinauto-js
 [npmjs]: https://www.npmjs.com
 [gulp]: http://gulpjs.com
 [jquery]: https://jquery.com

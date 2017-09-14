@@ -2,7 +2,8 @@
   "vendors" : {
     "src" : [
       "node_modules/jquery/dist/jquery.min.js",
-      "node_modules/material-components-web/dist/material-components-web.js"
+      "node_modules/material-components-web/dist/material-components-web.js",
+      "node_modules/material-components-web/dist/material-components-web.min.js"
     ],
     "dest" : "web/js/lib"
   },
@@ -50,8 +51,21 @@
     "src" : [
       "src/app/**/*.scss",
       "src/lib/ui/**",
-      "node_modules/material-components-web/dist/material-components-web.css"
+      "node_modules/material-components-web/dist/material-components-web.css",
+      "node_modules/material-components-web/dist/material-components-web.min.css"
     ],
     "dest" : "web/css"
+  },
+  "minify": {
+    "name": "equivalent.min.js",
+    "src": [
+      "src/lib/equivalent/System.js",
+      "src/lib/equivalent/Manager.js",
+      "src/lib/equivalent/Manager/Extend.js",
+      "src/lib/equivalent/Manager/Controller.js",
+      "src/lib/equivalent/Manager/App.js",
+      "src/lib/equivalent/Renderer.js"
+    ],
+    "dest": "web/js/lib"
   }
 }
