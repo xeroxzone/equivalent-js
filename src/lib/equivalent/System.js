@@ -71,7 +71,6 @@ EquivalentJS.System = new function () {
 
     /**
      * @description the system configuration
-     *  {@link EquivalentJS.System~configuration}
      * @memberOf EquivalentJS.System
      * @private
      * @type {Object}
@@ -172,67 +171,95 @@ EquivalentJS.System = new function () {
      * @private
      * @param {function} registerCallback the callback to register
      *  module manager, test and doc framework
+     * @throws {Error} could not interpret json configuration file path as <string>
      * @throws {Error} could not interpret json configuration as <Object>
      */
     var configure = function (registerCallback) {
         /**
          * @type {string}
          */
-        var configPath = 'js/config/parameters.json';
+        var configPath = '/js/config/parameters.json';
 
         if (typeof window.EquivalentJSConfigurationPath !== 'undefined') {
             /**
              * @description give a global path to configuration json file
-             * @typedef {string} EquivalentJSConfigurationPath
+             * @typedef {(string|Object)=} EquivalentJSConfigurationPath
              */
             configPath = window.EquivalentJSConfigurationPath;
         }
 
-        $.get(configPath)
-            .done(function (data) {
-                if (typeof data !== 'object') {
-                    throw new Error('Invalid configuration json file!');
-                }
+        /**
+         * @param {string} config the configuration json data
+         */
+        var setConfigValues = function (config) {
+            /**
+             * @type {{
+             *  shortcut: string,
+             *  environment: string,
+             *  modulePath: string,
+             *  docFramework: string,
+             *  testFrameworkUnit: string,
+             *  testFrameworkTheme: string
+             * }}
+             */
+            configuration = config;
+            shortcut = configuration.shortcut;
+            environment = configuration.environment;
+            moduleUri = configuration.modulePath;
+            docFrameworkUri = configuration.docFramework;
+            testFrameworkUnitUri = configuration.testFrameworkUnit;
+            testFrameworkThemeUri = configuration.testFrameworkTheme;
+        };
 
-                /**
-                 * @type {{
-                 *  shortcut: string,
-                 *  environment: string,
-                 *  modulePath: string,
-                 *  docFramework: string,
-                 *  testFrameworkUnit: string,
-                 *  testFrameworkTheme: string
-                 * }}
-                 */
-                configuration = data;
-                shortcut = configuration.shortcut;
-                environment = configuration.environment;
-                moduleUri = configuration.modulePath;
-                docFrameworkUri = configuration.docFramework;
-                testFrameworkUnitUri = configuration.testFrameworkUnit;
-                testFrameworkThemeUri = configuration.testFrameworkTheme;
+        /**
+         * @description register window.console into namespace to make it
+         *  suppressible with configuration environment property like "prod"
+         */
+        var registerConsole = function () {
+            if ('dev' !== environment) {
+                var disabledConsole = EquivalentJS.console = {};
+                $(['clear', 'dir', 'trace', 'log',
+                    'info', 'warn', 'error'
+                ]).each(function () {
+                    disabledConsole[this] = function () {};
+                });
+            } else {
+                EquivalentJS.console = window.console || {};
+            }
+        };
 
-                if ('dev' !== environment) {
-                    var disabledConsole = EquivalentJS.console = {};
-                    $(['clear', 'dir', 'trace', 'log',
-                        'info', 'warn', 'error'
-                    ]).each(function () {
-                        disabledConsole[this] = function () {};
-                    });
-                } else {
-                    EquivalentJS.console = window.console || {};
-                }
+        if (typeof configPath === 'object') {
+            setConfigValues(configPath);
 
-                if (typeof registerCallback === 'function') {
-                    registerCallback();
-                }
-            })
-            .fail(function (error) {
-                EquivalentJS.console.error(
-                    error.status + ' ' + error.statusText +
-                    ' - Could not load configuration!'
-                );
-            });
+            registerConsole();
+
+            if (typeof registerCallback === 'function') {
+                registerCallback();
+            }
+        } else if (typeof configPath !== 'string') {
+            throw new Error('Invalid configuration file path!');
+        } else {
+            $.get(configPath)
+                .done(function (data) {
+                    if (typeof data !== 'object') {
+                        throw new Error('Invalid configuration json file!');
+                    }
+
+                    setConfigValues(data);
+
+                    registerConsole();
+
+                    if (typeof registerCallback === 'function') {
+                        registerCallback();
+                    }
+                })
+                .fail(function (error) {
+                    EquivalentJS.console.error(
+                        error.status + ' ' + error.statusText +
+                        ' - Could not load configuration!'
+                    );
+                });
+        }
     };
 
     /**
@@ -252,34 +279,36 @@ EquivalentJS.System = new function () {
 
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
-        if (EquivalentJS.hasOwnProperty('Manager')) {
-            try {
-                EquivalentJS.Manager.construct(moduleUri);
-                registerShortcut();
-            } catch (error) {
-                EquivalentJS.console.error(error);
-            }
-
-            return;
+        if (typeof EquivalentJS.Manager !== 'undefined' ||
+            typeof window.EquivalentJSConfigurationPath === 'object'
+        ) {
+            setTimeout(function () {
+                try {
+                    EquivalentJS.Manager.construct(moduleUri);
+                    registerShortcut();
+                } catch (error) {
+                    EquivalentJS.console.error(error);
+                }
+            }, 100);
+        } else {
+            $.get(moduleUrl)
+                .done(function () {
+                    $(EquivalentJS.Manager).on('ready:manager', function () {
+                        try {
+                            EquivalentJS.Manager.construct(moduleUri);
+                            registerShortcut();
+                        } catch (error) {
+                            EquivalentJS.console.error(error);
+                        }
+                    }).trigger('ready:manager', module).off('ready:manager');
+                })
+                .fail(function (error) {
+                    EquivalentJS.console.error(
+                        error.status + ' ' + error.statusText +
+                        ' - Could not load module "' + namespace + '"!'
+                    );
+                });
         }
-
-        $.get(moduleUrl)
-            .done(function () {
-                $(EquivalentJS.Manager).on('ready:manager', function () {
-                    try {
-                        EquivalentJS.Manager.construct(moduleUri);
-                        registerShortcut();
-                    } catch (error) {
-                        EquivalentJS.console.error(error);
-                    }
-                }).trigger('ready:manager', module).off('ready:manager');
-            })
-            .fail(function (error) {
-                EquivalentJS.console.error(
-                    error.status + ' ' + error.statusText +
-                    ' - Could not load module "' + namespace + '"!'
-                );
-            });
     };
 
     /**

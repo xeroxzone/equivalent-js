@@ -358,7 +358,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @private
      * @param {Object} module an object with module class construction parameters
      * @param {boolean} withSystemTests indicate to include core modules into test runner
-     * @returns {void}
+     * @returns {void} break on try to run system tests
+     *  if configuration systemTests property is false
      * @throws {Error} if module class could not be cloned for test isolation
      * @tutorial TEST_RUNNER
      */

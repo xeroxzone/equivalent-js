@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>EquivalentJS</title>
-        <link rel="stylesheet" href="css/material-components-web.css">
+        <link rel="stylesheet" href="css/material-components-web.min.css">
         <link rel="stylesheet" href="css/load.css">
         <script src="js/lib/jquery.min.js"></script>
-        <script src="js/lib/material-components-web.js"></script>
+        <script src="js/lib/material-components-web.min.js"></script>
     </head>
     <body class="mdc-typography" data-application="DemoApp.Viewport">
 
@@ -111,6 +111,20 @@
             </footer>
 
         </div>
+
+        <script type="text/javascript">
+            var EquivalentJSConfigurationPath = {
+                "shortcut": "DIC",
+                "environment": "prod",
+                "appPath": "js/app",
+                "modulePath": "js/lib/equivalent",
+                "moduleLayout": "css",
+                "docFramework": "doc",
+                "testFrameworkUnit": "js/lib/qunit.js",
+                "testFrameworkTheme": "css/debug.css",
+                "systemTests": false
+            };
+        </script>
 
         <script src="js/lib/equivalent.min.js"></script>
 
