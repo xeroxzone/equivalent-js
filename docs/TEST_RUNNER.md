@@ -281,7 +281,8 @@ DIC.define('MyNamespace.test.BetterTestableModuleClassTest', new function () {
                             'module class model dependency loaded'
                         );
                         
-                        var $content = $(betterTestableModuleClass.__markup__).find('div.better-testable-dom-element');
+                        var $content = $(betterTestableModuleClass.__markup__)
+                            .find('div.better-testable-dom-element').html();
                         
                         assert.ok(0 < $content.length, 'content found in markup');
                         
