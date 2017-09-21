@@ -180,12 +180,12 @@ EquivalentJS.System = new function () {
          */
         var configPath = '/js/config/parameters.json';
 
-        if (typeof window.EquivalentJSConfigurationPath !== 'undefined') {
+        if (typeof window.EquivalentJSConfiguration !== 'undefined') {
             /**
              * @description give a global path to configuration json file
-             * @typedef {(string|Object)=} EquivalentJSConfigurationPath
+             * @typedef {(string|Object)=} EquivalentJSConfiguration
              */
-            configPath = window.EquivalentJSConfigurationPath;
+            configPath = window.EquivalentJSConfiguration;
         }
 
         /**
@@ -280,7 +280,7 @@ EquivalentJS.System = new function () {
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
         if (typeof EquivalentJS.Manager !== 'undefined' ||
-            typeof window.EquivalentJSConfigurationPath === 'object'
+            typeof window.EquivalentJSConfiguration === 'object'
         ) {
             setTimeout(function () {
                 try {
