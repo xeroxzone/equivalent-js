@@ -106,6 +106,12 @@ If the environment is set something else instead of "dev" the test and doc runne
 Also the manager is trying to use concatenated preloaded in
 DOM available framework module classes if the environment parameter is not "dev".
 
+The concatenated framework module classes created by
+
+    npm run prod:minify
+
+like described in [README.md][readme](../README.md)
+
 ## The Module Autoload Declaration
 
 For example there is a [module template][module-template](../src/lib/equivalent/template/ModuleName.js.template).
