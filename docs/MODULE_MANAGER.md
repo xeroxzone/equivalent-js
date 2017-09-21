@@ -99,11 +99,11 @@ run watcher like described in [README.md][readme](../README.md)
 
 ### Configure environment parameter
 
-The default environment is "dev". This mode load and enables access to test and doc runner.
+The default environment is "dev". This mode enables access to test and doc runner.
 
 If the environment is set something else instead of "dev" the test and doc runner get not initialized.
 
-Also the manager is trying to use concatenated minified preloaded in
+Also the manager is trying to use concatenated preloaded in
 DOM available framework module classes if the environment parameter is not "dev".
 
 ## The Module Autoload Declaration
