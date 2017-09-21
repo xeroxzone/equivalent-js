@@ -97,6 +97,15 @@ or as json like in [parameters.json](../src/config/parameters.json)
 
 run watcher like described in [README.md][readme](../README.md)
 
+### Configure environment parameter
+
+The default environment is "dev". This mode load and enables access to test and doc runner.
+
+If the environment is set something else instead of "dev" the test and doc runner get not initialized.
+
+Also the manager is trying to use concatenated minified preloaded in
+DOM available framework module classes if the environment parameter is not "dev".
+
 ## The Module Autoload Declaration
 
 For example there is a [module template][module-template](../src/lib/equivalent/template/ModuleName.js.template).

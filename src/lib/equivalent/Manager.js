@@ -179,34 +179,36 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             isAppLoad = true;
         } else if ('dev' !== configuration.environment) {
             var moduleDom = getModuleDOM(type);
-            return $.Deferred(function () {
-                var $defer = this;
+            if (null !== moduleDom) {
+                return $.Deferred(function () {
+                    var $defer = this;
 
-                moduleDom.type = type;
+                    moduleDom.type = type;
 
-                /**
-                 * @see EquivalentJS.Manager.Module.class.__manager__
-                 */
-                moduleDom.__manager__ = _;
+                    /**
+                     * @see EquivalentJS.Manager.Module.class.__manager__
+                     */
+                    moduleDom.__manager__ = _;
 
-                _.modules.push(createModule(moduleDom));
+                    _.modules.push(createModule(moduleDom));
 
-                try {
-                    moduleDom.construct(module);
-                } catch (error) {
-                    EquivalentJS.console.error(error);
-                }
+                    try {
+                        moduleDom.construct(module);
+                    } catch (error) {
+                        EquivalentJS.console.error(error);
+                    }
 
-                delete moduleDom.construct;
+                    delete moduleDom.construct;
 
-                /**
-                 * @description fires to event if module is ready
-                 * @fires EquivalentJS.Manager#ready:callback
-                 */
-                $(_).trigger('ready:callback', moduleDom);
+                    /**
+                     * @description fires to event if module is ready
+                     * @fires EquivalentJS.Manager#ready:callback
+                     */
+                    $(_).trigger('ready:callback', moduleDom);
 
-                $defer.resolve(moduleDom);
-            });
+                    $defer.resolve(moduleDom);
+                });
+            }
         }
 
         var namespace = EquivalentJS.System.getNamespace(type);
