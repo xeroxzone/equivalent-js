@@ -183,6 +183,7 @@ EquivalentJS.System = new function () {
         if (typeof window.EquivalentJSConfiguration !== 'undefined') {
             /**
              * @description give a global path to configuration json file
+             *  or direct as json
              * @typedef {(string|Object)=} EquivalentJSConfiguration
              */
             configPath = window.EquivalentJSConfiguration;
