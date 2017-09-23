@@ -361,7 +361,7 @@ var doSomething = function(parameters) {
  */
 DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
     /**
-     * @alias {MyApp.abstract.Controller}
+     * @alias {MyNamespace.MyApp.abstract.Controller}
      */
     var _ = this;
     
@@ -408,7 +408,7 @@ DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
  */
 DIC.define('MyNamespace.MyApp.controller.Doing', new function () {
     /**
-     * @alias {MyApp.controller.Doing}
+     * @alias {MyNamespace.MyApp.controller.Doing}
      */
     var _ = this;
     
