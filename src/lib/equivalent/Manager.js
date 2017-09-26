@@ -84,11 +84,15 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (false === testing) {
             _.add([
                 EquivalentJS.System.type,
-                _.type,
-                'EquivalentJS.Manager.Extend',
-                'EquivalentJS.Manager.Controller',
-                'EquivalentJS.Manager.App'
-            ]);
+                'EquivalentJS.Plugin'
+            ]).done(function () {
+                _.add([
+                    _.type,
+                    'EquivalentJS.Manager.Extend',
+                    'EquivalentJS.Manager.Controller',
+                    'EquivalentJS.Manager.App'
+                ]);
+            });
         }
     };
 
@@ -224,8 +228,21 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             cacheBust = true;
         }
 
+        var classPath = namespace;
+        if (module.type.indexOf('Plugin\.') > -1 &&
+            typeof module.parameters !== 'undefined' &&
+            typeof module.parameters.hasOwnProperty('plugin')
+        ) {
+            var plugin = module.parameters.plugin,
+                pluginPath = plugin.name + '/' + plugin.path
+            ;
+
+            classPath = classPath
+                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+        }
+
         var moduleUrl = classUri + '/' +
-            namespace + '.js' +
+            classPath + '.js' +
             ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ''),
             layoutUri = null
         ;
@@ -384,8 +401,21 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             namespace = type.replace(/^(\w+)\..*/, '$1') + '/' + namespace;
         }
 
+        var classPath = namespace;
+        if (type.indexOf('Plugin\.') > -1 &&
+            typeof parameters === 'object' &&
+            typeof parameters.hasOwnProperty('plugin')
+        ) {
+            var plugin = module.parameters.plugin,
+                pluginPath = plugin.name + '/' + plugin.test
+            ;
+
+            classPath = classPath
+                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+        }
+
         var testUrl = moduleUri.replace(/lib/, 'test/lib') +
-            '/' + namespace + 'Test.js?' +
+            '/' + classPath + 'Test.js?' +
             String((new Date()).getTime());
 
         if (true === isAppLoad) {

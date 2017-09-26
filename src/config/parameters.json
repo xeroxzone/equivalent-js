@@ -7,5 +7,8 @@
   "docFramework": "doc",
   "testFrameworkUnit": "js/lib/qunit.js",
   "testFrameworkTheme": "css/debug.css",
-  "systemTests": true
+  "systemTests": true,
+  "plugins": {
+    "equivalent-js-mdc": true
+  }
 }

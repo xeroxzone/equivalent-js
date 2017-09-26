@@ -66,6 +66,44 @@ function buildConcat(cfg, builder, base) {
 }
 
 /**
+ * @param {{config: Array, src: Array, dest: Array}} cfg
+ */
+function install(cfg) {
+    var installScripts = function (src, dest) {
+        return gulp.src(src)
+            .pipe(plumber())
+                .pipe(sourcemaps.init())
+                    .pipe(uglify())
+                .pipe(sourcemaps.write())
+            .pipe(plumber.stop())
+        .pipe(gulp.dest(dest));
+    };
+
+    var installConfigs = function (src, dest) {
+        return gulp.src(src)
+            .pipe(gulp.dest(dest));
+    };
+
+    if (cfg.hasOwnProperty('config') &&
+        Array.isArray(cfg.config) &&
+        Array.isArray(cfg.src) &&
+        Array.isArray(cfg.dest)
+    ) {
+        if (0 < cfg.config.length) {
+            installConfigs(cfg.config, cfg.dest[0]);
+        }
+
+        if (0 < cfg.src.length) {
+            installScripts(cfg.src[0], cfg.dest[0]);
+        }
+
+        if (1 < cfg.src.length) {
+            installScripts(cfg.src[1], cfg.dest[1]);
+        }
+    }
+}
+
+/**
  * @param {Object} cfg
  * @returns {Gulp}
  */
@@ -111,6 +149,14 @@ function buildConfigs(cfg) {
  * @param {Object} cfg
  * @returns {Gulp}
  */
+function buildPlugins(cfg) {
+    install(cfg);
+}
+
+/**
+ * @param {Object} cfg
+ * @returns {Gulp}
+ */
 function buildApps(cfg) {
     return build(cfg, uglify(), APP_CLASS_PATH);
 }
@@ -138,11 +184,11 @@ function buildConcatScripts(cfg) {
 function buildStyles(cfg) {
     return gulp.src(cfg.src, {base: APP_STYLE_PATH})
         .pipe(plumber())
-        .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(sourcemaps.write())
+            .pipe(sourcemaps.init())
+                .pipe(sass({outputStyle: 'compressed'}))
+            .pipe(sourcemaps.write())
         .pipe(plumber.stop())
-        .pipe(gulp.dest(cfg.dest));
+    .pipe(gulp.dest(cfg.dest));
 }
 
 
@@ -153,6 +199,7 @@ gulp.task('dev:scripts', function() {
             buildVendors(config.vendors);
             buildTestUnit(config.testunit);
             buildConfigs(config.configs);
+            buildPlugins(config.plugins);
             buildScripts(config.scripts);
         });
     });
@@ -187,6 +234,8 @@ gulp.task('dev:docs', function (callback) {
 gulp.task('dev:watch:scripts', function() {
     return watch(config.scripts.src, function () {
         del(['web/doc/**']).then(function () {
+            buildConfigs(config.configs);
+            buildPlugins(config.plugins);
             buildScripts(config.scripts);
         });
     });
@@ -239,12 +288,14 @@ gulp.task('prod:scripts', function() {
         del(['web/js/config/*.json']).then(function () {
             buildVendors(config.vendors);
             buildConfigs(config.configs);
+            buildPlugins(config.plugins);
             buildConcatScripts(config.minify);
             buildApps(config.apps);
             buildStyles(config.styles);
         });
     });
 });
+
 
 /* init commands "dev", "dev:watch", "prod:minify" */
 gulp.task('dev', [
