@@ -1,4 +1,4 @@
-# Contributing to EquivalenJS
+# Contributing to EquivalentJS
 
 *This documentation about how to contribute to EquivalentJS is under development and will be released soon.*
 

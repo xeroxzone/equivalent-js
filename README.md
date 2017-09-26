@@ -31,6 +31,7 @@ This framework use [jQuery][jquery] to realize tasks in traversing, manipulation
 Content
 
 * [Module Manager][MM](docs/MODULE_MANAGER.md)
+* [Module Plugin][MP](docs/MODULE_PLUGIN.md)
 * [Test Runner][MTR](docs/TEST_RUNNER.md)
 * [Doc Runner][MDR](docs/DOC_RUNNER.md)
 
@@ -62,14 +63,21 @@ or
     npm run prod:minify
     
     http://127.0.0.1:8083/prod.html
-    
+
+## How to contribute
+
+[Contributing](CONTRIBUTING.md)
+
 ## Appendix
 
 [Code of Conduct](CODE_OF_CONDUCT.md)
 
+
 ...live long and prosper
 
+
 [MM]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/MODULE_MANAGER.md
+[MP]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/MODULE_PLUGIN.md
 [MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
 [MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
 [npmjs]: https://www.npmjs.com
