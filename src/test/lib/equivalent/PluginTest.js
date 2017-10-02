@@ -40,16 +40,44 @@ DIC.define('EquivalentJS.test.PluginTest', new function () {
      * @param {EquivalentJS.Plugin} moduleClass
      */
     this.testHasPluginsLoaded = function (assert, moduleClass) {
-        var assertAsync = assert.async();
+        var configuration = EquivalentJS.System.getConfiguration(),
+            plugins = configuration.plugins,
+            hasActivePlugins = false,
+            assertAsync = assert.async()
+        ;
+
+        $.each(plugins, function (plugin, active) {
+            if (true === Boolean(active)) {
+                hasActivePlugins = true;
+            }
+        });
 
         manager.add(moduleClass.type).done(function (module) {
-            $(module).on('ready:plugin', function () {
-                assert.ok(0 < module.plugins.length, 'has loaded plugins');
+            if (true === hasActivePlugins) {
+                var hasReadyPlugins = false;
+
+                $(module).on('ready:plugin', function () {
+                    assert.ok(0 < module.plugins.length, 'has loaded plugins');
+
+                    assertAsync();
+
+                    hasReadyPlugins = true;
+                });
+
+                setTimeout(function () {
+                    if (false === hasReadyPlugins) {
+                        assert.notOk(true, 'could not load any plugins');
+
+                        assertAsync();
+                    }
+                }, 1024);
+            } else {
+                assert.ok(true, 'no active plugins in configuration found');
 
                 assertAsync();
-            });
+            }
         }).fail(function () {
-            assert.notOk(false, 'could not load module');
+            assert.notOk(true, 'could not load module');
 
             assertAsync();
         });

@@ -28,13 +28,6 @@ EquivalentJS.define('EquivalentJS.Renderer', new function () {
     var displayViewport = 'body';
 
     /**
-     * @description autoload stylesheet for display
-     * @memberOf EquivalentJS.Renderer
-     * @type {boolean}
-     */
-    _.layout = true;
-
-    /**
      * @description the display is the initial target for the viewport
      * @memberOf EquivalentJS.Renderer
      * @type {EquivalentJS.Renderer.Display}

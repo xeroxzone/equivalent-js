@@ -58,7 +58,7 @@ DIC.define('EquivalentJS.test.Manager.AppTest', new function () {
 
             $(module).trigger('app:initialize');
         }).fail(function () {
-            assert.notOk(false, 'could not load module');
+            assert.notOk(true, 'could not load module');
 
             assertAsync();
         });

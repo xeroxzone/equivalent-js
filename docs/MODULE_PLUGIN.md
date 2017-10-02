@@ -9,7 +9,7 @@ A module plugin get installed as package e.g. with [npmjs][npmjs].
 The package name pattern is like regular expression 
 
 ```regexp
-^equivalent-js-[a-z0-9-]{2,}$
+^equivalent-js-plugin-[a-z0-9-]{2,}$
 ```
  
 in lowercase.
@@ -18,10 +18,11 @@ in lowercase.
 
 ### The plugin directory scaffold
 
-A *plugin.json* file and a *src* folder are the minimum required structure.
+A *plugin.json* file and the following *src* folder structure are the minimum required structure.
 
     /plugin.json
-    /src/
+    /src/lib/
+    /src/test/lib/
 
 All other structures and module classes for the plugin are free to organize.
 
@@ -31,7 +32,7 @@ e.g.
 
 ```json
 {
-  "name": "equivalent-js-myplugin",
+  "name": "equivalent-js-plugin-my-plugin",
   "type": "EquivalentJS.Plugin.MyPlugin",
   "classPath": "src/lib",
   "testPath": "src/test/lib"

@@ -128,7 +128,7 @@ DIC.define('DemoApp.test.FactoryTest', new function () {
                 }, 1000);
             });
         }).fail(function () {
-            assert.notOk(false, 'could not load module');
+            assert.notOk(true, 'could not load module');
 
             assertAsync();
         });

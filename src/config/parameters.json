@@ -9,6 +9,6 @@
   "testFrameworkTheme": "css/debug.css",
   "systemTests": true,
   "plugins": {
-    "equivalent-js-mdc": true
+    "equivalent-js-plugin-scaffold-example": false
   }
 }

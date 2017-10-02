@@ -2,7 +2,7 @@
   "name": "equivalent-js",
   "version": "0.2.4",
   "description": "Class autoload and dependency manager",
-  "main": "./src/lib/init/Run.js",
+  "main": "./src/lib/equivalent.js",
   "scripts": {
     "dev:run": "./node_modules/.bin/gulp dev",
     "dev:watch": "./node_modules/.bin/gulp dev:watch",
