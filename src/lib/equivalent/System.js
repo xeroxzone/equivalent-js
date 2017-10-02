@@ -11,7 +11,7 @@ var EquivalentJS = {};
 /** @module EquivalentJS */
 
 /**
- * @description define a new module by type and module class
+ * @description Define a new module by type and module class
  * @memberOf EquivalentJS
  * @param {string} type as module class name
  * @param {EquivalentJS.Manager.Module.class} moduleClass as class object
@@ -180,12 +180,13 @@ EquivalentJS.System = new function () {
          */
         var configPath = '/js/config/parameters.json';
 
-        if (typeof window.EquivalentJSConfigurationPath !== 'undefined') {
+        if (typeof window.EquivalentJSConfiguration !== 'undefined') {
             /**
              * @description give a global path to configuration json file
-             * @typedef {(string|Object)=} EquivalentJSConfigurationPath
+             *  or direct as json
+             * @typedef {(string|Object)=} EquivalentJSConfiguration
              */
-            configPath = window.EquivalentJSConfigurationPath;
+            configPath = window.EquivalentJSConfiguration;
         }
 
         /**
@@ -196,10 +197,14 @@ EquivalentJS.System = new function () {
              * @type {{
              *  shortcut: string,
              *  environment: string,
+             *  appPath: string,
              *  modulePath: string,
+             *  moduleLayout: string,
              *  docFramework: string,
              *  testFrameworkUnit: string,
-             *  testFrameworkTheme: string
+             *  testFrameworkTheme: string,
+             *  systemTests: boolean,
+             *  plugins: Object
              * }}
              */
             configuration = config;
@@ -239,6 +244,8 @@ EquivalentJS.System = new function () {
         } else if (typeof configPath !== 'string') {
             throw new Error('Invalid configuration file path!');
         } else {
+            configPath += '?' + String((new Date()).getTime());
+
             $.get(configPath)
                 .done(function (data) {
                     if (typeof data !== 'object') {
@@ -280,7 +287,7 @@ EquivalentJS.System = new function () {
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
         if (typeof EquivalentJS.Manager !== 'undefined' ||
-            typeof window.EquivalentJSConfigurationPath === 'object'
+            typeof window.EquivalentJSConfiguration === 'object'
         ) {
             setTimeout(function () {
                 try {
@@ -575,7 +582,7 @@ EquivalentJS.System = new function () {
     /**
      * @description returns the system configuration
      * @memberOf EquivalentJS.System
-     * @return {Object}
+     * @returns {Object}
      */
     _.getConfiguration = function () {
         return configuration;

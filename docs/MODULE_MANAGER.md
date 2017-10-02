@@ -63,11 +63,54 @@ can be changed by the gulp.json configuration file:
 
 [./gulp.json](../gulp.json)
 
-To change from which web location the module manager read the files modify the parameters.json configuration file:
+To change from which web location the module manager read the files, modify the parameters.json configuration file:
 
 [./src/config/parameters.json](../src/config/parameters.json)
 
+A further way is to define a global variable before load the EquivalentJS framework:
+
+as a custom web uri to the folder containing the parameters.json file
+
+```html
+<script type="text/javascript">
+    var EquivalentJSConfiguration = '/js/config';
+</script>
+```
+
+or as json like in [parameters.json](../src/config/parameters.json)
+
+```html
+<script type="text/javascript">
+    var EquivalentJSConfiguration = {
+        "shortcut": "DIC",
+        "environment": "dev",
+        "appPath": "js/app",
+        "modulePath": "js/lib/equivalent",
+        "moduleLayout": "css",
+        "docFramework": "doc",
+        "testFrameworkUnit": "js/lib/qunit.js",
+        "testFrameworkTheme": "css/debug.css",
+        "systemTests": false
+    };
+</script>
+```
+
 run watcher like described in [README.md][readme](../README.md)
+
+### Configure environment parameter
+
+The default environment is "dev". This mode enables access to test and doc runner.
+
+If the environment is set something else instead of "dev" the test and doc runner get not initialized.
+
+Also the manager is trying to use concatenated preloaded in
+DOM available framework module classes if the environment parameter is not "dev".
+
+The concatenated framework module classes created by
+
+    npm run prod:minify
+
+like described in [README.md][readme](../README.md)
 
 ## The Module Autoload Declaration
 
@@ -318,7 +361,7 @@ var doSomething = function(parameters) {
  */
 DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
     /**
-     * @alias {MyApp.abstract.Controller}
+     * @alias {MyNamespace.MyApp.abstract.Controller}
      */
     var _ = this;
     
@@ -365,7 +408,7 @@ DIC.define('MyNamespace.MyApp.abstract.Controller', new function () {
  */
 DIC.define('MyNamespace.MyApp.controller.Doing', new function () {
     /**
-     * @alias {MyApp.controller.Doing}
+     * @alias {MyNamespace.MyApp.controller.Doing}
      */
     var _ = this;
     

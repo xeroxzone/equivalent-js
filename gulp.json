@@ -10,8 +10,9 @@
   "docs" : {
     "src" : [
       "src/lib/equivalent/**/*.js",
-      "doc/**/*.md",
-      "doc/*.md",
+      "node_modules/equivalent-js-*/**/*.js",
+      "docs/**/*.md",
+      "docs/*.md",
       "*.md"
     ],
     "dest" : "web/doc"
@@ -33,6 +34,19 @@
       "src/config/*.json"
     ],
     "dest" : "web/js/config"
+  },
+  "plugins" : {
+    "config": [
+      "node_modules/equivalent-js-plugin-*/plugin.json"
+    ],
+    "src" : [
+      "node_modules/equivalent-js-plugin-*/src/lib/**",
+      "node_modules/equivalent-js-plugin-*/src/test/lib/**"
+    ],
+    "dest" : [
+      "web/js/lib/equivalent/Plugin",
+      "web/js/test/lib/equivalent/Plugin"
+    ]
   },
   "apps" : {
     "src" : [
