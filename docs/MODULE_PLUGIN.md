@@ -2,6 +2,8 @@
 
 A module plugin is a loose coupled module class and their dependencies which loaded into core framework stack.
 
+The test and doc runner includes all plugin module classes if they are loaded into DIC.
+
 ## How to install a plugin for EquivalentJS
 
 A module plugin get installed as package e.g. with [npmjs][npmjs].
