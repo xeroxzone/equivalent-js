@@ -34,7 +34,8 @@ DIC.define('DemoApp.tool.Tests', new function () {
     var renderTests = function () {
         var $testRunner = $('[data-application="DemoApp.tool.Tests"]'),
             testParameters = $testRunner.data('parameters'),
-            testFilter = testParameters.filter || ''
+            testFilter = typeof testParameters === 'object' && testParameters.hasOwnProperty('filter') ?
+                testParameters.filter : ''
         ;
 
         $testRunner.removeClass('hidden');
