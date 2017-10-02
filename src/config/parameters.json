@@ -8,7 +8,5 @@
   "testFrameworkUnit": "js/lib/qunit.js",
   "testFrameworkTheme": "css/debug.css",
   "systemTests": true,
-  "plugins": {
-    "equivalent-js-plugin-scaffold-example": false
-  }
+  "plugins": {}
 }
