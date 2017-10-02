@@ -10,7 +10,8 @@
   "docs" : {
     "src" : [
       "src/lib/equivalent/**/*.js",
-      "node_modules/equivalent-js-*/**/*.js",
+      "node_modules/equivalent-js-*/src/lib/**/*.js",
+      "node_modules/equivalent-js-*/src/lib/*.js",
       "docs/**/*.md",
       "docs/*.md",
       "*.md"
@@ -74,6 +75,7 @@
     "name": "equivalent.min.js",
     "src": [
       "src/lib/equivalent/System.js",
+      "src/lib/equivalent/Plugin.js",
       "src/lib/equivalent/Manager.js",
       "src/lib/equivalent/Manager/Extend.js",
       "src/lib/equivalent/Manager/Controller.js",

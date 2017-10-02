@@ -9,7 +9,7 @@
  * @typedef {Object} EquivalentJS.Plugin
  * @constructs
  */
-DIC.define('EquivalentJS.Plugin', new function () {
+EquivalentJS.define('EquivalentJS.Plugin', new function () {
     /**
      * @description bind public properties or methods
      * @memberOf EquivalentJS.Plugin
