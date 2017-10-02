@@ -32,12 +32,15 @@ DIC.define('DemoApp.tool.Tests', new function () {
      * @private
      */
     var renderTests = function () {
-        var $testRunner = $('[data-application="DemoApp.tool.Tests"]');
+        var $testRunner = $('[data-application="DemoApp.tool.Tests"]'),
+            testParameters = $testRunner.data('parameters'),
+            testFilter = testParameters.filter || ''
+        ;
 
         $testRunner.removeClass('hidden');
 
         $testRunner.on('click', function () {
-            location.search = 'tests';
+            location.search = 'tests' + ('' !== testFilter ? '&filter=' + testFilter : '');
         });
     };
 });
