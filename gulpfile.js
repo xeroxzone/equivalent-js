@@ -19,6 +19,11 @@ var APP_CLASS_PATH = './src';
 var APP_STYLE_PATH = '';
 var LIB_CLASS_PATH = './src';
 
+var SASS_INCLUDE_PATHS = [
+    'node_modules'
+];
+
+
 /**
  * @param {Object} cfg
  * @param {(null|Object|function)=} builder
@@ -185,7 +190,7 @@ function buildStyles(cfg) {
     return gulp.src(cfg.src, {base: APP_STYLE_PATH})
         .pipe(plumber())
             .pipe(sourcemaps.init())
-                .pipe(sass({outputStyle: 'compressed'}))
+                .pipe(sass({includePaths: SASS_INCLUDE_PATHS, outputStyle: 'compressed'}))
             .pipe(sourcemaps.write())
         .pipe(plumber.stop())
     .pipe(gulp.dest(cfg.dest));
