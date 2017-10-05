@@ -71,7 +71,7 @@ function buildConcat(cfg, builder, base) {
 }
 
 /**
- * @param {{config: Array, src: Array, dest: Array}} cfg
+ * @param {{config: Array, layout: Array, src: Array, dest: Array}} cfg
  */
 function install(cfg) {
     var installScripts = function (src, dest) {
@@ -89,6 +89,16 @@ function install(cfg) {
             .pipe(gulp.dest(dest));
     };
 
+    var installStyles = function (src, dest) {
+        return gulp.src(src)
+            .pipe(plumber())
+                .pipe(sourcemaps.init())
+                    .pipe(sass({includePaths: SASS_INCLUDE_PATHS, outputStyle: 'compressed'}))
+                .pipe(sourcemaps.write())
+            .pipe(plumber.stop())
+        .pipe(gulp.dest(dest));
+    };
+
     if (cfg.hasOwnProperty('config') &&
         Array.isArray(cfg.config) &&
         Array.isArray(cfg.src) &&
@@ -104,6 +114,10 @@ function install(cfg) {
 
         if (1 < cfg.src.length) {
             installScripts(cfg.src[1], cfg.dest[1]);
+        }
+
+        if (0 < cfg.layout.length) {
+            installStyles(cfg.layout[0], cfg.dest[2]);
         }
     }
 }

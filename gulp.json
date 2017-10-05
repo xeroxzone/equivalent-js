@@ -40,13 +40,17 @@
     "config": [
       "node_modules/equivalent-js-plugin-*/plugin.json"
     ],
+    "layout": [
+      "node_modules/equivalent-js-plugin-*/src/lib/**.scss"
+    ],
     "src" : [
-      "node_modules/equivalent-js-plugin-*/src/lib/**",
-      "node_modules/equivalent-js-plugin-*/src/test/lib/**"
+      "node_modules/equivalent-js-plugin-*/src/lib/**.js",
+      "node_modules/equivalent-js-plugin-*/src/test/lib/**.js"
     ],
     "dest" : [
       "web/js/lib/equivalent/Plugin",
-      "web/js/test/lib/equivalent/Plugin"
+      "web/js/test/lib/equivalent/Plugin",
+      "web/css/Plugin"
     ]
   },
   "apps" : {

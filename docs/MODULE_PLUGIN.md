@@ -16,6 +16,8 @@ The package name pattern is like regular expression
  
 in lowercase.
 
+After that append the plugin name and enabled state to [*parameters.json*](../src/config/parameters.json).
+
 ## How to build a plugin for EquivalentJS
 
 ### The plugin directory scaffold

@@ -301,7 +301,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 importedClass.__markup__ = module.parameters.app;
             }
 
-            if (null !== (layoutUri = getLayout(importedClass, true))) {
+            if (null !== (layoutUri = getLayout(importedClass, true, module.parameters))) {
                 var $link = $('<link/>').attr({
                     'rel': 'stylesheet',
                     'href': layoutUri
@@ -553,9 +553,10 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {boolean} module.layout if module has layout
      * @param {string} module.type as module class name
      * @param {boolean} cacheBust bust the cache to get module stylesheet fresh
+     * @param {Object=} parameters of the constructed module class
      * @returns {?string}
      */
-    var getLayout = function (module, cacheBust) {
+    var getLayout = function (module, cacheBust, parameters) {
         cacheBust = cacheBust || false;
 
         var layoutUri = null;
@@ -573,6 +574,19 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
              */
             var namespace = EquivalentJS.System.getNamespace(module.type);
 
+            var classPath = namespace;
+            if (module.type.indexOf('Plugin\.') > -1 &&
+                typeof parameters !== 'undefined' &&
+                typeof parameters.hasOwnProperty('plugin')
+            ) {
+                var plugin = parameters.plugin,
+                    pluginPath = plugin.name + '/' + plugin.path
+                ;
+
+                classPath = classPath
+                    .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+            }
+
             /**
              * @type {string}
              */
@@ -581,8 +595,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                         .replace(/\W+/g, '-')
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2')
                         .toLowerCase();
-                })(namespace.substr(namespace.lastIndexOf('/') + 1)),
-                reNamespace = (namespace.substr(0, namespace.lastIndexOf('/') + 1)) +
+                })(classPath.substr(classPath.lastIndexOf('/') + 1)),
+                reNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
                 layoutClassName;
 
             if (false === /^EquivalentJS\./.test(module.type)) {
