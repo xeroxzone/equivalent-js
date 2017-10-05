@@ -91,12 +91,12 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
     };
 
     /**
-     * @description create a plugin module
+     * @description create a plugin
      * @memberOf EquivalentJS.Plugin
      * @private
      * @param {boolean} enable indicates a loaded plugin is active
      * @param {EquivalentJS.Manager.Module.class} plugin as a module class
-     * @returns {{enabled: boolean, class: EquivalentJS.Manager.Module.class}} a plugin module class
+     * @returns {{enabled: boolean, class: EquivalentJS.Manager.Module.class}} a plugin
      */
     var createPlugin = function (enable, plugin) {
         return {
