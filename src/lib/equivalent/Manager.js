@@ -309,9 +309,9 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     /**
                      * @description fires to event if layout stylesheet DOM loaded
                      * @memberOf EquivalentJS.Manager.Module.class
-                     * @fires EquivalentJS.Manager.Module.class#layout:done
+                     * @fires EquivalentJS.Manager.Module.class#ready:layout
                      */
-                    $(importedClass).trigger('layout:done');
+                    $(importedClass).trigger('ready:layout');
                 });
 
                 importedClass.__layout__ = $link.get(0);

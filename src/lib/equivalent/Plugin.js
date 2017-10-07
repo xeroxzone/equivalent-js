@@ -11,6 +11,11 @@
  */
 EquivalentJS.define('EquivalentJS.Plugin', new function () {
     /**
+     * @description indicates a plugin is loaded ready into DIC
+     * @event EquivalentJS.Plugin#ready:plugin
+     */
+
+    /**
      * @description bind public properties or methods
      * @memberOf EquivalentJS.Plugin
      * @private
@@ -77,6 +82,10 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
 
                             _.plugins.push(plugin);
 
+                            /**
+                             * @description fires to event if plugin is loaded ready into DIC
+                             * @fires EquivalentJS.Plugin#ready:plugin
+                             */
                             $(_).trigger('ready:plugin');
                         });
                     }
