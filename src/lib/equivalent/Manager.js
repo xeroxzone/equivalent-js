@@ -73,6 +73,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {boolean=} testRun if true then manager can be
      *  manually handled by tests
      * @requires module:EquivalentJS
+     * @requires module:EquivalentJS/Plugin
      * @requires module:EquivalentJS/Manager/Extend
      * @requires module:EquivalentJS/Manager/Controller
      * @requires module:EquivalentJS/Manager/App
