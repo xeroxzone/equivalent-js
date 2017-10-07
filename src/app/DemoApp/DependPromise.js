@@ -35,6 +35,13 @@ DIC.define('DemoApp.DependPromise', new function () {
     _.layout = true;
 
     /**
+     * @description the application demo DOM
+     * @memberOf DemoApp.DependPromise
+     * @type {?jQuery}
+     */
+    _.$demo = null;
+
+    /**
      * @description initialize application demo
      * @memberOf DemoApp.DependPromise
      * @requires module:DemoApp/DependPromise/Markup
@@ -44,6 +51,8 @@ DIC.define('DemoApp.DependPromise', new function () {
             .add('DemoApp.DependPromise.Markup')
             .done(function (module) {
                 Markup = module;
+
+                _.$demo = $(_.__markup__);
 
                 renderDemo();
             })
@@ -60,15 +69,13 @@ DIC.define('DemoApp.DependPromise', new function () {
      * @private
      */
     var renderDemo = function () {
-        var $demo = $(_.__markup__);
-
-        Markup.wrapMarkup($demo);
+        Markup.wrapMarkup(_.$demo);
 
         var color = 1,
             interval = 0,
             render = function () {
                 if (null !== _.$demo) {
-                    $demo.find('h1').prop('class', 'color-promise-' + color);
+                    _.$demo.find('h1').prop('class', 'color-promise-' + color);
 
                     if (interval > 0) {return;}
                     interval = setTimeout(function () {
