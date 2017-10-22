@@ -577,7 +577,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
             var classPath = namespace;
             if (module.type.indexOf('Plugin\.') > -1 &&
-                typeof parameters !== 'undefined' &&
+                typeof parameters === 'object' &&
                 typeof parameters.hasOwnProperty('plugin')
             ) {
                 var plugin = parameters.plugin,
@@ -781,8 +781,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var module = null;
 
         $(_.modules).each(function () {
-            var moduleClass = this;
-            if (type === moduleClass.type) {
+            var moduleObject = this;
+            if (type === moduleObject.type) {
                 module = this;
             }
         });
@@ -798,20 +798,20 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @returns {?EquivalentJS.Manager.Module}
      */
     var getModuleByExtend = function (type) {
-        var inheritModule = null;
+        var module = null;
 
         $(_.modules).each(function () {
-            var module = this,
-                moduleClass = module.class;
+            var moduleObject = this,
+                moduleClass = moduleObject.class;
 
             if (moduleClass.hasOwnProperty('extend') &&
                 type === moduleClass.extend
             ) {
-                inheritModule = module;
+                module = moduleObject;
             }
         });
 
-        return inheritModule;
+        return module;
     };
 
     /**

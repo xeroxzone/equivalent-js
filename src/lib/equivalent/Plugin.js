@@ -57,6 +57,7 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
      * @memberOf EquivalentJS.Plugin
      * @private
      * @param {Object} plugins the configuration of plugins
+     * @tutorial MODULE_PLUGIN
      */
     var register = function (plugins) {
         $.each(plugins, function (name, enabled) {

@@ -45,9 +45,7 @@ EquivalentJS.define('EquivalentJS.Manager.Extend', new function () {
                 }
             });
 
-            if (typeof moduleClass.construct !== 'undefined' &&
-                typeof moduleClass.construct === 'function'
-            ) {
+            if (typeof moduleClass.construct === 'function') {
                 inheritClass.construct.parentClass = moduleClass.construct;
 
                 delete moduleClass.construct;

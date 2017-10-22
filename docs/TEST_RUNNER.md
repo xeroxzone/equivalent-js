@@ -239,6 +239,7 @@ DIC.define('MyNamespace.test.BetterTestableModuleClassTest', new function () {
      * @description mocked markup for test
      * @memberOf MyNamespace.test.BetterTestableModuleClassTest
      * @private
+     * @type {?jQuery}
      */
     var $mockMarkup;
     

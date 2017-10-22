@@ -31,7 +31,6 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
     /**
      * @description the manager assigns this property automatically
      * @memberOf EquivalentJS.Manager.Module.class
-     * @type {string}
      * @typedef {string} EquivalentJS.Manager.Module.class.type
      * @tutorial MODULE_MANAGER
      */
@@ -41,7 +40,6 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      * @description extend from another module class;
      *  this property is optional
      * @memberOf EquivalentJS.Manager.Module.class
-     * @type {string}
      * @typedef {string} EquivalentJS.Manager.Module.class.extend
      */
     _.extend = 'EquivalentJS.Manager.Module.class';
@@ -55,7 +53,6 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      * the module will be removed from DIC;
      * this property is optional
      * @memberOf EquivalentJS.Manager.Module.class
-     * @type {boolean}
      * @typedef {boolean} EquivalentJS.Manager.Module.class.layout
      * @see EquivalentJS.Manager.Module.class.__layout__ the css reference
      */
@@ -66,7 +63,7 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      *  the method get destroyed by manager after module is loaded;
      *  this method is optional
      * @memberOf EquivalentJS.Manager.Module.class
-     * @typedef {Object} EquivalentJS.Manager.Module.class.construct
+     * @typedef {function} EquivalentJS.Manager.Module.class.construct
      */
     _.construct = function () {};
 
