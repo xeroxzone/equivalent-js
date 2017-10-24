@@ -82,15 +82,15 @@ or as json like in [parameters.json](../src/config/parameters.json)
 ```html
 <script type="text/javascript">
     var EquivalentJSConfiguration = {
-        "shortcut": "DIC",
-        "environment": "dev",
-        "appPath": "js/app",
-        "modulePath": "js/lib/equivalent",
-        "moduleLayout": "css",
-        "docFramework": "doc",
-        "testFrameworkUnit": "js/lib/qunit.js",
-        "testFrameworkTheme": "css/debug.css",
-        "systemTests": false
+        "shortcut": "DIC", // name string of the shortcut interface
+        "environment": "dev", // name string of system environment; default is "dev"
+        "appPath": "js/app", // web path to app module classes
+        "modulePath": "js/lib/equivalent", // web path to framework library
+        "moduleLayout": "css", // web path to the folder containing stylesheets
+        "docFramework": "doc", // web path to the folder containing the generated documentation
+        "testFrameworkUnit": "js/lib/qunit.js", // web path to test framework library
+        "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
+        "systemTests": false // execute framework library test cases in test runner
     };
 </script>
 ```
@@ -123,7 +123,9 @@ markup or a direct object call from another javascripts to access the module by 
 
 ```html
 <head>
+    <!-- markup... -->
     <script src="js/lib/equivalent.js"></script>
+    <!-- markup... -->
 </head>
 ```
 
@@ -131,7 +133,7 @@ or
 
 ```html
 <body>
-    <!-- some markup... -->
+    <!-- markup... -->
     <script src="js/lib/equivalent.js"></script>
 </body>
 ```

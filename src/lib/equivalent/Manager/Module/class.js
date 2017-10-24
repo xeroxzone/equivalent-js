@@ -1,6 +1,6 @@
 "use strict";
 
-/** @module EquivalentJS/Manager */
+/** @module EquivalentJS/Manager/Module */
 
 /**
  * @interface

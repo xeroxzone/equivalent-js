@@ -71,7 +71,7 @@ function buildConcat(cfg, builder, base) {
 }
 
 /**
- * @param {{config: Array, layout: Array, src: Array, dest: Array}} cfg
+ * @param {{config: Array, classes: Object, tests: Object, layout: Object}} cfg
  */
 function install(cfg) {
     var installScripts = function (src, dest) {
@@ -100,24 +100,23 @@ function install(cfg) {
     };
 
     if (cfg.hasOwnProperty('config') &&
-        Array.isArray(cfg.config) &&
-        Array.isArray(cfg.src) &&
-        Array.isArray(cfg.dest)
+        typeof cfg.config === 'string' &&
+        typeof cfg.classes.dest === 'string'
     ) {
         if (0 < cfg.config.length) {
-            installConfigs(cfg.config, cfg.dest[0]);
-        }
+            installConfigs(cfg.config, cfg.classes.dest);
 
-        if (0 < cfg.src.length) {
-            installScripts(cfg.src[0], cfg.dest[0]);
-        }
+            if (0 < cfg.classes.src.length) {
+                installScripts(cfg.classes.src, cfg.classes.dest);
+            }
 
-        if (1 < cfg.src.length) {
-            installScripts(cfg.src[1], cfg.dest[1]);
-        }
+            if (0 < cfg.tests.src.length) {
+                installScripts(cfg.tests.src, cfg.tests.dest);
+            }
 
-        if (0 < cfg.layout.length) {
-            installStyles(cfg.layout[0], cfg.dest[2]);
+            if (0 < cfg.layout.src.length) {
+                installStyles(cfg.layout.src, cfg.layout.dest);
+            }
         }
     }
 }
