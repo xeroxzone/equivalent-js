@@ -71,7 +71,7 @@ function buildConcat(cfg, builder, base) {
 }
 
 /**
- * @param {{config: Array, classes: Object, tests: Object, layout: Object}} cfg
+ * @param {{config: string, classes: Object, tests: Object, layout: Object}} cfg
  */
 function install(cfg) {
     var installScripts = function (src, dest) {
