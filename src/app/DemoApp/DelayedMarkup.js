@@ -19,6 +19,13 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
     var _ = this;
 
     /**
+     * @description markup template
+     * @memberOf DemoApp.DelayedMarkup
+     * @type {boolean}
+     */
+    _.template = true;
+
+    /**
      * @description markup element
      * @memberOf DemoApp.DelayedMarkup
      * @type {?jQuery}

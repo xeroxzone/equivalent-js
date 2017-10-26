@@ -34,4 +34,5 @@ fabric.properties
 /src/lib/ui/**/*.css.map
 /web/css/
 /web/js/
+/web/html/
 /web/doc/

@@ -45,6 +45,19 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
     _.extend = 'EquivalentJS.Manager.Module.class';
 
     /**
+     * @description bind a template on module;
+     * if true then add markup fragment file to the corresponding module class folder;
+     * the file name pattern is lowercase dash seperated module class name parts
+     * like MyNamespace/MyApp.js => MyNamespace/my-app.html;
+     * the template DOM element get removed if
+     * the module will be removed from DIC;
+     * this property is optional
+     * @memberOf EquivalentJS.Manager.Module.class
+     * @typedef {boolean} EquivalentJS.Manager.Module.class.template
+     */
+    _.template = false;
+
+    /**
      * @description bind a stylesheet on module;
      * if true then add sass css file to the corresponding module class folder;
      * the file name pattern is lowercase dash seperated module class name parts
@@ -76,6 +89,14 @@ EquivalentJS.define('EquivalentJS.Manager.Module.class', new function () {
      * @typedef {EquivalentJS.Manager} EquivalentJS.Manager.Module.class.__manager__
      */
     _.__manager__ = {};
+
+    /**
+     * @description get the template reference if module template is true;
+     *  the manager assigns this property automatically;
+     * @memberOf EquivalentJS.Manager.Module.class
+     * @typedef {jQuery} EquivalentJS.Manager.Module.class.__template__
+     */
+    _.__template__ = {};
 
     /**
      * @description get the css reference if module layout is true;

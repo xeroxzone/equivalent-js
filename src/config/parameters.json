@@ -4,6 +4,7 @@
   "appPath": "js/app",
   "modulePath": "js/lib/equivalent",
   "moduleLayout": "css",
+  "moduleTemplate": "html",
   "docFramework": "doc",
   "testFrameworkUnit": "js/lib/qunit.js",
   "testFrameworkTheme": "css/debug.css",

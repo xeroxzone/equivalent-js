@@ -73,6 +73,12 @@
     ],
     "dest" : "web/css"
   },
+  "templates": {
+    "src": [
+      "src/app/**/*.html"
+    ],
+    "dest": "web/html"
+  },
   "minify": {
     "name": "equivalent.min.js",
     "src": [

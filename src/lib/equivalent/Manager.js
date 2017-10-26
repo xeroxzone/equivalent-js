@@ -245,7 +245,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var moduleUrl = classUri + '/' +
             classPath + '.js' +
             ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ''),
-            layoutUri = null
+            layoutUri = null,
+            templateUri = null
         ;
 
         var request = createRequest(moduleUrl);
@@ -318,6 +319,14 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 importedClass.__layout__ = $link.get(0);
 
                 $('head').append($link);
+            }
+
+            if (true === isAppLoad &&
+                null !== (templateUri = getTemplate(importedClass, true, module.parameters))
+            ) {
+                $.get(templateUri).done(function (template) {
+                    importedClass.__template__ = $(template);
+                });
             }
 
             return importedClass;
@@ -547,11 +556,36 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
     };
 
     /**
+     * @description if module class use a template the try to autoload the markup file
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} module the module class
+     * @param {boolean} module.template if module has a template
+     * @param {string} module.type as module class name
+     * @param {boolean} cacheBust bust the cache to get module template fresh
+     * @param {Object=} parameters of the constructed module class
+     * @returns {?string}
+     */
+    var getTemplate = function (module, cacheBust, parameters) {
+        cacheBust = cacheBust || false;
+
+        var templateUri = null;
+
+        if (module.hasOwnProperty('template') &&
+            true === module.template
+        ) {
+            templateUri = getResource('template', module, cacheBust, parameters);
+        }
+
+        return templateUri;
+    };
+
+    /**
      * @description if module class use a layout then try to autoload the stylesheet
      * @memberOf EquivalentJS.Manager
      * @private
      * @param {EquivalentJS.Manager.Module.class} module the module class
-     * @param {boolean} module.layout if module has layout
+     * @param {boolean} module.layout if module has a layout
      * @param {string} module.type as module class name
      * @param {boolean} cacheBust bust the cache to get module stylesheet fresh
      * @param {Object=} parameters of the constructed module class
@@ -565,64 +599,100 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (module.hasOwnProperty('layout') &&
             true === module.layout
         ) {
-            /**
-             * @type {{environment: string, moduleLayout: string}}
-             */
-            var configuration = EquivalentJS.System.getConfiguration();
-
-            /**
-             * @type {string}
-             */
-            var namespace = EquivalentJS.System.getNamespace(module.type);
-
-            var classPath = namespace;
-            if (module.type.indexOf('Plugin\.') > -1 &&
-                typeof parameters === 'object' &&
-                typeof parameters.hasOwnProperty('plugin')
-            ) {
-                var plugin = parameters.plugin,
-                    pluginPath = plugin.name + '/' + plugin.path
-                ;
-
-                classPath = classPath
-                    .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
-            }
-
-            /**
-             * @type {string}
-             */
-            var layoutClassName = (function (toDashesLowerCase) {
-                    return toDashesLowerCase
-                        .replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2')
-                        .toLowerCase();
-                })(classPath.substr(classPath.lastIndexOf('/') + 1)),
-                reNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
-                layoutClassName;
-
-            if (false === /^EquivalentJS\./.test(module.type)) {
-                reNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
-                    '/' + reNamespace;
-            }
-
-            if ('dev' !== configuration.environment) {
-                cacheBust = false;
-            }
-
-            layoutUri = configuration.moduleLayout + '/' +
-                reNamespace + '.css' +
-                ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : '');
-
-            registerRequest({url: layoutUri, method: 'head'})
-                .fail(function (error) {
-                    EquivalentJS.console.error(
-                        error.status + ' ' + error.statusText +
-                        ' - Could not load layout for module "' + namespace + '"!'
-                    );
-                });
+            layoutUri = getResource('layout', module, cacheBust, parameters);
         }
 
         return layoutUri;
+    };
+
+    /**
+     * @description if module class use a resource then try to autoload the file
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {string} resourceType the resource type 'layout' or 'template'
+     * @param {EquivalentJS.Manager.Module.class} module the module class
+     * @param {string} module.type as module class name
+     * @param {boolean} cacheBust bust the cache to get module resource fresh
+     * @param {Object=} parameters of the constructed module class
+     * @returns {string}
+     */
+    var getResource = function (resourceType, module, cacheBust, parameters) {
+        cacheBust = cacheBust || false;
+
+        var resourceUri = null;
+
+        /**
+         * @type {{environment: string, moduleLayout: string, moduleTemplate: string}}
+         */
+        var configuration = EquivalentJS.System.getConfiguration();
+
+        /**
+         * @type {string}
+         */
+        var namespace = EquivalentJS.System.getNamespace(module.type);
+
+        var classPath = namespace;
+        if (module.type.indexOf('Plugin\.') > -1 &&
+            typeof parameters === 'object' &&
+            typeof parameters.hasOwnProperty('plugin')
+        ) {
+            var plugin = parameters.plugin,
+                pluginPath = plugin.name + '/' + plugin.path
+            ;
+
+            classPath = classPath
+                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+        }
+
+        /**
+         * @type {string}
+         */
+        var resourceName = (function (toDashesLowerCase) {
+                return toDashesLowerCase
+                    .replace(/\W+/g, '-')
+                    .replace(/([a-z\d])([A-Z])/g, '$1-$2')
+                    .toLowerCase();
+            })(classPath.substr(classPath.lastIndexOf('/') + 1)),
+            resourceNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
+            resourceName;
+
+        if (false === /^EquivalentJS\./.test(module.type)) {
+            resourceNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
+                '/' + resourceNamespace;
+        }
+
+        if ('dev' !== configuration.environment) {
+            cacheBust = false;
+        }
+
+        var resourcePath = '',
+            resourceFileExtension = ''
+        ;
+
+        switch (resourceType) {
+            case 'layout':
+                resourcePath = configuration.moduleLayout;
+                resourceFileExtension = 'css';
+                break;
+            case 'template':
+                resourcePath = configuration.moduleTemplate;
+                resourceFileExtension = 'html';
+                break;
+        }
+
+        resourceUri = resourcePath + '/' +
+            resourceNamespace + '.' + resourceFileExtension +
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : '');
+
+        registerRequest({url: resourceUri, method: 'head'})
+            .fail(function (error) {
+                EquivalentJS.console.error(
+                    error.status + ' ' + error.statusText +
+                    ' - Could not load ' + resourceType + ' for module "' + namespace + '"!'
+                );
+            });
+
+        return resourceUri;
     };
 
     /**
