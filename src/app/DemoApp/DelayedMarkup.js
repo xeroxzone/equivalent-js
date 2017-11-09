@@ -26,20 +26,13 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
     _.template = true;
 
     /**
-     * @description markup element
-     * @memberOf DemoApp.DelayedMarkup
-     * @type {?jQuery}
-     */
-    _.$markup = null;
-
-    /**
      * @description construct the module class
      * @memberOf DemoApp.DelayedMarkup
      */
     _.construct = function () {
-        _.$markup = $('[data-application="DemoApp.DelayedMarkup"]');
-
-        createElements();
+        $(_).on('ready:template', function () {
+            createElements();
+        });
     };
 
     /**
@@ -48,20 +41,8 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
      * @private
      */
     var createElements = function () {
-        var $elements = $('<ul/>'),
-            $first = $('<li/>').text('first'),
-            $second = $('<li/>').text('second')
-        ;
-
-        $elements.append($first, $second);
-
-        var $defer = $.Deferred()
-            .done(function () {
-                _.$markup.append($elements);
-            });
-
-        setTimeout(function () {
-            $defer.resolve();
-        }, 2048);
+        $(_.__markup__).append(_.__template__.getBlock('block-1', {
+            content_variable: 123
+        }));
     };
 });

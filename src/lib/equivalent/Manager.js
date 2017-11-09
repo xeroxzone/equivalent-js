@@ -309,7 +309,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     'href': layoutUri
                 }).on('load', function () {
                     /**
-                     * @description fires to event if layout stylesheet DOM loaded
+                     * @description fires to event if layout stylesheet DOM is loaded
                      * @memberOf EquivalentJS.Manager.Module.class
                      * @fires EquivalentJS.Manager.Module.class#ready:layout
                      */
@@ -325,7 +325,52 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 null !== (templateUri = getTemplate(importedClass, true, module.parameters))
             ) {
                 $.get(templateUri).done(function (template) {
-                    importedClass.__template__ = $(template);
+                    var $templateMarkup = $('<div/>').append($(template)),
+                        $templateDataBlocks = $templateMarkup.find('[data-template]')
+                    ;
+
+                    if (0 < $templateDataBlocks.length) {
+                        /**
+                         * @param {string} name of the template data block
+                         * @param {Object=} data to apply to placeholder variables
+                         * @returns {HTMLElement} the template data block by name
+                         */
+                        $templateDataBlocks.getBlock = function (name, data) {
+                            var $block = $('<div/>').append($(this))
+                                .find('[data-template="' + name + '"]')
+                            ;
+
+                            if (typeof data === 'object') {
+                                $.each(data, function (key, value) {
+                                    $block.html(
+                                        $block.html()
+                                            .replace(
+                                                new RegExp('\{\{\\s*' + key + '\\s*\}\}'),
+                                                value
+                                            )
+                                    );
+                                });
+                            }
+
+                            return $block;
+                        };
+
+                        $templateMarkup = $templateDataBlocks;
+                    } else {
+                        $templateMarkup = $(template);
+                    }
+
+                    importedClass.__template__ = $templateMarkup;
+
+                    /**
+                     * @description delay property apply and
+                     *  fires to event if template DOM is loaded
+                     * @memberOf EquivalentJS.Manager.Module.class
+                     * @fires EquivalentJS.Manager.Module.class#ready:template
+                     */
+                    setTimeout(function () {
+                        $(importedClass).trigger('ready:template');
+                    }, 100);
                 });
             }
 
@@ -574,7 +619,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (module.hasOwnProperty('template') &&
             true === module.template
         ) {
-            templateUri = getResource('template', module, cacheBust, parameters);
+            templateUri = getResource('template', module, parameters, cacheBust);
         }
 
         return templateUri;
@@ -599,7 +644,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (module.hasOwnProperty('layout') &&
             true === module.layout
         ) {
-            layoutUri = getResource('layout', module, cacheBust, parameters);
+            layoutUri = getResource('layout', module, parameters, cacheBust);
         }
 
         return layoutUri;
@@ -612,11 +657,11 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {string} resourceType the resource type 'layout' or 'template'
      * @param {EquivalentJS.Manager.Module.class} module the module class
      * @param {string} module.type as module class name
-     * @param {boolean} cacheBust bust the cache to get module resource fresh
      * @param {Object=} parameters of the constructed module class
+     * @param {boolean=} cacheBust bust the cache to get module resource fresh
      * @returns {string}
      */
-    var getResource = function (resourceType, module, cacheBust, parameters) {
+    var getResource = function (resourceType, module, parameters, cacheBust) {
         cacheBust = cacheBust || false;
 
         var resourceUri = null;
@@ -654,7 +699,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     .toLowerCase();
             })(classPath.substr(classPath.lastIndexOf('/') + 1)),
             resourceNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
-            resourceName;
+            resourceName
+        ;
 
         if (false === /^EquivalentJS\./.test(module.type)) {
             resourceNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
@@ -951,7 +997,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
                 var preparedType = prepared.indexOf(type);
                 if (preparedType > -1) {
-                    prepared.splice(preparedType);
+                    prepared.splice(preparedType, 1);
                 }
 
                 success = true;

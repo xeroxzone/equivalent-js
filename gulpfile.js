@@ -222,37 +222,35 @@ function buildTemplates(cfg) {
 
 /* dev */
 gulp.task('dev:scripts', function() {
-    del(['web/js/lib/*.js', 'web/js/lib/**/*.js']).then(function () {
-        del(['web/js/config/*.json']).then(function () {
-            buildVendors(config.vendors);
-            buildTestUnit(config.testunit);
-            buildConfigs(config.configs);
-            buildPlugins(config.plugins);
-            buildScripts(config.scripts);
-        });
+    del(['web/js/lib/**.js', 'web/js/config/*.json']).then(function () {
+        buildVendors(config.vendors);
+        buildTestUnit(config.testunit);
+        buildConfigs(config.configs);
+        buildPlugins(config.plugins);
+        buildScripts(config.scripts);
     });
 });
 
 gulp.task('dev:apps', function() {
-    del(['web/js/app/*.js', 'web/js/app/**/*.js']).then(function () {
+    del(['web/js/app/**.js']).then(function () {
         buildApps(config.apps);
     });
 });
 
 gulp.task('dev:tests', function() {
-    del(['web/js/test/*.js', 'web/js/test/**/*.js']).then(function () {
+    del(['web/js/test/**.js']).then(function () {
         buildTests(config.tests);
     });
 });
 
 gulp.task('dev:styles', function() {
-    del(['web/css/*.css', 'web/css/**/*.css']).then(function () {
+    del(['web/css/**.css']).then(function () {
         buildStyles(config.styles);
     });
 });
 
 gulp.task('dev:templates', function() {
-    del(['web/html/*.css', 'web/html/**/*.html']).then(function () {
+    del(['web/html/**.html']).then(function () {
         buildTemplates(config.templates);
     });
 });
@@ -267,7 +265,7 @@ gulp.task('dev:docs', function (callback) {
 /* dev watch */
 gulp.task('dev:watch:scripts', function() {
     return watch(config.scripts.src, function () {
-        del(['web/doc/**']).then(function () {
+        del(['web/js/lib/equivalent/**.js', 'web/js/config/*.json']).then(function () {
             buildConfigs(config.configs);
             buildPlugins(config.plugins);
             buildScripts(config.scripts);
@@ -277,7 +275,7 @@ gulp.task('dev:watch:scripts', function() {
 
 gulp.task('dev:watch:apps', function() {
     return watch(config.apps.src, function () {
-        del(['web/js/app/*.js', 'web/js/app/**/*.js']).then(function () {
+        del(['web/js/app/**.js']).then(function () {
             buildApps(config.apps);
         });
     });
@@ -285,7 +283,7 @@ gulp.task('dev:watch:apps', function() {
 
 gulp.task('dev:watch:tests', function() {
     return watch(config.tests.src, function () {
-        del(['web/js/test/*.js', 'web/js/test/**/*.js']).then(function () {
+        del(['web/js/test/**.js', '!web/js/test/lib/equivalent/Plugin']).then(function () {
             buildTests(config.tests);
         });
     });
@@ -293,7 +291,7 @@ gulp.task('dev:watch:tests', function() {
 
 gulp.task('dev:watch:styles', function() {
     return watch(config.styles.src, function () {
-        del(['web/css/*.css', 'web/css/**/*.css']).then(function () {
+        del(['web/css/**.css']).then(function () {
             buildStyles(config.styles);
         });
     });
@@ -301,7 +299,7 @@ gulp.task('dev:watch:styles', function() {
 
 gulp.task('dev:watch:templates', function() {
     return watch(config.templates.src, function () {
-        del(['web/html/*.css', 'web/html/**/*.css']).then(function () {
+        del(['web/html/**.html']).then(function () {
             buildTemplates(config.templates);
         });
     });
@@ -326,16 +324,18 @@ gulp.task('dev:watch:docs:apps', function() {
 
 /* prod */
 gulp.task('prod:scripts', function() {
-    del(['web/js/lib/equivalent.min.js', 'web/js/app/**/*.js']).then(function () {
-        del(['web/js/config/*.json']).then(function () {
-            buildVendors(config.vendors);
-            buildConfigs(config.configs);
-            buildPlugins(config.plugins);
-            buildConcatScripts(config.minify);
-            buildApps(config.apps);
-            buildStyles(config.styles);
-            buildTemplates(config.templates);
-        });
+    del([
+        'web/js/lib/equivalent.min.js',
+        'web/js/app/**.js',
+        'web/js/config/*.json'
+    ]).then(function () {
+        buildVendors(config.vendors);
+        buildConfigs(config.configs);
+        buildPlugins(config.plugins);
+        buildConcatScripts(config.minify);
+        buildApps(config.apps);
+        buildStyles(config.styles);
+        buildTemplates(config.templates);
     });
 });
 

@@ -33,6 +33,6 @@ fabric.properties
 /src/lib/ui/**/*.css
 /src/lib/ui/**/*.css.map
 /web/css/
-/web/js/
-/web/html/
 /web/doc/
+/web/html/
+/web/js/
