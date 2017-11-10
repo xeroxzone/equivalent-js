@@ -991,6 +991,12 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     $('head link[href^="' + layoutUri + '"]').remove();
                 }
 
+                if (null !== getTemplate(moduleClass, false)) {
+                    if (moduleClass.hasOwnProperty('__template__')) {
+                        moduleClass.__template__.detach();
+                    }
+                }
+
                 $(_.modules[i]).off();
 
                 _.modules.splice(i, 1);

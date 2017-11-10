@@ -248,7 +248,7 @@ _.construct = function () {
 };
 ```
 
-### Define autoloaded stylesheet
+### Define autoload stylesheet
 
     ./src/app/MyNamespace/my-app.scss
 
@@ -265,6 +265,31 @@ _.construct = function () {
  * @see EquivalentJs.Manager.Module.class.__layout__ the css reference
  */
 _.layout = true;
+```
+
+### Define autoload template
+
+    ./src/app/MyNamespace/my-app.html
+    
+e.g.
+
+* [template markup example][template-markup](../src/app/DemoApp/delayed-markup.html)
+
+* [template usage example][template-usage](../src/app/DemoApp/DelayedMarkup.js)
+
+```javascript
+/**
+ * @description bind a template on module;
+ *  if true then add template html file to the corresponding module class folder;
+ *  the file name pattern is lowercase dash seperated module class name parts
+ *  like MyNamespace/MyApp.js => MyNamespace/my-app.html;
+ *  the template DOM get removed if 
+ *  the module will be removed from DIC;
+ *  this property is optional
+ * @type {boolean}
+ * @see EquivalentJs.Manager.Module.class.__template__ the template reference
+ */
+_.template = true;
 ```
 
 ### Define class events
@@ -460,6 +485,8 @@ DIC.get('MyNamespace.MyApp.controller.Doing').class;
 [MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
 [MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
 [module-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/lib/equivalent/template/ModuleName.js.template
+[template-markup]: https://github.com/xeroxzone/equivalent-js/blob/master/src/app/DemoApp/delayed-markup.html
+[template-usage]: https://github.com/xeroxzone/equivalent-js/blob/master/src/app/DemoApp/DelayedMarkup.js
 [gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com
 [jsdoc]: http://usejsdoc.org

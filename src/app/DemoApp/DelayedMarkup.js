@@ -41,8 +41,12 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
      * @private
      */
     var createElements = function () {
-        $(_.__markup__).append(_.__template__.getBlock('block-1', {
-            content_variable: 123
+        if (typeof _.__markup__ === 'undefined') {
+            _.__markup__ = $('[data-application="' + _.type + '"]');
+        }
+
+        $(_.__markup__).removeClass('hidden').html(_.__template__.getBlock('block-1', {
+            content_variable: 'example'
         }));
     };
 });

@@ -40,7 +40,7 @@ DIC.define('DemoApp.test.DelayedMarkupTest', new function () {
 
                 assert.ok(
                     -1 < $(module.__markup__).find('[data-template="block-1"]')
-                        .html().indexOf('variable content 123'),
+                        .html().indexOf('variable content example'),
                     'found variable placeholder replaced by data'
                 );
 
