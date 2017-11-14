@@ -90,6 +90,7 @@ or as json like in [parameters.json](../src/config/parameters.json)
         "docFramework": "doc", // web path to the folder containing the generated documentation
         "testFrameworkUnit": "js/lib/qunit.js", // web path to test framework library
         "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
+        "deployVersion": "v1.0", // web resources like js or css append a version string on url load
         "systemTests": false // execute framework library test cases in test runner
     };
 </script>

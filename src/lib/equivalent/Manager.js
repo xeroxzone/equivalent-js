@@ -110,7 +110,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      */
     var register = function (module) {
         /**
-         * @type {{environment: string, systemTests: boolean, appPath: string}}
+         * @type {{environment: string, systemTests: boolean, appPath: string, deployVersion: string}}
          */
         var configuration = EquivalentJS.System.getConfiguration();
 
@@ -244,7 +244,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         var moduleUrl = classUri + '/' +
             classPath + '.js' +
-            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ''),
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion)),
             layoutUri = null,
             templateUri = null
         ;
@@ -728,7 +728,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         resourceUri = resourcePath + '/' +
             resourceNamespace + '.' + resourceFileExtension +
-            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : '');
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion));
 
         registerRequest({url: resourceUri, method: 'head'})
             .fail(function (error) {
