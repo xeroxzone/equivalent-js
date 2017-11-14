@@ -73,6 +73,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {boolean=} testRun if true then manager can be
      *  manually handled by tests
      * @requires module:EquivalentJS
+     * @requires module:EquivalentJS/Plugin
      * @requires module:EquivalentJS/Manager/Extend
      * @requires module:EquivalentJS/Manager/Controller
      * @requires module:EquivalentJS/Manager/App
@@ -109,7 +110,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      */
     var register = function (module) {
         /**
-         * @type {{environment: string, systemTests: boolean, appPath: string}}
+         * @type {{environment: string, systemTests: boolean, appPath: string, deployVersion: string}}
          */
         var configuration = EquivalentJS.System.getConfiguration();
 
@@ -243,8 +244,9 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         var moduleUrl = classUri + '/' +
             classPath + '.js' +
-            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ''),
-            layoutUri = null
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion)),
+            layoutUri = null,
+            templateUri = null
         ;
 
         var request = createRequest(moduleUrl);
@@ -307,16 +309,69 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     'href': layoutUri
                 }).on('load', function () {
                     /**
-                     * @description fires to event if layout stylesheet DOM loaded
+                     * @description fires to event if layout stylesheet DOM is loaded
                      * @memberOf EquivalentJS.Manager.Module.class
-                     * @fires EquivalentJS.Manager.Module.class#layout:done
+                     * @fires EquivalentJS.Manager.Module.class#ready:layout
                      */
-                    $(importedClass).trigger('layout:done');
+                    $(importedClass).trigger('ready:layout');
                 });
 
                 importedClass.__layout__ = $link.get(0);
 
                 $('head').append($link);
+            }
+
+            if (true === isAppLoad &&
+                null !== (templateUri = getTemplate(importedClass, true, module.parameters))
+            ) {
+                $.get(templateUri).done(function (template) {
+                    var $templateMarkup = $('<div/>').append($(template)),
+                        $templateDataBlocks = $templateMarkup.find('[data-template]')
+                    ;
+
+                    if (0 < $templateDataBlocks.length) {
+                        /**
+                         * @param {string} name of the template data block
+                         * @param {Object=} data to apply to placeholder variables
+                         * @returns {HTMLElement} the template data block by name
+                         */
+                        $templateDataBlocks.getBlock = function (name, data) {
+                            var $block = $('<div/>').append($(this))
+                                .find('[data-template="' + name + '"]')
+                            ;
+
+                            if (typeof data === 'object') {
+                                $.each(data, function (key, value) {
+                                    $block.html(
+                                        $block.html()
+                                            .replace(
+                                                new RegExp('\{\{\\s*' + key + '\\s*\}\}'),
+                                                value
+                                            )
+                                    );
+                                });
+                            }
+
+                            return $block;
+                        };
+
+                        $templateMarkup = $templateDataBlocks;
+                    } else {
+                        $templateMarkup = $(template);
+                    }
+
+                    importedClass.__template__ = $templateMarkup;
+
+                    /**
+                     * @description delay property apply and
+                     *  fires to event if template DOM is loaded
+                     * @memberOf EquivalentJS.Manager.Module.class
+                     * @fires EquivalentJS.Manager.Module.class#ready:template
+                     */
+                    setTimeout(function () {
+                        $(importedClass).trigger('ready:template');
+                    }, 100);
+                });
             }
 
             return importedClass;
@@ -546,11 +601,36 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
     };
 
     /**
+     * @description if module class use a template the try to autoload the markup file
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} module the module class
+     * @param {boolean} module.template if module has a template
+     * @param {string} module.type as module class name
+     * @param {boolean} cacheBust bust the cache to get module template fresh
+     * @param {Object=} parameters of the constructed module class
+     * @returns {?string}
+     */
+    var getTemplate = function (module, cacheBust, parameters) {
+        cacheBust = cacheBust || false;
+
+        var templateUri = null;
+
+        if (module.hasOwnProperty('template') &&
+            true === module.template
+        ) {
+            templateUri = getResource('template', module, parameters, cacheBust);
+        }
+
+        return templateUri;
+    };
+
+    /**
      * @description if module class use a layout then try to autoload the stylesheet
      * @memberOf EquivalentJS.Manager
      * @private
      * @param {EquivalentJS.Manager.Module.class} module the module class
-     * @param {boolean} module.layout if module has layout
+     * @param {boolean} module.layout if module has a layout
      * @param {string} module.type as module class name
      * @param {boolean} cacheBust bust the cache to get module stylesheet fresh
      * @param {Object=} parameters of the constructed module class
@@ -564,64 +644,101 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (module.hasOwnProperty('layout') &&
             true === module.layout
         ) {
-            /**
-             * @type {{environment: string, moduleLayout: string}}
-             */
-            var configuration = EquivalentJS.System.getConfiguration();
-
-            /**
-             * @type {string}
-             */
-            var namespace = EquivalentJS.System.getNamespace(module.type);
-
-            var classPath = namespace;
-            if (module.type.indexOf('Plugin\.') > -1 &&
-                typeof parameters !== 'undefined' &&
-                typeof parameters.hasOwnProperty('plugin')
-            ) {
-                var plugin = parameters.plugin,
-                    pluginPath = plugin.name + '/' + plugin.path
-                ;
-
-                classPath = classPath
-                    .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
-            }
-
-            /**
-             * @type {string}
-             */
-            var layoutClassName = (function (toDashesLowerCase) {
-                    return toDashesLowerCase
-                        .replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2')
-                        .toLowerCase();
-                })(classPath.substr(classPath.lastIndexOf('/') + 1)),
-                reNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
-                layoutClassName;
-
-            if (false === /^EquivalentJS\./.test(module.type)) {
-                reNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
-                    '/' + reNamespace;
-            }
-
-            if ('dev' !== configuration.environment) {
-                cacheBust = false;
-            }
-
-            layoutUri = configuration.moduleLayout + '/' +
-                reNamespace + '.css' +
-                ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : '');
-
-            registerRequest({url: layoutUri, method: 'head'})
-                .fail(function (error) {
-                    EquivalentJS.console.error(
-                        error.status + ' ' + error.statusText +
-                        ' - Could not load layout for module "' + namespace + '"!'
-                    );
-                });
+            layoutUri = getResource('layout', module, parameters, cacheBust);
         }
 
         return layoutUri;
+    };
+
+    /**
+     * @description if module class use a resource then try to autoload the file
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {string} resourceType the resource type 'layout' or 'template'
+     * @param {EquivalentJS.Manager.Module.class} module the module class
+     * @param {string} module.type as module class name
+     * @param {Object=} parameters of the constructed module class
+     * @param {boolean=} cacheBust bust the cache to get module resource fresh
+     * @returns {string}
+     */
+    var getResource = function (resourceType, module, parameters, cacheBust) {
+        cacheBust = cacheBust || false;
+
+        var resourceUri = null;
+
+        /**
+         * @type {{environment: string, moduleLayout: string, moduleTemplate: string}}
+         */
+        var configuration = EquivalentJS.System.getConfiguration();
+
+        /**
+         * @type {string}
+         */
+        var namespace = EquivalentJS.System.getNamespace(module.type);
+
+        var classPath = namespace;
+        if (module.type.indexOf('Plugin\.') > -1 &&
+            typeof parameters === 'object' &&
+            typeof parameters.hasOwnProperty('plugin')
+        ) {
+            var plugin = parameters.plugin,
+                pluginPath = plugin.name + '/' + plugin.path
+            ;
+
+            classPath = classPath
+                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+        }
+
+        /**
+         * @type {string}
+         */
+        var resourceName = (function (toDashesLowerCase) {
+                return toDashesLowerCase
+                    .replace(/\W+/g, '-')
+                    .replace(/([a-z\d])([A-Z])/g, '$1-$2')
+                    .toLowerCase();
+            })(classPath.substr(classPath.lastIndexOf('/') + 1)),
+            resourceNamespace = (classPath.substr(0, classPath.lastIndexOf('/') + 1)) +
+            resourceName
+        ;
+
+        if (false === /^EquivalentJS\./.test(module.type)) {
+            resourceNamespace = module.type.replace(/^(\w+)\..*/, '$1') +
+                '/' + resourceNamespace;
+        }
+
+        if ('dev' !== configuration.environment) {
+            cacheBust = false;
+        }
+
+        var resourcePath = '',
+            resourceFileExtension = ''
+        ;
+
+        switch (resourceType) {
+            case 'layout':
+                resourcePath = configuration.moduleLayout;
+                resourceFileExtension = 'css';
+                break;
+            case 'template':
+                resourcePath = configuration.moduleTemplate;
+                resourceFileExtension = 'html';
+                break;
+        }
+
+        resourceUri = resourcePath + '/' +
+            resourceNamespace + '.' + resourceFileExtension +
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion));
+
+        registerRequest({url: resourceUri, method: 'head'})
+            .fail(function (error) {
+                EquivalentJS.console.error(
+                    error.status + ' ' + error.statusText +
+                    ' - Could not load ' + resourceType + ' for module "' + namespace + '"!'
+                );
+            });
+
+        return resourceUri;
     };
 
     /**
@@ -780,8 +897,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var module = null;
 
         $(_.modules).each(function () {
-            var moduleClass = this;
-            if (type === moduleClass.type) {
+            var moduleObject = this;
+            if (type === moduleObject.type) {
                 module = this;
             }
         });
@@ -797,20 +914,20 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @returns {?EquivalentJS.Manager.Module}
      */
     var getModuleByExtend = function (type) {
-        var inheritModule = null;
+        var module = null;
 
         $(_.modules).each(function () {
-            var module = this,
-                moduleClass = module.class;
+            var moduleObject = this,
+                moduleClass = moduleObject.class;
 
             if (moduleClass.hasOwnProperty('extend') &&
                 type === moduleClass.extend
             ) {
-                inheritModule = module;
+                module = moduleObject;
             }
         });
 
-        return inheritModule;
+        return module;
     };
 
     /**
@@ -874,13 +991,19 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     $('head link[href^="' + layoutUri + '"]').remove();
                 }
 
+                if (null !== getTemplate(moduleClass, false)) {
+                    if (moduleClass.hasOwnProperty('__template__')) {
+                        moduleClass.__template__.detach();
+                    }
+                }
+
                 $(_.modules[i]).off();
 
                 _.modules.splice(i, 1);
 
                 var preparedType = prepared.indexOf(type);
                 if (preparedType > -1) {
-                    prepared.splice(preparedType);
+                    prepared.splice(preparedType, 1);
                 }
 
                 success = true;

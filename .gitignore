@@ -32,6 +32,9 @@ fabric.properties
 /npm-debug.log
 /src/lib/ui/**/*.css
 /src/lib/ui/**/*.css.map
+/src/lib/equivalent/Plugin/
+/src/test/lib/equivalent/Plugin/
 /web/css/
-/web/js/
 /web/doc/
+/web/html/
+/web/js/

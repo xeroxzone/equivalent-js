@@ -82,15 +82,16 @@ or as json like in [parameters.json](../src/config/parameters.json)
 ```html
 <script type="text/javascript">
     var EquivalentJSConfiguration = {
-        "shortcut": "DIC",
-        "environment": "dev",
-        "appPath": "js/app",
-        "modulePath": "js/lib/equivalent",
-        "moduleLayout": "css",
-        "docFramework": "doc",
-        "testFrameworkUnit": "js/lib/qunit.js",
-        "testFrameworkTheme": "css/debug.css",
-        "systemTests": false
+        "shortcut": "DIC", // name string of the shortcut interface
+        "environment": "dev", // name string of system environment; default is "dev"
+        "appPath": "js/app", // web path to app module classes
+        "modulePath": "js/lib/equivalent", // web path to framework library
+        "moduleLayout": "css", // web path to the folder containing stylesheets
+        "docFramework": "doc", // web path to the folder containing the generated documentation
+        "testFrameworkUnit": "js/lib/qunit.js", // web path to test framework library
+        "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
+        "deployVersion": "v1.0", // web resources like js or css append a version string on url load
+        "systemTests": false // execute framework library test cases in test runner
     };
 </script>
 ```
@@ -123,7 +124,9 @@ markup or a direct object call from another javascripts to access the module by 
 
 ```html
 <head>
+    <!-- markup... -->
     <script src="js/lib/equivalent.js"></script>
+    <!-- markup... -->
 </head>
 ```
 
@@ -131,7 +134,7 @@ or
 
 ```html
 <body>
-    <!-- some markup... -->
+    <!-- markup... -->
     <script src="js/lib/equivalent.js"></script>
 </body>
 ```
@@ -246,7 +249,7 @@ _.construct = function () {
 };
 ```
 
-### Define autoloaded stylesheet
+### Define autoload stylesheet
 
     ./src/app/MyNamespace/my-app.scss
 
@@ -263,6 +266,31 @@ _.construct = function () {
  * @see EquivalentJs.Manager.Module.class.__layout__ the css reference
  */
 _.layout = true;
+```
+
+### Define autoload template
+
+    ./src/app/MyNamespace/my-app.html
+    
+e.g.
+
+* [template markup example][template-markup](../src/app/DemoApp/delayed-markup.html)
+
+* [template usage example][template-usage](../src/app/DemoApp/DelayedMarkup.js)
+
+```javascript
+/**
+ * @description bind a template on module;
+ *  if true then add template html file to the corresponding module class folder;
+ *  the file name pattern is lowercase dash seperated module class name parts
+ *  like MyNamespace/MyApp.js => MyNamespace/my-app.html;
+ *  the template DOM get removed if 
+ *  the module will be removed from DIC;
+ *  this property is optional
+ * @type {boolean}
+ * @see EquivalentJs.Manager.Module.class.__template__ the template reference
+ */
+_.template = true;
 ```
 
 ### Define class events
@@ -458,6 +486,8 @@ DIC.get('MyNamespace.MyApp.controller.Doing').class;
 [MTR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/TEST_RUNNER.md
 [MDR]: https://github.com/xeroxzone/equivalent-js/blob/master/docs/DOC_RUNNER.md
 [module-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/lib/equivalent/template/ModuleName.js.template
+[template-markup]: https://github.com/xeroxzone/equivalent-js/blob/master/src/app/DemoApp/delayed-markup.html
+[template-usage]: https://github.com/xeroxzone/equivalent-js/blob/master/src/app/DemoApp/DelayedMarkup.js
 [gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com
 [jsdoc]: http://usejsdoc.org

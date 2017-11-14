@@ -5,4 +5,4 @@ if (typeof jQuery === 'undefined') {
     throw new Error('Missing loader library "jQuery"!');
 }
 
-$.getScript('js/lib/equivalent/System.js');
+jQuery.getScript('js/lib/equivalent/System.js');

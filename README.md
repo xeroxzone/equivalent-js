@@ -1,4 +1,4 @@
-# EquivalentJS
+# <img src="https://raw.githubusercontent.com/xeroxzone/equivalent-js/master/web/icon/favicon-32x32.png" alt="EquivalentJS"> EquivalentJS
 
 ## Class autoload and dependency manager
 

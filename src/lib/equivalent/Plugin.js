@@ -11,6 +11,11 @@
  */
 EquivalentJS.define('EquivalentJS.Plugin', new function () {
     /**
+     * @description indicates a plugin is loaded ready into DIC
+     * @event EquivalentJS.Plugin#ready:plugin
+     */
+
+    /**
      * @description bind public properties or methods
      * @memberOf EquivalentJS.Plugin
      * @private
@@ -52,6 +57,7 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
      * @memberOf EquivalentJS.Plugin
      * @private
      * @param {Object} plugins the configuration of plugins
+     * @tutorial MODULE_PLUGIN
      */
     var register = function (plugins) {
         $.each(plugins, function (name, enabled) {
@@ -77,6 +83,10 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
 
                             _.plugins.push(plugin);
 
+                            /**
+                             * @description fires to event if plugin is loaded ready into DIC
+                             * @fires EquivalentJS.Plugin#ready:plugin
+                             */
                             $(_).trigger('ready:plugin');
                         });
                     }
@@ -91,12 +101,12 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
     };
 
     /**
-     * @description create a plugin module
+     * @description create a plugin
      * @memberOf EquivalentJS.Plugin
      * @private
      * @param {boolean} enable indicates a loaded plugin is active
      * @param {EquivalentJS.Manager.Module.class} plugin as a module class
-     * @returns {{enabled: boolean, class: EquivalentJS.Manager.Module.class}} a plugin module class
+     * @returns {{enabled: boolean, class: EquivalentJS.Manager.Module.class}} a plugin
      */
     var createPlugin = function (enable, plugin) {
         return {

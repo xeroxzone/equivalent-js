@@ -19,20 +19,20 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
     var _ = this;
 
     /**
-     * @description markup element
+     * @description markup template
      * @memberOf DemoApp.DelayedMarkup
-     * @type {?jQuery}
+     * @type {boolean}
      */
-    _.$markup = null;
+    _.template = true;
 
     /**
      * @description construct the module class
      * @memberOf DemoApp.DelayedMarkup
      */
     _.construct = function () {
-        _.$markup = $('[data-application="DemoApp.DelayedMarkup"]');
-
-        createElements();
+        $(_).on('ready:template', function () {
+            createElements();
+        });
     };
 
     /**
@@ -41,20 +41,12 @@ DIC.define('DemoApp.DelayedMarkup', new function () {
      * @private
      */
     var createElements = function () {
-        var $elements = $('<ul/>'),
-            $first = $('<li/>').text('first'),
-            $second = $('<li/>').text('second')
-        ;
+        if (typeof _.__markup__ === 'undefined') {
+            _.__markup__ = $('[data-application="' + _.type + '"]');
+        }
 
-        $elements.append($first, $second);
-
-        var $defer = $.Deferred()
-            .done(function () {
-                _.$markup.append($elements);
-            });
-
-        setTimeout(function () {
-            $defer.resolve();
-        }, 2048);
+        $(_.__markup__).removeClass('hidden').html(_.__template__.getBlock('block-1', {
+            content_variable: 'example'
+        }));
     };
 });

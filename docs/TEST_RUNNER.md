@@ -6,6 +6,8 @@ The Test Runner will try to run tests for all modules stored in DIC
 
 For an example there is a [test template][test-template](../src/test/lib/equivalent/template/ModuleNameTest.js.template)
 
+Also have a look into the framework and demo app [test cases][test-cases]
+
 ### Automated unit testing for modules with [QUnit][qunit]
 
     load system with get parameter "tests" like
@@ -239,6 +241,7 @@ DIC.define('MyNamespace.test.BetterTestableModuleClassTest', new function () {
      * @description mocked markup for test
      * @memberOf MyNamespace.test.BetterTestableModuleClassTest
      * @private
+     * @type {?jQuery}
      */
     var $mockMarkup;
     
@@ -300,4 +303,5 @@ DIC.define('MyNamespace.test.BetterTestableModuleClassTest', new function () {
 ```
 
 [test-template]: https://github.com/xeroxzone/equivalent-js/blob/master/src/test/lib/equivalent/template/ModuleNameTest.js.template
+[test-cases]: https://github.com/xeroxzone/equivalent-js/tree/master/src/test
 [qunit]: https://qunitjs.com
