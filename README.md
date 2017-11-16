@@ -12,10 +12,10 @@ These modules represented by a constructor function as a class object. They can 
 dependency injection methods and listen to asynchronously autoloads 
 by event or promise pattern.
 
-They can switch on to use layout files from [Sass][sass] generated as a 
-module class bound autoloaded stylesheet.
+They can switch on to use layout files from [Sass][sass] generated or
+templates as a module class bound autoloaded resource.
 
-Module classes are build in a namespace struture that can be used for 
+Module classes are build in a namespace structure that can be used for 
 everything what the power of JavaScript can do.
 
 Initialization of module classes can be done via a HTML attribute or by 
