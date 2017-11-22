@@ -230,7 +230,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin\.') > -1 &&
+        if (module.type.indexOf('Plugin.') > -1 &&
             typeof module.parameters !== 'undefined' &&
             typeof module.parameters.hasOwnProperty('plugin')
         ) {
@@ -345,7 +345,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                                     $block.html(
                                         $block.html()
                                             .replace(
-                                                new RegExp('\{\{\\s*' + key + '\\s*\}\}'),
+                                                new RegExp('{{\\s*' + key + '\\s*}}'),
                                                 value
                                             )
                                     );
@@ -457,7 +457,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (type.indexOf('Plugin\.') > -1 &&
+        if (type.indexOf('Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -664,8 +664,6 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
     var getResource = function (resourceType, module, parameters, cacheBust) {
         cacheBust = cacheBust || false;
 
-        var resourceUri = null;
-
         /**
          * @type {{environment: string, moduleLayout: string, moduleTemplate: string}}
          */
@@ -677,7 +675,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var namespace = EquivalentJS.System.getNamespace(module.type);
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin\.') > -1 &&
+        if (module.type.indexOf('Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -726,7 +724,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 break;
         }
 
-        resourceUri = resourcePath + '/' +
+        var resourceUri = resourcePath + '/' +
             resourceNamespace + '.' + resourceFileExtension +
             ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion));
 

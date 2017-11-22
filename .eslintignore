@@ -1,0 +1,8 @@
+node_modules/*
+docs/*
+web/*
+gulp.json
+gulpfile.js
+jsdoc.json
+package-lock.json
+package.json

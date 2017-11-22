@@ -33,6 +33,9 @@ DIC.define('DemoApp.Viewport.MDC', new function () {
      */
     _.construct = function () {
         if (Object(window).hasOwnProperty('mdc')) {
+            /**
+             * @typedef {Object} window.mdc
+             */
             mdc = window.mdc;
         }
     };

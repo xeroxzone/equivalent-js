@@ -20,6 +20,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "equivalent-js-plugin-scaffold-example": "git+https://github.com/xeroxzone/equivalent-js-plugin-scaffold-example.git#0.1.4-dev",
+    "eslint": "^4.11.0",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.4.0",
     "gulp-concat": "^2.6.1",
