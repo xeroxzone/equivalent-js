@@ -660,6 +660,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {Object=} parameters of the constructed module class
      * @param {boolean=} cacheBust bust the cache to get module resource fresh
      * @returns {string}
+     * @throws {Error} if resourceType was not passed to method
      */
     var getResource = function (resourceType, module, parameters, cacheBust) {
         cacheBust = cacheBust || false;
@@ -722,6 +723,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 resourcePath = configuration.moduleTemplate;
                 resourceFileExtension = 'html';
                 break;
+            default:
+                throw new Error('Missing resource type parameter!');
         }
 
         var resourceUri = resourcePath + '/' +
