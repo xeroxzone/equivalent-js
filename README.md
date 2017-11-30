@@ -76,9 +76,8 @@ Latest stable version:
 [![npm version](https://badge.fury.io/js/equivalent-js.svg)](https://badge.fury.io/js/equivalent-js)
 
 Quality measurement:
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f6661d1aa5f43d88a790fd34ca4a507)](https://www.codacy.com/app/xeroxzone/equivalent-js?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xeroxzone/equivalent-js&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f414132646b405a8d167ed2a84d1b5d)](https://www.codacy.com/app/xeroxzone/equivalent-js?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xeroxzone/equivalent-js&amp;utm_campaign=Badge_Grade)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xeroxzone/equivalent-js/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/xeroxzone/equivalent-js/?branch=master)
-
 ...live long and prosper
 
 
