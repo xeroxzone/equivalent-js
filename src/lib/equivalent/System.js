@@ -1,7 +1,5 @@
 "use strict";
 
-/** @var {(jQuery|function)} $ */
-
 /**
  * @namespace
  * @typedef {Object} EquivalentJS

@@ -129,7 +129,7 @@ DIC.define('DemoApp.Factory.Circle', new function () {
     };
 
     /**
-     * @description get a circle after create and setted parameters
+     * @description get a circle after create and set parameters
      * @memberOf DemoApp.Factory.Circle
      * @returns {jQuery}
      */

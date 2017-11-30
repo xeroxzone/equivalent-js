@@ -230,7 +230,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin\.') > -1 &&
+        if (module.type.indexOf('Plugin.') > -1 &&
             typeof module.parameters !== 'undefined' &&
             typeof module.parameters.hasOwnProperty('plugin')
         ) {
@@ -345,7 +345,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                                     $block.html(
                                         $block.html()
                                             .replace(
-                                                new RegExp('\{\{\\s*' + key + '\\s*\}\}'),
+                                                new RegExp('{{\\s*' + key + '\\s*}}'),
                                                 value
                                             )
                                     );
@@ -457,7 +457,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (type.indexOf('Plugin\.') > -1 &&
+        if (type.indexOf('Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -660,11 +660,10 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {Object=} parameters of the constructed module class
      * @param {boolean=} cacheBust bust the cache to get module resource fresh
      * @returns {string}
+     * @throws {Error} if resourceType was not passed to method
      */
     var getResource = function (resourceType, module, parameters, cacheBust) {
         cacheBust = cacheBust || false;
-
-        var resourceUri = null;
 
         /**
          * @type {{environment: string, moduleLayout: string, moduleTemplate: string}}
@@ -677,7 +676,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var namespace = EquivalentJS.System.getNamespace(module.type);
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin\.') > -1 &&
+        if (module.type.indexOf('Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -724,9 +723,11 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 resourcePath = configuration.moduleTemplate;
                 resourceFileExtension = 'html';
                 break;
+            default:
+                throw new Error('Missing resource type parameter!');
         }
 
-        resourceUri = resourcePath + '/' +
+        var resourceUri = resourcePath + '/' +
             resourceNamespace + '.' + resourceFileExtension +
             ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion));
 

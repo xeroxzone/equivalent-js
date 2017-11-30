@@ -20,7 +20,7 @@
   },
   "testunit" : {
     "src" : [
-      "node_modules/qunitjs/qunit/qunit.js"
+      "node_modules/qunit/qunit/qunit.js"
     ],
     "dest" : "web/js/lib"
   },
