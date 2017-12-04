@@ -45,7 +45,7 @@ EquivalentJS.define = function (type, moduleClass) {
 
         createModuleDOM(type, moduleClass);
     } else {
-        throw new Error('The module class must be of type <Object>.');
+        throw new Error('The module class must be of type Object.');
     }
 };
 
@@ -169,8 +169,7 @@ EquivalentJS.System = new function () {
      * @private
      * @param {function} registerCallback the callback to register
      *  module manager, test and doc framework
-     * @throws {Error} could not interpret json configuration file path as <string>
-     * @throws {Error} could not interpret json configuration as <Object>
+     * @throws {Error} could not interpret json configuration file path as string or as Object
      */
     var configure = function (registerCallback) {
         /**
@@ -486,7 +485,7 @@ EquivalentJS.System = new function () {
                     );
                 });
 
-            var $link = $('<link/>').attr({
+            var $link = $('<link><link/>').attr({
                 'rel': 'stylesheet',
                 'href': testFrameworkThemeUri
             });

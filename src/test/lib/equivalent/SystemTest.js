@@ -67,7 +67,7 @@ DIC.define('EquivalentJS.test.SystemTest', new function () {
                 function() {
                     EquivalentJS.define(1);
                 },
-                new Error('The module class type must be of type <string>.'),
+                new Error('The module class type must be of type string.'),
                 'exception was thrown on wrong typed module creation'
             );
 
@@ -75,7 +75,7 @@ DIC.define('EquivalentJS.test.SystemTest', new function () {
                 function() {
                     EquivalentJS.define(1, 1);
                 },
-                new Error('The module class type must be of type <string>.'),
+                new Error('The module class type must be of type string.'),
                 'exception was thrown on wrong typed module creation ' +
                 'with wrong typed expected class object'
             );
@@ -99,7 +99,7 @@ DIC.define('EquivalentJS.test.SystemTest', new function () {
                 function() {
                     EquivalentJS.define('EquivalentJS.mock.ModuleClassNamespace');
                 },
-                new Error('The module class must be of type <Object>.'),
+                new Error('The module class must be of type Object.'),
                 'exception was thrown on correct typed module creation ' +
                 'without class object'
             );
@@ -108,7 +108,7 @@ DIC.define('EquivalentJS.test.SystemTest', new function () {
                 function() {
                     EquivalentJS.define('EquivalentJS.mock.ModuleClassNamespace', 1);
                 },
-                new Error('The module class must be of type <Object>.'),
+                new Error('The module class must be of type Object.'),
                 'exception was thrown on correct typed module creation with ' +
                 'wrong typed expected class object'
             );
