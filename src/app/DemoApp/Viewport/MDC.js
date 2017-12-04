@@ -23,7 +23,7 @@ DIC.define('DemoApp.Viewport.MDC', new function () {
      * @description the mdc web interface
      * @memberOf DemoApp.Viewport.MDC
      * @private
-     * @type {?{drawer: Object}}
+     * @type {?{drawer: {MDCPersistentDrawer: MDCPersistentDrawer}}}
      */
     var mdc = null;
 
@@ -33,9 +33,6 @@ DIC.define('DemoApp.Viewport.MDC', new function () {
      */
     _.construct = function () {
         if (Object(window).hasOwnProperty('mdc')) {
-            /**
-             * @typedef {Object} window.mdc
-             */
             mdc = window.mdc;
         }
     };

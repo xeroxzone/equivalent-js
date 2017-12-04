@@ -57,7 +57,7 @@ DIC.define('DemoApp.Factory.Circle', new function () {
             throw new Error('Only can create from factory class!');
         }
 
-        $circle = $('<div/>');
+        $circle = $('<div></div>');
 
         $circle
             .prop({

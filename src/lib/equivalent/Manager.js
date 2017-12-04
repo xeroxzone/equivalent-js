@@ -110,7 +110,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      */
     var register = function (module) {
         /**
-         * @type {{environment: string, systemTests: boolean, appPath: string, deployVersion: string}}
+         * @type {Object}
          */
         var configuration = EquivalentJS.System.getConfiguration();
 
@@ -325,7 +325,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 null !== (templateUri = getTemplate(importedClass, true, module.parameters))
             ) {
                 $.get(templateUri).done(function (template) {
-                    var $templateMarkup = $('<div/>').append($(template)),
+                    var $templateMarkup = $('<div></div>').append($(template)),
                         $templateDataBlocks = $templateMarkup.find('[data-template]')
                     ;
 
@@ -336,7 +336,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                          * @returns {HTMLElement} the template data block by name
                          */
                         $templateDataBlocks.getBlock = function (name, data) {
-                            var $block = $('<div/>').append($(this))
+                            var $block = $('<div></div>').append($(this))
                                 .find('[data-template="' + name + '"]')
                             ;
 
@@ -581,7 +581,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 var $missingTestsLog = $('.missing-tests-log > ul');
                 if (0 < $missingTestsLog.length) {
                     $missingTestsLog.append(
-                        $('<li/>').html('Could not load test for module "' + namespace + '"!')
+                        $('<li></li>').html('Could not load test for module "' + namespace + '"!')
                     );
                 }
             });
@@ -666,7 +666,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         cacheBust = cacheBust || false;
 
         /**
-         * @type {{environment: string, moduleLayout: string, moduleTemplate: string}}
+         * @type {Object}
          */
         var configuration = EquivalentJS.System.getConfiguration();
 
@@ -829,8 +829,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @description create a module object around the module class
      * @memberOf EquivalentJS.Manager
      * @private
-     * @param {object} module the module class
-     * @param {string} module.type as module class name
+     * @param {Object} module the module class
      * @returns {EquivalentJS.Manager.Module}
      * @throws {Error} if module could not be created
      */
@@ -838,7 +837,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         if (typeof module !== 'object') {
             throw new Error('Could not create module!');
         } else if (typeof module.type !== 'string') {
-            throw new Error('The module type property must be of type <string>!');
+            throw new Error('The module type property must be of type string!');
         }
 
         /**
@@ -1057,7 +1056,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         var onReadyError = function () {
             EquivalentJS.console.error(
-                'Parameter "type" must be a <string> or <Array> and "callback" a <function>!'
+                'Parameter "type" must be a string or Array and "callback" a function!'
             );
         };
 
@@ -1152,8 +1151,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var $resolver,
             onAddError = function (type) {
                 EquivalentJS.console.error('Could not add module "' + type + ';' +
-                    ' parameter "type" must be a <string> or <Array>!' +
-                    ' and "parameters" if given; then as an <Object>'
+                    ' parameter "type" must be a string or Array!' +
+                    ' and "parameters" if given; then as an Object'
                 );
             };
 
