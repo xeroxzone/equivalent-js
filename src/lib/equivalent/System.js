@@ -485,7 +485,7 @@ EquivalentJS.System = new function () {
                     );
                 });
 
-            var $link = $('<link><link/>').attr({
+            var $link = $('<link>').attr({
                 'rel': 'stylesheet',
                 'href': testFrameworkThemeUri
             });
