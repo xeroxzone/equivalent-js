@@ -331,7 +331,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
                     if (0 < $templateDataBlocks.length) {
                         var templates = [],
-                            findTemplate = function(name) {
+                            invokeTemplate = function(name) {
                                 return $.grep(templates, function(template) {
                                     return template.id === name;
                                 });
@@ -352,11 +352,12 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                                 // @todo create equivalent-js-plugin-twig
                                 if (window.hasOwnProperty('Twig')) {
                                     var templateName = '__template__' + name,
-                                        template = null
+                                        template = null,
+                                        invokedTemplate = invokeTemplate(templateName)
                                     ;
 
-                                    if (1 === findTemplate(templateName).length) {
-                                        template = findTemplate(templateName).pop();
+                                    if (1 === invokedTemplate.length) {
+                                        template = invokedTemplate.pop();
                                     } else {
                                         template = window.Twig.twig({
                                             id: templateName + (true === testing ? String((new Date()).getTime()) : ''),

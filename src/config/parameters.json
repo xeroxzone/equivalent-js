@@ -11,6 +11,7 @@
   "systemTests": true,
   "deployVersion": "v1.0",
   "plugins": {
+    "equivalent-js-plugin-mdc": true,
     "equivalent-js-plugin-scaffold-example": true
   }
 }

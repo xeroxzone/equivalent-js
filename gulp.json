@@ -52,6 +52,21 @@
       "dest": "web/css/Plugin"
     }
   },
+  "pluginDev" : {
+    "config": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/plugin.json",
+    "classes": {
+      "src": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/src/lib/**.js",
+      "dest": "web/js/lib/equivalent/Plugin"
+    },
+    "tests": {
+      "src": "src/test/lib/equivalent/Plugin/equivalent-js-plugin-*/src/test/lib/**.js",
+      "dest": "web/js/test/lib/equivalent/Plugin"
+    },
+    "layout": {
+      "src": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/src/lib/**.scss",
+      "dest": "web/css/Plugin"
+    }
+  },
   "scripts" : {
     "src" : [
       "src/lib/**/*.js",

@@ -28,12 +28,12 @@ crashlytics-build.properties
 fabric.properties
 
 # project
+# /src/lib/equivalent/Plugin/
+# /src/test/lib/equivalent/Plugin/
 /node_modules/
 /npm-debug.log
 /src/lib/ui/**/*.css
 /src/lib/ui/**/*.css.map
-/src/lib/equivalent/Plugin/
-/src/test/lib/equivalent/Plugin/
 /web/css/
 /web/doc/
 /web/html/

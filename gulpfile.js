@@ -230,6 +230,12 @@ gulp.task('dev:scripts', function() {
     });
 });
 
+gulp.task('dev:plugin', function() {
+    del(['web/js/lib/equivalent/Plugin/**.js']).then(function () {
+        buildPlugins(config.pluginDev);
+    });
+});
+
 gulp.task('dev:apps', function() {
     del(['web/js/app/**.js']).then(function () {
         buildApps(config.apps);
@@ -268,6 +274,14 @@ gulp.task('dev:watch:scripts', function() {
             buildConfigs(config.configs);
             buildPlugins(config.plugins);
             buildScripts(config.scripts);
+        });
+    });
+});
+
+gulp.task('dev:watch:plugin', function() {
+    return watch(config.pluginDev.classes.src, function () {
+        del(['web/js/lib/equivalent/Plugin/**.js']).then(function () {
+            buildPlugins(config.pluginDev);
         });
     });
 });
@@ -342,6 +356,7 @@ gulp.task('prod:scripts', function() {
 /* init commands "dev", "dev:watch", "prod:minify" */
 gulp.task('dev', [
     'dev:scripts',
+    'dev:plugin',
     'dev:apps',
     'dev:tests',
     'dev:styles',
@@ -352,6 +367,7 @@ gulp.task('dev', [
 gulp.task('dev:watch', [
     'dev',
     'dev:watch:scripts',
+    'dev:watch:plugin',
     'dev:watch:apps',
     'dev:watch:tests',
     'dev:watch:styles',
