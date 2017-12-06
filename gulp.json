@@ -1,8 +1,9 @@
 {
   "vendors" : {
+    "name": "vendors.min.js",
     "src" : [
       "node_modules/jquery/dist/jquery.min.js",
-      "node_modules/material-components-web/dist/material-components-web.js",
+      "node_modules/twig/twig.min.js",
       "node_modules/material-components-web/dist/material-components-web.min.js"
     ],
     "dest" : "web/js/lib"
@@ -68,7 +69,6 @@
     "src" : [
       "src/app/**/*.scss",
       "src/lib/ui/**",
-      "node_modules/material-components-web/dist/material-components-web.css",
       "node_modules/material-components-web/dist/material-components-web.min.css"
     ],
     "dest" : "web/css"

@@ -1,5 +1,24 @@
 <div data-template="block-1">
-    variable content {{ content_variable }}
+    <div class="mdc-card">
+        <section class="mdc-card__primary">
+            {% if content_title is defined %}
+            <h1 class="mdc-card__title mdc-card__title--large">{{ content_title }}</h1>
+            {% endif %}
+            {% if content_subtitle is defined %}
+            <h2 class="mdc-card__subtitle">{{ content_subtitle }}</h2>
+            {% endif %}
+        </section>
+        <section class="mdc-card__supporting-text">
+            variable content {{ content_variable }}
+        </section>
+        <section class="mdc-card__actions">
+            <button
+                type="button"
+                class="count-up mdc-button mdc-button--compact mdc-card__action"
+                data-mdc-auto-init="MDCRipple"
+            >Trigger</button>
+        </section>
+    </div>
 </div>
 <div data-template="block-2">
     static content

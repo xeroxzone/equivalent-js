@@ -52,20 +52,14 @@ function build(cfg, builder, base) {
 
 /**
  * @param {Object} cfg
- * @param {(null|Object|function)=} builder
- * @param {string=} base
+ * @param {(Object|function)} builder
  * @returns {Gulp}
  */
-function buildConcat(cfg, builder, base) {
-    builder = builder || null;
-    base = base || '';
-
+function buildConcat(cfg, builder) {
     return gulp.src(cfg.src)
             .pipe(plumber())
-                .pipe(sourcemaps.init())
-                    .pipe(concat(cfg.name))
-                    .pipe(builder)
-                .pipe(sourcemaps.write())
+                .pipe(concat(cfg.name))
+                .pipe(builder)
             .pipe(plumber.stop())
         .pipe(gulp.dest(cfg.dest))
     ;
@@ -127,7 +121,12 @@ function install(cfg) {
  * @returns {Gulp}
  */
 function buildVendors(cfg) {
-    return build(cfg);
+    return gulp.src(cfg.src)
+            .pipe(plumber())
+                .pipe(concat(cfg.name))
+            .pipe(plumber.stop())
+        .pipe(gulp.dest(cfg.dest))
+    ;
 }
 
 /**
@@ -165,7 +164,7 @@ function buildConfigs(cfg) {
 }
 
 /**
- * @param {Object} cfg
+ * @param {{config: string, classes: Object, tests: Object, layout: Object}} cfg
  * @returns {Gulp}
  */
 function buildPlugins(cfg) {
@@ -193,7 +192,7 @@ function buildScripts(cfg) {
  * @returns {Gulp}
  */
 function buildConcatScripts(cfg) {
-    return buildConcat(cfg, uglify(), LIB_CLASS_PATH);
+    return buildConcat(cfg, uglify());
 }
 
 /**

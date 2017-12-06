@@ -330,6 +330,14 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                     ;
 
                     if (0 < $templateDataBlocks.length) {
+                        var templates = [],
+                            findTemplate = function(name) {
+                                return $.grep(templates, function(template) {
+                                    return template.id === name;
+                                });
+                            }
+                        ;
+
                         /**
                          * @param {string} name of the template data block
                          * @param {Object=} data to apply to placeholder variables
@@ -337,19 +345,36 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                          */
                         $templateDataBlocks.getBlock = function (name, data) {
                             var $block = $('<div></div>').append($(this))
-                                .find('[data-template="' + name + '"]')
+                                .find('[data-template="' + name + '"]').clone()
                             ;
 
                             if (typeof data === 'object') {
-                                $.each(data, function (key, value) {
-                                    $block.html(
-                                        $block.html()
-                                            .replace(
-                                                new RegExp('{{\\s*' + key + '\\s*}}'),
-                                                value
-                                            )
-                                    );
-                                });
+                                // @todo create equivalent-js-plugin-twig
+                                if (window.hasOwnProperty('Twig')) {
+                                    var templateName = '__template__' + name,
+                                        template = null
+                                    ;
+
+                                    if (1 === findTemplate(templateName).length) {
+                                        template = findTemplate(templateName).pop();
+                                    } else {
+                                        template = window.Twig.twig({
+                                            id: templateName + (true === testing ? String((new Date()).getTime()) : ''),
+                                            data: $block.html()
+                                        });
+
+                                        templates.push(template);
+                                    }
+
+                                    $block.html(template.render(data));
+                                } else {
+                                    $.each(data, function (key, value) {
+                                        $block.html($block.html().replace(
+                                            new RegExp('{{\\s*' + key + '\\s*}}'),
+                                            value
+                                        ));
+                                    });
+                                }
                             }
 
                             return $block;
