@@ -21,8 +21,8 @@ DIC.define('DemoApp.Viewport', new function () {
     /**
      * @description the mdc web interface wrapper
      * @memberOf DemoApp.Viewport
-     * @alias {?DemoApp.Viewport.MDC}
-     * @see DemoApp.Viewport.MDC
+     * @alias {?EquivalentJS.Plugin.MDC}
+     * @see EquivalentJS.Plugin.MDC
      */
     var MDC = null;
 
@@ -41,7 +41,7 @@ DIC.define('DemoApp.Viewport', new function () {
     _.construct = function () {
         $mainMenu = $('.main-menu');
 
-        _.__manager__.add('DemoApp.Viewport.MDC').done(function (module) {
+        _.__manager__.add('EquivalentJS.Plugin.MDC').done(function (module) {
             MDC = module;
 
             handlePersistentDrawerOnMainMenu();
