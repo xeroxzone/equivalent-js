@@ -59,17 +59,15 @@ DIC.define('EquivalentJS.test.PluginTest', new function () {
                 $(module).on('ready:plugin', function () {
                     assert.ok(0 < module.plugins.length, 'has loaded plugins');
 
-                    assertAsync();
-
                     hasReadyPlugins = true;
                 });
 
                 setTimeout(function () {
                     if (false === hasReadyPlugins) {
                         assert.notOk(true, 'could not load any plugins');
-
-                        assertAsync();
                     }
+
+                    assertAsync();
                 }, 1024);
             } else {
                 assert.ok(true, 'no active plugins in configuration found');
