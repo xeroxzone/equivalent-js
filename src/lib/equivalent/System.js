@@ -284,13 +284,16 @@ EquivalentJS.System = new function () {
 
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
-        if (typeof EquivalentJS.Manager !== 'undefined' ||
+        if (typeof EquivalentJS.Manager === 'object' ||
             typeof window.EquivalentJSConfiguration === 'object'
         ) {
             setTimeout(function () {
                 try {
-                    EquivalentJS.Manager.construct(moduleUri);
                     registerShortcut();
+
+                    $.getScript(configuration.appPath + '/apps.min.js').done(function () {
+                        EquivalentJS.Manager.construct(moduleUri);
+                    });
                 } catch (error) {
                     EquivalentJS.console.error(error);
                 }

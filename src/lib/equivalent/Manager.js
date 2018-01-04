@@ -182,37 +182,14 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var isAppLoad = false;
         if (false === /^EquivalentJS\./.test(type)) {
             isAppLoad = true;
-        } else if ('dev' !== configuration.environment) {
+        }
+
+        // if equivalent.min.js library is as concatenated minified files loaded
+        //  search for existing DOM object
+        if ('dev' !== configuration.environment) {
             var moduleDom = getModuleDOM(type);
-            if (null !== moduleDom) {
-                return $.Deferred(function () {
-                    var $defer = this;
-
-                    moduleDom.type = type;
-
-                    /**
-                     * @see EquivalentJS.Manager.Module.class.__manager__
-                     */
-                    moduleDom.__manager__ = _;
-
-                    _.modules.push(createModule(moduleDom));
-
-                    try {
-                        moduleDom.construct(module);
-                    } catch (error) {
-                        EquivalentJS.console.error(error);
-                    }
-
-                    delete moduleDom.construct;
-
-                    /**
-                     * @description fires to event if module is ready
-                     * @fires EquivalentJS.Manager#ready:callback
-                     */
-                    $(_).trigger('ready:callback', moduleDom);
-
-                    $defer.resolve(moduleDom);
-                });
+            if (null !== moduleDom && -1 === module.type.indexOf('EquivalentJS.Plugin.')) {
+                return registerFromDOM(moduleDom, module, type);
             }
         }
 
@@ -230,7 +207,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin.') > -1 &&
+        if (module.type.indexOf('EquivalentJS.Plugin.') > -1 &&
             typeof module.parameters !== 'undefined' &&
             typeof module.parameters.hasOwnProperty('plugin')
         ) {
@@ -244,9 +221,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
         var moduleUrl = classUri + '/' +
             classPath + '.js' +
-            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion)),
-            layoutUri = null,
-            templateUri = null
+            ((true === cacheBust) ? ('?' + String((new Date()).getTime())) : ('?' + configuration.deployVersion))
         ;
 
         var request = createRequest(moduleUrl);
@@ -278,127 +253,14 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             if (typeof importedClass.extend === 'string') {
                 return _.add(importedClass.extend); // only pre register module for inheritance
             } else {
-                var inheritModule = getModuleByExtend(type);
-
-                if (null !== inheritModule) {
-                    var inheritClass = extend(
-                        inheritModule.class,
-                        importedClass
-                    );
-
-                    removeModule(importedClass.type);
-
-                    importedClass = inheritClass;
-                    type = importedClass.type;
-                }
+                importedClass = loadModuleClassByExtend(importedClass, type);
+                type = importedClass.type;
             }
 
-            if (typeof module.parameters !== 'undefined' &&
-                typeof module.parameters.app !== 'undefined' &&
-                true === isAppLoad
-            ) {
-                /**
-                 * @see EquivalentJS.Manager.Module.class.__markup__
-                 */
-                importedClass.__markup__ = module.parameters.app;
-            }
+            applyApplicationDOMReference(importedClass, module);
 
-            if (null !== (layoutUri = getLayout(importedClass, true, module.parameters))) {
-                var $link = $('<link/>').attr({
-                    'rel': 'stylesheet',
-                    'href': layoutUri
-                }).on('load', function () {
-                    /**
-                     * @description fires to event if layout stylesheet DOM is loaded
-                     * @memberOf EquivalentJS.Manager.Module.class
-                     * @fires EquivalentJS.Manager.Module.class#ready:layout
-                     */
-                    $(importedClass).trigger('ready:layout');
-                });
-
-                importedClass.__layout__ = $link.get(0);
-
-                $('head').append($link);
-            }
-
-            if (true === isAppLoad &&
-                null !== (templateUri = getTemplate(importedClass, true, module.parameters))
-            ) {
-                $.get(templateUri).done(function (template) {
-                    var $templateMarkup = $('<div></div>').append($(template)),
-                        $templateDataBlocks = $templateMarkup.find('[data-template]')
-                    ;
-
-                    if (0 < $templateDataBlocks.length) {
-                        var templates = [],
-                            invokeTemplate = function(name) {
-                                return $.grep(templates, function(template) {
-                                    return template.id === name;
-                                });
-                            }
-                        ;
-
-                        /**
-                         * @param {string} name of the template data block
-                         * @param {Object=} data to apply to placeholder variables
-                         * @returns {HTMLElement} the template data block by name
-                         */
-                        $templateDataBlocks.getBlock = function (name, data) {
-                            var $block = $('<div></div>').append($(this))
-                                .find('[data-template="' + name + '"]').clone()
-                            ;
-
-                            if (typeof data === 'object') {
-                                // @todo create equivalent-js-plugin-twig
-                                if (window.hasOwnProperty('Twig')) {
-                                    var templateName = '__template__' + name,
-                                        template = null,
-                                        invokedTemplate = invokeTemplate(templateName)
-                                    ;
-
-                                    if (1 === invokedTemplate.length) {
-                                        template = invokedTemplate.pop();
-                                    } else {
-                                        template = window.Twig.twig({
-                                            id: templateName + (true === testing ? String((new Date()).getTime()) : ''),
-                                            data: $block.html()
-                                        });
-
-                                        templates.push(template);
-                                    }
-
-                                    $block.html(template.render(data));
-                                } else {
-                                    $.each(data, function (key, value) {
-                                        $block.html($block.html().replace(
-                                            new RegExp('{{\\s*' + key + '\\s*}}'),
-                                            value
-                                        ));
-                                    });
-                                }
-                            }
-
-                            return $block;
-                        };
-
-                        $templateMarkup = $templateDataBlocks;
-                    } else {
-                        $templateMarkup = $(template);
-                    }
-
-                    importedClass.__template__ = $templateMarkup;
-
-                    /**
-                     * @description delay property apply and
-                     *  fires to event if template DOM is loaded
-                     * @memberOf EquivalentJS.Manager.Module.class
-                     * @fires EquivalentJS.Manager.Module.class#ready:template
-                     */
-                    setTimeout(function () {
-                        $(importedClass).trigger('ready:template');
-                    }, 100);
-                });
-            }
+            loadLayout(importedClass, module);
+            loadTemplate(importedClass, module);
 
             return importedClass;
         })
@@ -462,9 +324,10 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      *  if configuration systemTests property is false
      * @throws {Error} if module class could not be cloned for test isolation
      * @tutorial TEST_RUNNER
+     * @todo refactor too long method {@link EquivalentJS.Manager~test}
      */
     var test = function (module, withSystemTests) {
-        if (true === testing) {return;} // if tests are testing the manager themself
+        if (true === testing) {return;} // if tests are testing the manager self
 
         var isAppLoad = false;
         if (false === /^EquivalentJS\./.test(module.type)) {
@@ -483,7 +346,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         }
 
         var classPath = namespace;
-        if (type.indexOf('Plugin.') > -1 &&
+        if (type.indexOf('EquivalentJS.Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -599,15 +462,17 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                 $testSetup.resolve();
             })
             .fail(function (error) {
+                var errorMessage = 'Could not load test for module "' + namespace + '"!';
+
                 EquivalentJS.console.error(
                     error.status + ' ' + error.statusText +
-                    ' - Could not load test for module "' + namespace + '"!'
+                    ' - ' + errorMessage
                 );
 
                 var $missingTestsLog = $('.missing-tests-log > ul');
                 if (0 < $missingTestsLog.length) {
                     $missingTestsLog.append(
-                        $('<li></li>').html('Could not load test for module "' + namespace + '"!')
+                        $('<li></li>').html(errorMessage)
                     );
                 }
             });
@@ -620,10 +485,184 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @see EquivalentJS.Extend
      * @param {EquivalentJS.Manager.Module.class} inheritClass the inherit class
      * @param {EquivalentJS.Manager.Module.class} moduleClass the parent class
-     * @returns {?EquivalentJS.Manager.Module.class}
+     * @returns {EquivalentJS.Manager.Module.class}
      */
     var extend = function (inheritClass, moduleClass) {
         return EquivalentJS.Manager.Extend.inherit(inheritClass, moduleClass);
+    };
+
+    /**
+     * @description load an inherited module class
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} importedClass the module class
+     * @param {string} type as module class name
+     * @returns {EquivalentJS.Manager.Module.class}
+     */
+    var loadModuleClassByExtend = function (importedClass, type) {
+        var inheritModule = getModuleByExtend(type);
+
+        if (null !== inheritModule) {
+            var inheritClass = extend(
+                inheritModule.class,
+                importedClass
+            );
+
+            removeModule(importedClass.type);
+
+            importedClass = inheritClass;
+        }
+
+        return importedClass;
+    };
+
+    /**
+     * @description apply application DOM reference if initialized from DOM
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} importedClass the module class to load from
+     * @param {Object} module class parameters
+     */
+    var applyApplicationDOMReference = function (importedClass, module) {
+        var isAppLoad = false;
+        if (false === /^EquivalentJS\./.test(module.type)) {
+            isAppLoad = true;
+        }
+
+        if (typeof module.parameters !== 'undefined' &&
+            typeof module.parameters.app !== 'undefined' &&
+            true === isAppLoad
+        ) {
+            /**
+             * @see EquivalentJS.Manager.Module.class.__markup__
+             */
+            importedClass.__markup__ = module.parameters.app;
+        }
+    };
+
+    /**
+     * @description load template of module class if required
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} importedClass the module class to load from
+     * @param {Object} module class parameters
+     */
+    var loadTemplate = function (importedClass, module) {
+        var templateUri = getTemplateUri(importedClass, true, module.parameters),
+            isAppLoad = false
+        ;
+
+        if (false === /^EquivalentJS\./.test(module.type)) {
+            isAppLoad = true;
+        }
+
+        if (true === isAppLoad &&
+            null !== templateUri
+        ) {
+            $.get(templateUri).done(function (template) {
+                var $templateMarkup = $('<div></div>').append($(template)),
+                    $templateDataBlocks = $templateMarkup.find('[data-template]')
+                ;
+
+                if (0 < $templateDataBlocks.length) {
+                    var templates = [],
+                        invokeTemplate = function(name) {
+                            return $.grep(templates, function(template) {
+                                return template.id === name;
+                            });
+                        }
+                    ;
+
+                    /**
+                     * @param {string} name of the template data block
+                     * @param {Object=} data to apply to placeholder variables
+                     * @returns {HTMLElement} the template data block by name
+                     */
+                    $templateDataBlocks.getBlock = function (name, data) {
+                        var $block = $('<div></div>').append($(this))
+                            .find('[data-template="' + name + '"]').clone()
+                        ;
+
+                        if (typeof data === 'object') {
+                            // @todo create equivalent-js-plugin-twig
+                            if (window.hasOwnProperty('Twig')) {
+                                var templateName = '__template__' + name,
+                                    template = null,
+                                    invokedTemplate = invokeTemplate(templateName)
+                                ;
+
+                                if (1 === invokedTemplate.length) {
+                                    template = invokedTemplate.pop();
+                                } else {
+                                    template = window.Twig.twig({
+                                        id: templateName + (true === testing ? String((new Date()).getTime()) : ''),
+                                        data: $block.html()
+                                    });
+
+                                    templates.push(template);
+                                }
+
+                                $block.html(template.render(data));
+                            } else {
+                                $.each(data, function (key, value) {
+                                    $block.html($block.html().replace(
+                                        new RegExp('{{\\s*' + key + '\\s*}}'),
+                                        value
+                                    ));
+                                });
+                            }
+                        }
+
+                        return $block;
+                    };
+
+                    $templateMarkup = $templateDataBlocks;
+                } else {
+                    $templateMarkup = $(template);
+                }
+
+                importedClass.__template__ = $templateMarkup;
+
+                /**
+                 * @description delay property apply and
+                 *  fires to event if template DOM is loaded
+                 * @memberOf EquivalentJS.Manager.Module.class
+                 * @fires EquivalentJS.Manager.Module.class#ready:template
+                 */
+                setTimeout(function () {
+                    $(importedClass).trigger('ready:template');
+                }, 100);
+            });
+        }
+    };
+
+    /**
+     * @description load layout of module class if required
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} importedClass the module class to load from
+     * @param {Object} module class parameters
+     */
+    var loadLayout = function (importedClass, module) {
+        var layoutUri = getLayoutUri(importedClass, true, module.parameters);
+
+        if (null !== layoutUri) {
+            var $link = $('<link/>').attr({
+                'rel': 'stylesheet',
+                'href': layoutUri
+            }).on('load', function () {
+                /**
+                 * @description fires to event if layout stylesheet DOM is loaded
+                 * @memberOf EquivalentJS.Manager.Module.class
+                 * @fires EquivalentJS.Manager.Module.class#ready:layout
+                 */
+                $(importedClass).trigger('ready:layout');
+            });
+
+            importedClass.__layout__ = $link.get(0);
+
+            $('head').append($link);
+        }
     };
 
     /**
@@ -637,7 +676,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {Object=} parameters of the constructed module class
      * @returns {?string}
      */
-    var getTemplate = function (module, cacheBust, parameters) {
+    var getTemplateUri = function (module, cacheBust, parameters) {
         cacheBust = cacheBust || false;
 
         var templateUri = null;
@@ -662,7 +701,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {Object=} parameters of the constructed module class
      * @returns {?string}
      */
-    var getLayout = function (module, cacheBust, parameters) {
+    var getLayoutUri = function (module, cacheBust, parameters) {
         cacheBust = cacheBust || false;
 
         var layoutUri = null;
@@ -702,7 +741,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         var namespace = EquivalentJS.System.getNamespace(module.type);
 
         var classPath = namespace;
-        if (module.type.indexOf('Plugin.') > -1 &&
+        if (module.type.indexOf('EquivalentJS.Plugin.') > -1 &&
             typeof parameters === 'object' &&
             typeof parameters.hasOwnProperty('plugin')
         ) {
@@ -849,6 +888,70 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
         };
 
         return $resolver;
+    };
+
+    /**
+     * @description register modules from DOM if module classes loaded as minified concatenated file
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {EquivalentJS.Manager.Module.class} moduleDom the module class
+     * @param {Object} module class parameters
+     * @param {string} type as module class name
+     * @returns {Deferred}
+     */
+    var registerFromDOM = function (moduleDom, module, type) {
+        return $.Deferred(function () {
+            var $defer = this;
+
+            moduleDom.type = type;
+
+            /**
+             * @see EquivalentJS.Manager.Module.class.__manager__
+             */
+            moduleDom.__manager__ = _;
+
+            _.modules.push(createModule(moduleDom));
+
+            if (typeof moduleDom.extend === 'string') {
+                return _.add(moduleDom.extend); // only pre register module for inheritance
+            } else {
+                moduleDom = loadModuleClassByExtend(moduleDom, type);
+                type = moduleDom.type;
+            }
+
+            applyApplicationDOMReference(moduleDom, module);
+
+            loadLayout(moduleDom, module);
+            loadTemplate(moduleDom, module);
+
+            try {
+                if (typeof moduleDom.construct === 'undefined') {
+                    moduleDom.construct = function () {};
+                }
+
+                if (typeof moduleDom.construct.parentClass === 'function') {
+                    try {
+                        moduleDom.construct.parentClass(module);
+                    } catch (error) {
+                        EquivalentJS.console.error(error);
+                    }
+                }
+
+                moduleDom.construct(module);
+            } catch (error) {
+                EquivalentJS.console.error(error);
+            }
+
+            delete moduleDom.construct;
+
+            /**
+             * @description fires to event if module is ready
+             * @fires EquivalentJS.Manager#ready:callback
+             */
+            $(_).trigger('ready:callback', moduleDom);
+
+            $defer.resolve(moduleDom);
+        });
     };
 
     /**
@@ -1013,11 +1116,11 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             if (type === module.type) {
                 var moduleClass = _.modules[i].class;
 
-                if (null !== (layoutUri = getLayout(moduleClass, false))) {
+                if (null !== (layoutUri = getLayoutUri(moduleClass, false))) {
                     $('head link[href^="' + layoutUri + '"]').remove();
                 }
 
-                if (null !== getTemplate(moduleClass, false)) {
+                if (null !== getTemplateUri(moduleClass, false)) {
                     if (moduleClass.hasOwnProperty('__template__')) {
                         moduleClass.__template__.detach();
                     }
@@ -1215,23 +1318,35 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @description get module
      * @memberOf EquivalentJS.Manager
      * @param {string} type as module class name
-     * @returns {?EquivalentJS.Manager.Module}
+     * @param {boolean=} fromDOM retrieve DOM reference
+     * @returns {?(EquivalentJS.Manager.Module|Object)}
      * @example DIC.get('A.namespacePart.ClassName');
      * @tutorial MODULE_MANAGER
      */
-    _.get = function (type) {
-        return getModule(type);
+    _.get = function (type, fromDOM) {
+        var moduleObject = getModule(type);
+        if (typeof fromDOM === 'boolean' && true === fromDOM) {
+            moduleObject = getModuleDOM(type);
+        }
+
+        return moduleObject;
     };
 
     /**
      * @description has module
      * @memberOf EquivalentJS.Manager
      * @param {string} type as module class name
+     * @param {boolean=} fromDOM check for DOM reference
      * @returns {boolean}
      * @example DIC.has('A.namespacePart.ClassName');
      * @tutorial MODULE_MANAGER
      */
-    _.has = function (type) {
-        return null !== getModule(type);
+    _.has = function (type, fromDOM) {
+        var hasModuleObject = null !== getModule(type);
+        if (typeof fromDOM === 'boolean' && true === fromDOM) {
+            hasModuleObject = null !== getModuleDOM(type);
+        }
+
+        return hasModuleObject;
     };
 });

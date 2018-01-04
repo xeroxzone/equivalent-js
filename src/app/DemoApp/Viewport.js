@@ -41,12 +41,10 @@ DIC.define('DemoApp.Viewport', new function () {
     _.construct = function () {
         $mainMenu = $('.main-menu');
 
-        _.__manager__.add('EquivalentJS.Plugin.MDC').done(function (module) {
+        _.__manager__.ready('EquivalentJS.Plugin.MDC', function (module) {
             MDC = module;
 
             handlePersistentDrawerOnMainMenu();
-        }).fail(function () {
-            EquivalentJS.console.error('Could not find design renderer!');
         });
     };
 
