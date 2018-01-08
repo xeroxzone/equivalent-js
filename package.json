@@ -16,24 +16,24 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "twig": "^1.10.5",
-    "material-components-web": "^0.19.0"
+    "material-components-web": "^0.27.0"
   },
   "devDependencies": {
     "del": "^3.0.0",
     "equivalent-js-plugin-scaffold-example": "git+https://github.com/xeroxzone/equivalent-js-plugin-scaffold-example.git#0.1.4-dev",
     "eslint": "^4.15.0",
     "gulp": "^3.9.1",
-    "gulp-cli": "^1.4.0",
+    "gulp-cli": "^2.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-plumber": "^1.2.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.3",
     "gulp-uglify": "^3.0.0",
-    "gulp-watch": "^4.3.11",
+    "gulp-watch": "^5.0.0",
     "http-server": "^0.10.0",
     "ink-docstrap": "^1.3.2",
-    "jsdoc": "^3.5.3",
+    "jsdoc": "^3.5.5",
     "path": "^0.12.7",
     "qunit": "^2.4.1"
   },

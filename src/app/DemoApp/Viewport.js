@@ -35,6 +35,13 @@ DIC.define('DemoApp.Viewport', new function () {
     var $mainMenu = null;
 
     /**
+     * @description autoload stylesheet for display
+     * @memberOf DemoApp.Viewport
+     * @type {boolean}
+     */
+    _.layout = true;
+
+    /**
      * @description initialize the viewport handlers
      * @memberOf DemoApp.Viewport
      */
