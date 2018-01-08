@@ -87,7 +87,7 @@ EquivalentJS.define('EquivalentJS.Plugin', new function () {
                              * @description fires to event if plugin is loaded ready into DIC
                              * @fires EquivalentJS.Plugin#ready:plugin
                              */
-                            $(_).trigger('ready:plugin');
+                            $(_).trigger('ready:plugin', {plugin: plugin});
                         });
                     }
                 }).fail(function (error) {

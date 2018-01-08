@@ -268,7 +268,7 @@ _.construct = function () {
 _.layout = true;
 ```
 
-### Define autoload template
+### Define autoload template with support of [Twig][twigjs] syntax
 
     ./src/app/MyNamespace/my-app.html
     
@@ -491,3 +491,4 @@ DIC.get('MyNamespace.MyApp.controller.Doing').class;
 [gulp]: http://gulpjs.com
 [qunit]: https://qunitjs.com
 [jsdoc]: http://usejsdoc.org
+[twigjs]: https://github.com/twigjs/twig.js/wiki

@@ -52,29 +52,24 @@ function build(cfg, builder, base) {
 
 /**
  * @param {Object} cfg
- * @param {(null|Object|function)=} builder
- * @param {string=} base
+ * @param {(Object|function)} builder
  * @returns {Gulp}
  */
-function buildConcat(cfg, builder, base) {
-    builder = builder || null;
-    base = base || '';
-
+function buildConcat(cfg, builder) {
     return gulp.src(cfg.src)
             .pipe(plumber())
-                .pipe(sourcemaps.init())
-                    .pipe(concat(cfg.name))
-                    .pipe(builder)
-                .pipe(sourcemaps.write())
+                .pipe(concat(cfg.name))
+                .pipe(builder)
             .pipe(plumber.stop())
         .pipe(gulp.dest(cfg.dest))
     ;
 }
 
 /**
- * @param {{config: string, classes: Object, tests: Object, layout: Object}} cfg
+ * @param {{config: string, classes: Object, tests: Object, styles: Object}} cfg
+ * @param {boolean} buildTests
  */
-function install(cfg) {
+function install(cfg, buildTests) {
     var installScripts = function (src, dest) {
         return gulp.src(src)
             .pipe(plumber())
@@ -111,12 +106,12 @@ function install(cfg) {
                 installScripts(cfg.classes.src, cfg.classes.dest);
             }
 
-            if (0 < cfg.tests.src.length) {
+            if (true === buildTests && 0 < cfg.tests.src.length) {
                 installScripts(cfg.tests.src, cfg.tests.dest);
             }
 
-            if (0 < cfg.layout.src.length) {
-                installStyles(cfg.layout.src, cfg.layout.dest);
+            if (0 < cfg.styles.src.length) {
+                installStyles(cfg.styles.src, cfg.styles.dest);
             }
         }
     }
@@ -127,7 +122,12 @@ function install(cfg) {
  * @returns {Gulp}
  */
 function buildVendors(cfg) {
-    return build(cfg);
+    return gulp.src(cfg.src)
+            .pipe(plumber())
+                .pipe(concat(cfg.name))
+            .pipe(plumber.stop())
+        .pipe(gulp.dest(cfg.dest))
+    ;
 }
 
 /**
@@ -165,11 +165,16 @@ function buildConfigs(cfg) {
 }
 
 /**
- * @param {Object} cfg
+ * @param {{config: string, classes: Object, tests: Object, styles: Object}} cfg
+ * @param {boolean=} buildTests – default is true
  * @returns {Gulp}
  */
-function buildPlugins(cfg) {
-    install(cfg);
+function buildPlugins(cfg, buildTests) {
+    if (typeof buildTests === 'undefined') {
+        buildTests = true;
+    }
+
+    install(cfg, buildTests);
 }
 
 /**
@@ -178,6 +183,14 @@ function buildPlugins(cfg) {
  */
 function buildApps(cfg) {
     return build(cfg, uglify(), APP_CLASS_PATH);
+}
+
+/**
+ * @param {Object} cfg
+ * @returns {Gulp}
+ */
+function buildConcatApps(cfg) {
+    return buildConcat(cfg, uglify());
 }
 
 /**
@@ -193,7 +206,7 @@ function buildScripts(cfg) {
  * @returns {Gulp}
  */
 function buildConcatScripts(cfg) {
-    return buildConcat(cfg, uglify(), LIB_CLASS_PATH);
+    return buildConcat(cfg, uglify());
 }
 
 /**
@@ -214,6 +227,19 @@ function buildStyles(cfg) {
  * @param {Object} cfg
  * @returns {Gulp}
  */
+// function buildConcatStyles(cfg) {
+//     return gulp.src(cfg.src, {base: APP_STYLE_PATH})
+//         .pipe(plumber())
+//             .pipe(sass({includePaths: SASS_INCLUDE_PATHS, outputStyle: 'compressed'}))
+//             .pipe(concat(cfg.name))
+//         .pipe(plumber.stop())
+//     .pipe(gulp.dest(cfg.dest));
+// }
+
+/**
+ * @param {Object} cfg
+ * @returns {Gulp}
+ */
 function buildTemplates(cfg) {
     return gulp.src(cfg.src, {base: APP_TEMPLATE_PATH})
     .pipe(gulp.dest(cfg.dest));
@@ -228,6 +254,12 @@ gulp.task('dev:scripts', function() {
         buildConfigs(config.configs);
         buildPlugins(config.plugins);
         buildScripts(config.scripts);
+    });
+});
+
+gulp.task('dev:plugin', function() {
+    del(['web/js/lib/equivalent/Plugin/**.js']).then(function () {
+        buildPlugins(config.pluginDev);
     });
 });
 
@@ -269,6 +301,14 @@ gulp.task('dev:watch:scripts', function() {
             buildConfigs(config.configs);
             buildPlugins(config.plugins);
             buildScripts(config.scripts);
+        });
+    });
+});
+
+gulp.task('dev:watch:plugin', function() {
+    return watch(config.pluginDev.classes.src, function () {
+        del(['web/js/lib/equivalent/Plugin/**.js']).then(function () {
+            buildPlugins(config.pluginDev);
         });
     });
 });
@@ -323,17 +363,21 @@ gulp.task('dev:watch:docs:apps', function() {
 
 
 /* prod */
-gulp.task('prod:scripts', function() {
+gulp.task('prod:build', function() {
     del([
+        'web/css/**',
+        'web/html/**',
+        'web/js/lib/equivalent/Plugin/**/*.js',
         'web/js/lib/equivalent.min.js',
-        'web/js/app/**.js',
+        'web/js/apps.min.js',
         'web/js/config/*.json'
     ]).then(function () {
         buildVendors(config.vendors);
         buildConfigs(config.configs);
-        buildPlugins(config.plugins);
+        buildPlugins(config.plugins, false);
+        buildPlugins(config.pluginDev, false);
         buildConcatScripts(config.minify);
-        buildApps(config.apps);
+        buildConcatApps(config.minifyApps);
         buildStyles(config.styles);
         buildTemplates(config.templates);
     });
@@ -343,6 +387,7 @@ gulp.task('prod:scripts', function() {
 /* init commands "dev", "dev:watch", "prod:minify" */
 gulp.task('dev', [
     'dev:scripts',
+    'dev:plugin',
     'dev:apps',
     'dev:tests',
     'dev:styles',
@@ -353,6 +398,7 @@ gulp.task('dev', [
 gulp.task('dev:watch', [
     'dev',
     'dev:watch:scripts',
+    'dev:watch:plugin',
     'dev:watch:apps',
     'dev:watch:tests',
     'dev:watch:styles',
@@ -362,5 +408,5 @@ gulp.task('dev:watch', [
 ]);
 
 gulp.task('prod:minify', [
-    'prod:scripts'
+    'prod:build'
 ]);

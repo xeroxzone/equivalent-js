@@ -4,7 +4,11 @@ module.exports = {
     "env": {
         "browser": true,
         "qunit": true,
-        "jquery": true
+        "jquery": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
     },
     "globals": {
         "EquivalentJS": true,

@@ -13,7 +13,7 @@ dependency injection methods and listen to asynchronously autoloads
 by event or promise pattern.
 
 They can switch on to use layout files from [Sass][sass] generated or
-templates as a module class bound autoloaded resource.
+templates with [Twig][twigjs] as a module class bound autoloaded resource.
 
 Module classes are build in a namespace structure that can be used for 
 everything what the power of JavaScript can do.
@@ -92,3 +92,4 @@ Quality measurement:
 [jsdoc]: http://usejsdoc.org
 [jsdoc-type]: http://usejsdoc.org/tags-type.html
 [sass]: http://sass-lang.com
+[twigjs]: https://github.com/twigjs/twig.js/wiki

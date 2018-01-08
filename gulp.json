@@ -1,8 +1,9 @@
 {
   "vendors" : {
+    "name": "vendors.min.js",
     "src" : [
       "node_modules/jquery/dist/jquery.min.js",
-      "node_modules/material-components-web/dist/material-components-web.js",
+      "node_modules/twig/twig.min.js",
       "node_modules/material-components-web/dist/material-components-web.min.js"
     ],
     "dest" : "web/js/lib"
@@ -36,21 +37,6 @@
     ],
     "dest" : "web/js/config"
   },
-  "plugins" : {
-    "config": "node_modules/equivalent-js-plugin-*/plugin.json",
-    "classes": {
-      "src": "node_modules/equivalent-js-plugin-*/src/lib/**.js",
-      "dest": "web/js/lib/equivalent/Plugin"
-    },
-    "tests": {
-      "src" : "node_modules/equivalent-js-plugin-*/src/test/lib/**.js",
-      "dest" : "web/js/test/lib/equivalent/Plugin"
-    },
-    "layout": {
-      "src": "node_modules/equivalent-js-plugin-*/src/lib/**.scss",
-      "dest": "web/css/Plugin"
-    }
-  },
   "scripts" : {
     "src" : [
       "src/lib/**/*.js",
@@ -68,7 +54,6 @@
     "src" : [
       "src/app/**/*.scss",
       "src/lib/ui/**",
-      "node_modules/material-components-web/dist/material-components-web.css",
       "node_modules/material-components-web/dist/material-components-web.min.css"
     ],
     "dest" : "web/css"
@@ -78,6 +63,36 @@
       "src/app/**/*.html"
     ],
     "dest": "web/html"
+  },
+  "plugins" : {
+    "config": "node_modules/equivalent-js-plugin-*/plugin.json",
+    "classes": {
+      "src": "node_modules/equivalent-js-plugin-*/src/lib/**.js",
+      "dest": "web/js/lib/equivalent/Plugin"
+    },
+    "tests": {
+      "src" : "node_modules/equivalent-js-plugin-*/src/test/lib/**.js",
+      "dest" : "web/js/test/lib/equivalent/Plugin"
+    },
+    "styles": {
+      "src": "node_modules/equivalent-js-plugin-*/src/lib/**.scss",
+      "dest": "web/css/Plugin"
+    }
+  },
+  "pluginDev" : {
+    "config": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/plugin.json",
+    "classes": {
+      "src": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/src/lib/**.js",
+      "dest": "web/js/lib/equivalent/Plugin"
+    },
+    "tests": {
+      "src": "src/test/lib/equivalent/Plugin/equivalent-js-plugin-*/src/test/lib/**.js",
+      "dest": "web/js/test/lib/equivalent/Plugin"
+    },
+    "styles": {
+      "src": "src/lib/equivalent/Plugin/equivalent-js-plugin-*/src/lib/**.scss",
+      "dest": "web/css/Plugin"
+    }
   },
   "minify": {
     "name": "equivalent.min.js",
@@ -91,5 +106,12 @@
       "src/lib/equivalent/Renderer.js"
     ],
     "dest": "web/js/lib"
+  },
+  "minifyApps": {
+    "name": "app/apps.min.js",
+    "src": [
+      "src/app/**/**.js"
+    ],
+    "dest": "web/js"
   }
 }

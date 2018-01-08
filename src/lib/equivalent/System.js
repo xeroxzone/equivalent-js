@@ -17,7 +17,7 @@ var EquivalentJS = {};
  */
 EquivalentJS.define = function (type, moduleClass) {
     if (typeof type !== 'string') {
-        throw new Error('The module class type must be of type <string>.');
+        throw new Error('The module class type must be of type string.');
     }
 
     if (typeof moduleClass === 'object') {
@@ -45,7 +45,7 @@ EquivalentJS.define = function (type, moduleClass) {
 
         createModuleDOM(type, moduleClass);
     } else {
-        throw new Error('The module class must be of type <Object>.');
+        throw new Error('The module class must be of type Object.');
     }
 };
 
@@ -169,8 +169,7 @@ EquivalentJS.System = new function () {
      * @private
      * @param {function} registerCallback the callback to register
      *  module manager, test and doc framework
-     * @throws {Error} could not interpret json configuration file path as <string>
-     * @throws {Error} could not interpret json configuration as <Object>
+     * @throws {Error} could not interpret json configuration file path as string or as Object
      */
     var configure = function (registerCallback) {
         /**
@@ -198,6 +197,7 @@ EquivalentJS.System = new function () {
              *  appPath: string,
              *  modulePath: string,
              *  moduleLayout: string,
+             *  moduleTemplate: string,
              *  docFramework: string,
              *  testFrameworkUnit: string,
              *  testFrameworkTheme: string,
@@ -284,13 +284,16 @@ EquivalentJS.System = new function () {
 
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
-        if (typeof EquivalentJS.Manager !== 'undefined' ||
+        if (typeof EquivalentJS.Manager === 'object' ||
             typeof window.EquivalentJSConfiguration === 'object'
         ) {
             setTimeout(function () {
                 try {
-                    EquivalentJS.Manager.construct(moduleUri);
                     registerShortcut();
+
+                    $.getScript(configuration.appPath + '/apps.min.js').done(function () {
+                        EquivalentJS.Manager.construct(moduleUri);
+                    });
                 } catch (error) {
                     EquivalentJS.console.error(error);
                 }
@@ -364,7 +367,7 @@ EquivalentJS.System = new function () {
                 );
             }
         } else {
-            throw new Error('Name of shortcut must be of type <string>.');
+            throw new Error('Name of shortcut must be of type string.');
         }
     };
 
@@ -381,14 +384,14 @@ EquivalentJS.System = new function () {
         if (-1 < location.search.indexOf('docs-stop')) {
             sessionStorage.removeItem('runDocs');
             $('> iframe', '#' + docRunner).remove();
-        } else if (true === Boolean(sessionStorage.getItem('runDocs')) ||
+        } else if ('true' === sessionStorage.getItem('runDocs') ||
             -1 < location.search.indexOf('docs')
         ) {
             $('body').prepend('<section class="docs">' +
                 '<div id="' + docRunner + '"></div>' +
             '</section>');
 
-            sessionStorage.setItem('runDocs', true);
+            sessionStorage.setItem('runDocs', 'true');
 
             $.ajax(docFrameworkUri, {method: 'head'})
                 .fail(function (error) {
@@ -407,7 +410,7 @@ EquivalentJS.System = new function () {
 
                 $('body').css({overflow: 'hidden'});
 
-                $('<button/>').addClass('mdc-button mdc-button--raised').prop({
+                $('<button></button>').addClass('mdc-button mdc-button--raised').prop({
                     'id': 'doc-runner-control'
                 }).css({
                     position: 'fixed',
@@ -419,7 +422,7 @@ EquivalentJS.System = new function () {
                     textTransform: 'uppercase'
                 }).text('running').appendTo('#' + docRunner);
 
-                $('<iframe/>').attr({
+                $('<iframe></iframe>').attr({
                     'src': docFrameworkUri,
                     'frameborder': 0
                 }).css({
@@ -468,7 +471,7 @@ EquivalentJS.System = new function () {
     var registerTestFramework = function () {
         if (-1 < location.search.indexOf('tests-stop')) {
             sessionStorage.removeItem('runTests');
-        } else if (true === Boolean(sessionStorage.getItem('runTests')) ||
+        } else if ('true' === sessionStorage.getItem('runTests') ||
             -1 < location.search.indexOf('tests')
         ) {
             $(document).ajaxStart(function() {
@@ -485,7 +488,7 @@ EquivalentJS.System = new function () {
                     );
                 });
 
-            var $link = $('<link/>').attr({
+            var $link = $('<link>').attr({
                 'rel': 'stylesheet',
                 'href': testFrameworkThemeUri
             });
@@ -521,7 +524,7 @@ EquivalentJS.System = new function () {
 
             $('<div><ul></ul></div>').addClass('missing-tests-log').appendTo('.debug');
 
-            $('<button/>').addClass('mdc-button mdc-button--raised').prop({
+            $('<button></button>').addClass('mdc-button mdc-button--raised').prop({
                 'id': 'test-runner-control'
             }).css({
                 position: 'fixed',
@@ -559,7 +562,7 @@ EquivalentJS.System = new function () {
                 }, 1000);
             });
 
-            sessionStorage.setItem('runTests', true);
+            sessionStorage.setItem('runTests', 'true');
         }
     };
 

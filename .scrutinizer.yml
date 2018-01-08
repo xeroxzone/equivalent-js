@@ -1,0 +1,24 @@
+checks:
+    javascript: true
+
+build:
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - eslint-run "src/**"
+                    - jshint-run
+            environment:
+                node:
+                    version: 8.9.1
+
+filter:
+    paths: ["src/*"]
+    excluded_paths:
+        - "docs/*"
+        - "src/test/*"
+        - "web/*"
+        - "gulpfile.js"
+        - "gulp.json"
+        - "jsdoc.json"
+        - "*/plugin.json"

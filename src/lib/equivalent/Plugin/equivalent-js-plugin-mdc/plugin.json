@@ -1,0 +1,6 @@
+{
+  "name": "equivalent-js-plugin-mdc",
+  "type": "EquivalentJS.Plugin.MDC",
+  "classPath": "src/lib",
+  "testPath": "src/test/lib"
+}
