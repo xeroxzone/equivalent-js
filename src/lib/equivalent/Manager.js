@@ -586,15 +586,12 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                         if (typeof data === 'object') {
                             // @todo create equivalent-js-plugin-twig
                             if (window.hasOwnProperty('Twig')) {
-                                var templateName = '__template__' + name;
-
-                                var template = null,
-                                    invokedTemplate = invokeTemplate(templateName)
+                                var templateName = '__template__' + name,
+                                    invokedTemplate = invokeTemplate(templateName),
+                                    template = ((1 === invokedTemplate.length) ? invokedTemplate.pop() : null)
                                 ;
 
-                                if (1 === invokedTemplate.length) {
-                                    template = invokedTemplate.pop();
-                                } else {
+                                if (null === template) {
                                     template = window.Twig.twig({
                                         id: templateName + (true === testing ? String((new Date()).getTime()) : ''),
                                         data: $block.html()
