@@ -586,8 +586,9 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                         if (typeof data === 'object') {
                             // @todo create equivalent-js-plugin-twig
                             if (window.hasOwnProperty('Twig')) {
-                                var templateName = '__template__' + name,
-                                    template = null,
+                                var templateName = '__template__' + name;
+
+                                var template = null,
                                     invokedTemplate = invokeTemplate(templateName)
                                 ;
 
@@ -602,7 +603,9 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
                                     templates.push(template);
                                 }
 
-                                $block.html(template.render(data));
+                                if (null !== template) {
+                                    $block.html(template.render(data));
+                                }
                             } else {
                                 $.each(data, function (key, value) {
                                     $block.html($block.html().replace(
@@ -951,6 +954,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             $(_).trigger('ready:callback', moduleDom);
 
             $defer.resolve(moduleDom);
+
+            return moduleDom;
         });
     };
 
