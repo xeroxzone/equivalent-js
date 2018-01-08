@@ -1,0 +1,11 @@
+@import "../../lib/ui/bootstrap";
+
+[data-application="DemoApp.Viewport"] {
+    .main-menu {
+        &.material-icons {
+            color: $mdc-theme-background;
+            text-decoration: none;
+            padding: 1rem;
+        }
+    }
+}
