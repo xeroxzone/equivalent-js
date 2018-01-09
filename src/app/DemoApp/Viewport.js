@@ -61,7 +61,7 @@ DIC.define('DemoApp.Viewport', new function () {
      * @private
      */
     var handlePersistentDrawerOnMainMenu = function () {
-        var $drawerElement = $('.mdc-persistent-drawer'),
+        var $drawerElement = $('.mdc-drawer'),
             drawer = MDC.createDrawer($drawerElement.get(0))
         ;
 
