@@ -41,9 +41,9 @@ Install dependencies with [npmjs][npmjs] at project root folder
 
     npm install
 
-## Documentation, scripts and stylesheets
+## Documentation, scripts, stylesheets and templates
 
-Generate scripts and stylesheets ([Sass][sass]) 
+Generate scripts, stylesheets ([Sass][sass]) and templates ([Twig][twigjs]) 
 and documentation ([JSDoc][jsdoc] & [JSDoc Type][jsdoc-type])
 
     npm run dev:run
