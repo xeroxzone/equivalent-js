@@ -14,13 +14,13 @@
     "url": "git+https://github.com/xeroxzone/equivalent-js.git"
   },
   "dependencies": {
-    "equivalent-js-plugin-mdc": "git+https://github.com/xeroxzone/equivalent-js-plugin-mdc.git#0.1.1-dev",
     "jquery": "^3.2.1",
-    "material-components-web": "^0.28.0",
-    "twig": "^1.10.5"
+    "twig": "^1.10.5",
+    "material-components-web": "^0.28.0"
   },
   "devDependencies": {
     "del": "^3.0.0",
+    "equivalent-js-plugin-mdc": "git+https://github.com/xeroxzone/equivalent-js-plugin-mdc.git#0.1.1-dev",
     "equivalent-js-plugin-scaffold-example": "git+https://github.com/xeroxzone/equivalent-js-plugin-scaffold-example.git#0.1.4-dev",
     "eslint": "^4.15.0",
     "gulp": "^3.9.1",
