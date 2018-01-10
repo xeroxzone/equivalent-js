@@ -66,7 +66,7 @@ function buildConcat(cfg, builder) {
 }
 
 /**
- * @param {{config: string, classes: Object, tests: Object, styles: Object}} cfg
+ * @param {{config: string, classes: Object, tests: Object, styles: Object, templates: Object}} cfg
  * @param {boolean} buildTests
  */
 function install(cfg, buildTests) {
@@ -95,9 +95,14 @@ function install(cfg, buildTests) {
         .pipe(gulp.dest(dest));
     };
 
+    var installTemplates = function (src, dest) {
+        return gulp.src(src)
+            .pipe(gulp.dest(dest));
+    };
+
     if (cfg.hasOwnProperty('config') &&
         typeof cfg.config === 'string' &&
-        typeof cfg.classes.dest === 'string'
+        typeof cfg.classes.dest !== 'undefined'
     ) {
         if (0 < cfg.config.length) {
             installConfigs(cfg.config, cfg.classes.dest);
@@ -112,6 +117,10 @@ function install(cfg, buildTests) {
 
             if (0 < cfg.styles.src.length) {
                 installStyles(cfg.styles.src, cfg.styles.dest);
+            }
+
+            if (0 < cfg.templates.src.length) {
+                installTemplates(cfg.templates.src, cfg.templates.dest);
             }
         }
     }
@@ -165,7 +174,7 @@ function buildConfigs(cfg) {
 }
 
 /**
- * @param {{config: string, classes: Object, tests: Object, styles: Object}} cfg
+ * @param {{config: string, classes: Object, tests: Object, styles: Object, templates: Object}} cfg
  * @param {boolean=} buildTests – default is true
  * @returns {Gulp}
  */
