@@ -1,6 +1,6 @@
 {
   "name": "equivalent-js",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Class autoload and dependency manager",
   "main": "./src/lib/equivalent.js",
   "scripts": {
@@ -20,7 +20,8 @@
   },
   "devDependencies": {
     "del": "^3.0.0",
-    "equivalent-js-plugin-scaffold-example": "git+https://github.com/xeroxzone/equivalent-js-plugin-scaffold-example.git#0.1.4-dev",
+    "equivalent-js-plugin-mdc": "^0.1.1",
+    "equivalent-js-plugin-scaffold-example": "^0.1.4",
     "eslint": "^4.15.0",
     "gulp": "^3.9.1",
     "gulp-cli": "^2.0.0",
