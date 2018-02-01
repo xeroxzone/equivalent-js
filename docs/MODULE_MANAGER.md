@@ -6,7 +6,14 @@ All modules stored in a Dependency Injection Container – in following called D
 the event will be fired on manager everytime if a module class get registered.
 
 ```javascript
+/**
+ * @param {string} type as module class name
+ * @param {function} callback function after module is ready loaded
+ */
 DIC.ready('MyNamespace.MyApp', function (module) {
+    /**
+    * @alias {MyNamespace.MyApp}
+    */
     var MyApp = module;
 });
 ```
@@ -50,10 +57,10 @@ var MyApp = DIC.get('MyNamespace.MyApp').class;
 if (true === DIC.remove('MyNamespace.MyApp')) {}
 ```
 
-- show DIC object or EquivalentJs public interface object in browser console
+- show DIC object, EquivalentJs or demo application public interface object in browser console
 
 ```javascript
-console.log(DIC, EquivalentJs);
+console.log(DIC, EquivalentJs, DemoApp);
 ```
 
 ## Configuration
@@ -92,6 +99,9 @@ or as json like in [parameters.json](../src/config/parameters.json)
         "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
         "deployVersion": "v1.0", // web resources like js or css append a version string on url load
         "systemTests": false // execute framework library test cases in test runner
+        "plugins": { // load plugins into equivalent-js core load stack
+            "equivalent-js-plugin-name": true // an example plugin placeholder; the bool indicates the plugin active
+        }
     };
 </script>
 ```
