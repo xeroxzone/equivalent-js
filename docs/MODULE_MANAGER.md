@@ -91,12 +91,13 @@ or as json like in [parameters.json](../src/config/parameters.json)
     var EquivalentJSConfiguration = {
         "shortcut": "DIC", // name string of the shortcut interface
         "environment": "dev", // name string of system environment; default is "dev"
-        "appPath": "js/app", // web path to app module classes
-        "modulePath": "js/lib/equivalent", // web path to framework library
-        "moduleLayout": "css", // web path to the folder containing stylesheets
-        "docFramework": "doc", // web path to the folder containing the generated documentation
-        "testFrameworkUnit": "js/lib/qunit.js", // web path to test framework library
-        "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
+        "appPath": "/js/app", // web path to app module classes
+        "modulePath": "/js/lib/equivalent", // web path to framework library
+        "moduleLayout": "/css", // web path to the folder containing stylesheets
+        "moduleTemplate": "/html", // web path to the folder containing templates
+        "docFramework": "/doc", // web path to the folder containing the generated documentation
+        "testFrameworkUnit": "/js/lib/qunit.js", // web path to test framework library
+        "testFrameworkTheme": "/css/debug.css", // web path to test framework stylesheet
         "deployVersion": "v1.0", // web resources like js or css append a version string on url load
         "systemTests": false // execute framework library test cases in test runner
         "plugins": { // load plugins into equivalent-js core load stack
@@ -135,7 +136,7 @@ markup or a direct object call from another javascripts to access the module by 
 ```html
 <head>
     <!-- markup... -->
-    <script src="js/lib/equivalent.js"></script>
+    <script src="/js/lib/equivalent.js"></script>
     <!-- markup... -->
 </head>
 ```
@@ -145,7 +146,7 @@ or
 ```html
 <body>
     <!-- markup... -->
-    <script src="js/lib/equivalent.js"></script>
+    <script src="/js/lib/equivalent.js"></script>
 </body>
 ```
 
