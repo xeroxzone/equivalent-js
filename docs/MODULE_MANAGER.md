@@ -6,7 +6,14 @@ All modules stored in a Dependency Injection Container – in following called D
 the event will be fired on manager everytime if a module class get registered.
 
 ```javascript
+/**
+ * @param {string} type as module class name
+ * @param {function} callback function after module is ready loaded
+ */
 DIC.ready('MyNamespace.MyApp', function (module) {
+    /**
+    * @alias {MyNamespace.MyApp}
+    */
     var MyApp = module;
 });
 ```
@@ -50,10 +57,10 @@ var MyApp = DIC.get('MyNamespace.MyApp').class;
 if (true === DIC.remove('MyNamespace.MyApp')) {}
 ```
 
-- show DIC object or EquivalentJs public interface object in browser console
+- show DIC object, EquivalentJs or demo application public interface object in browser console
 
 ```javascript
-console.log(DIC, EquivalentJs);
+console.log(DIC, EquivalentJs, DemoApp);
 ```
 
 ## Configuration
@@ -84,14 +91,18 @@ or as json like in [parameters.json](../src/config/parameters.json)
     var EquivalentJSConfiguration = {
         "shortcut": "DIC", // name string of the shortcut interface
         "environment": "dev", // name string of system environment; default is "dev"
-        "appPath": "js/app", // web path to app module classes
-        "modulePath": "js/lib/equivalent", // web path to framework library
-        "moduleLayout": "css", // web path to the folder containing stylesheets
-        "docFramework": "doc", // web path to the folder containing the generated documentation
-        "testFrameworkUnit": "js/lib/qunit.js", // web path to test framework library
-        "testFrameworkTheme": "css/debug.css", // web path to test framework stylesheet
+        "appPath": "/js/app", // web path to app module classes
+        "modulePath": "/js/lib/equivalent", // web path to framework library
+        "moduleLayout": "/css", // web path to the folder containing stylesheets
+        "moduleTemplate": "/html", // web path to the folder containing templates
+        "docFramework": "/doc", // web path to the folder containing the generated documentation
+        "testFrameworkUnit": "/js/lib/qunit.js", // web path to test framework library
+        "testFrameworkTheme": "/css/debug.css", // web path to test framework stylesheet
         "deployVersion": "v1.0", // web resources like js or css append a version string on url load
         "systemTests": false // execute framework library test cases in test runner
+        "plugins": { // load plugins into equivalent-js core load stack
+            "equivalent-js-plugin-name": true // an example plugin placeholder; the bool indicates the plugin active
+        }
     };
 </script>
 ```
@@ -125,7 +136,7 @@ markup or a direct object call from another javascripts to access the module by 
 ```html
 <head>
     <!-- markup... -->
-    <script src="js/lib/equivalent.js"></script>
+    <script src="/js/lib/equivalent.js"></script>
     <!-- markup... -->
 </head>
 ```
@@ -135,7 +146,7 @@ or
 ```html
 <body>
     <!-- markup... -->
-    <script src="js/lib/equivalent.js"></script>
+    <script src="/js/lib/equivalent.js"></script>
 </body>
 ```
 

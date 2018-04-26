@@ -426,24 +426,26 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
 
                 var $testTeardown = $testCases.then(function () {
                     if (0 < Object.keys(moduleClassTest).length) {
-                        var hasTestMethods = 0;
-                        $.each(moduleClassTest, function (testMethod) {
-                            var test = moduleClassTest[testMethod];
-                            if (typeof test === 'function' && /^test.*/.test(String(testMethod))) {
-                                EquivalentJS.test.Unit.test(testCase + '. ' + testMethod, function (assert) {
-                                    try {
-                                        return test(assert, clone(moduleClass));
-                                    } catch (error) {
-                                        EquivalentJS.console.error(error);
-                                    }
-                                });
-                                hasTestMethods++;
+                        EquivalentJS.test.Unit.module(type, function () {
+                            var hasTestMethods = 0;
+                            $.each(moduleClassTest, function (testMethod) {
+                                var test = moduleClassTest[testMethod];
+                                if (typeof test === 'function' && /^test.*/.test(String(testMethod))) {
+                                    EquivalentJS.test.Unit.test(testCase + '. ' + testMethod, function (assert) {
+                                        try {
+                                            return test(assert, clone(moduleClass));
+                                        } catch (error) {
+                                            EquivalentJS.console.error(error);
+                                        }
+                                    });
+                                    hasTestMethods++;
+                                }
+                            });
+
+                            if (0 === hasTestMethods) {
+                                EquivalentJS.console.warn('Test "' + testCase + '" has no test methods!');
                             }
                         });
-
-                        if (0 === hasTestMethods) {
-                            EquivalentJS.console.warn('Test "' + testCase + '" has no test methods!');
-                        }
                     }
                 });
 

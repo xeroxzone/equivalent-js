@@ -513,6 +513,12 @@ EquivalentJS.System = new function () {
                         Unit: window.QUnit || {}
                     };
 
+                    // check that test framework integration is running
+                    EquivalentJS.test.Unit.module('Test Framework');
+                    EquivalentJS.test.Unit.test(_.type + '. registerTestFramework', function (assert) {
+                        assert.ok(typeof EquivalentJS.test.Unit === 'object', 'test framework initiated');
+                    });
+
                     _.testing = true;
                 })
                 .fail(function (error) {
