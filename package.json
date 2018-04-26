@@ -1,6 +1,6 @@
 {
   "name": "equivalent-js",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Class autoload and dependency manager",
   "main": "./src/lib/equivalent.js",
   "scripts": {
