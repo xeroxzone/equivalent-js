@@ -124,13 +124,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
          * @description type as module class name
          * @type {string}
          */
-        var type = '';
-
-        if (typeof module !== 'undefined' &&
-            typeof module.type !== 'undefined'
-        ) {
-            type = module.type;
-        }
+        var type = getModuleType(module);
 
         /* return resolver if module is already called or loaded */
         if (null !== getModule(type)) {
@@ -179,10 +173,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             return;
         }
 
-        var isAppLoad = false;
-        if (false === /^EquivalentJS\./.test(type)) {
-            isAppLoad = true;
-        }
+        var isAppLoad = isModuleAnAppLoad(type);
 
         // if equivalent.min.js library is as concatenated minified files loaded
         //  search for existing DOM object
@@ -206,18 +197,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             cacheBust = true;
         }
 
-        var classPath = namespace;
-        if (module.type.indexOf('EquivalentJS.Plugin.') > -1 &&
-            typeof module.parameters !== 'undefined' &&
-            typeof module.parameters.hasOwnProperty('plugin')
-        ) {
-            var plugin = module.parameters.plugin,
-                pluginPath = plugin.name + '/' + plugin.path
-            ;
-
-            classPath = classPath
-                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
-        }
+        var classPath = getModuleClassPath(module, namespace);
 
         var moduleUrl = classUri + '/' +
             classPath + '.js' +
@@ -329,10 +309,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
     var test = function (module, withSystemTests) {
         if (true === testing) {return;} // if tests are testing the manager self
 
-        var isAppLoad = false;
-        if (false === /^EquivalentJS\./.test(module.type)) {
-            isAppLoad = true;
-        }
+        var isAppLoad = isModuleAnAppLoad(module.type);
 
         var type = module.type,
             parameters = module.parameters
@@ -526,10 +503,7 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      * @param {Object} module class parameters
      */
     var applyApplicationDOMReference = function (importedClass, module) {
-        var isAppLoad = false;
-        if (false === /^EquivalentJS\./.test(module.type)) {
-            isAppLoad = true;
-        }
+        var isAppLoad = isModuleAnAppLoad(module.type);
 
         if (typeof module.parameters !== 'undefined' &&
             typeof module.parameters.app !== 'undefined' &&
@@ -551,12 +525,8 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
      */
     var loadTemplate = function (importedClass, module) {
         var templateUri = getTemplateUri(importedClass, true, module.parameters),
-            isAppLoad = false
+            isAppLoad = isModuleAnAppLoad(module.type)
         ;
-
-        if (false === /^EquivalentJS\./.test(module.type)) {
-            isAppLoad = true;
-        }
 
         if (true === isAppLoad &&
             null !== templateUri
@@ -807,6 +777,62 @@ EquivalentJS.define('EquivalentJS.Manager', new function () {
             });
 
         return resourceUri;
+    };
+
+    /**
+     * @description get the type as name from module
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {Object} module an object with module class construction parameters
+     * @returns {string} the module type as name
+     * @throws {Error} if could not get type property from module object
+     */
+    var getModuleType = function (module) {
+        if (typeof module !== 'undefined' &&
+            typeof module.type !== 'undefined'
+        ) {
+            return module.type;
+        } else {
+            throw new Error('Could not get type from module!');
+        }
+    };
+
+    /**
+     * @description get the module class path to resolve autoload
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {Object} module an object with module class construction parameters
+     * @param {string} namespace from module type
+     * @returns {string} as class path to resolve autoload
+     */
+    var getModuleClassPath = function (module, namespace) {
+        var classPath = namespace;
+        if (module.type.indexOf('EquivalentJS.Plugin.') > -1 &&
+            typeof module.parameters !== 'undefined' &&
+            typeof module.parameters.hasOwnProperty('plugin')
+        ) {
+            var plugin = module.parameters.plugin,
+                pluginPath = plugin.name + '/' + plugin.path
+            ;
+
+            classPath = classPath
+                .replace(/^Plugin\/(.*)/, 'Plugin/' + pluginPath + '/$1');
+        }
+
+        return classPath;
+    };
+
+    /**
+     * @description identify as app load by module type
+     * @memberOf EquivalentJS.Manager
+     * @private
+     * @param {string} type
+     * @returns {boolean} indicates an app load
+     */
+    var isModuleAnAppLoad = function (type) {
+        var isAppLoad = isModuleAnAppLoad(type);
+
+        return isAppLoad;
     };
 
     /**
